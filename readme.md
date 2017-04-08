@@ -1,50 +1,70 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+![Laravel](https://laravel.com/assets/img/components/logo-laravel.svg)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<h1 align="center">Aplikasi Grosir Obat</h1>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Tentang
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi Grosir Obat adalah sebuah sistem kasir dan manajemen produk obat yang dibuat menggunakan framework Laravel.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
 
-## Learning Laravel
+## Fitur
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+Fitur pada Aplikasi ini meliputi:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+1. Akun Login
+    - Login dan Logout User
+    - Ganti Password User
+2. Entry Transaksi
+    - Entry Transaksi Tunai
+    - Entry Transaksi Kredit
+    - Pencarian Produk
+    - Konfirmasi Transaksi
+    - Cetak Nota (PDF; Format A4)
+3. Manajemen Produk
+    - List Produk
+    - Cetak Daftar Harga
+    - Input Produk Baru
+    - Edit Produk (Harga Tunai dan Kredit)
+    - Hapus Produk
+4. Manajemen Transaksi
+    - List Transaksi Hari ini
+    - List Transaksi
+    - Detail Transaksi
+    - Cetak Nota (PDF; Format A4)
+5. Manajemen User
+    - List User
+    - Input User Baru
+    - Edit User
+    - Hapus User (jika tidak ada transaksi)
 
-## Laravel Sponsors
+## Proses Transksi
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+### Keranjang Belanja
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- **[Codecourse](https://www.codecourse.com)**
-- [Fragrantica](https://www.fragrantica.com)
+**Keranjang Belanja** didesain agar mengikuti hirarki berikut:
+- Kelas **CartCollection** memiliki beberapa kelas **CashDraft** dan atau **CreditDraft**
+- Kelas **CashDraft** memiliki beberapa **Product** dengan harga **Tunai**
+- Kelas **CreditDraft** memiliki beberapa **Product** dengan harga **Kredit**
+- Kelas **CashDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Cash**
+- Kelas **CreditDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Credit**
 
-## Contributing
+### Proses Entry Transaksi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Proses Entry transaksi baru:
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+1. User login
+2. Klik tombol **Transaksi Tunai** (atau **Transaksi Kredit**)
+3. Cari produk (minimal 3 huruf)
+4. Muncul list produk dengan harga sesuai jenis transaksi
+5. Isi **Jumlah Item**, klik **Tambah**
+6. Item produk yang bersangkutan akan muncul pada List Item
+7. Isi data pembeli
+8. Klik **Proses Transaksi**
+9. Muncul halaman **Konfirmasi Transaksi** (cek list item, harga dan total)
+10. Klik **Simpan Transaksi**
+11. Muncul halaman **Detail Transaksi**
+12. **Cetak Nota** format PDF ukuran A4.
 
 ## License
 
