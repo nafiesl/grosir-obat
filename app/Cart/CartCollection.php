@@ -105,6 +105,7 @@ class CartCollection
         $content[$draftKey]->addItem($item);
 
         $this->session->put($this->instance, $content);
+        return $item->product;
     }
 
     public function updateDraftItem($draftKey, $itemKey, $newItemData)
