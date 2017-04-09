@@ -48,6 +48,11 @@ abstract class TransactionDraft
         return $this->items()->sum('subtotal');
     }
 
+    public function getTotalQty()
+    {
+        return $this->items()->sum('qty');
+    }
+
     public function updateItem($itemKey, $newItemData)
     {
         if (!isset($this->items[$itemKey]))

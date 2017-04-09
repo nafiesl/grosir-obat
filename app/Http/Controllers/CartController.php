@@ -34,4 +34,22 @@ class CartController extends Controller
 
         return redirect()->route('cart.index', $item->draftKey);
     }
+
+    public function removeDraftItem(Request $request, $draftKey)
+    {
+        $this->cart->removeItemFromDraft($draftKey, $request->item_index);
+        return redirect()->route('cart.index', $draftKey);
+    }
+
+    public function remove(Request $request)
+    {
+        $this->cart->removeDraft($request->draft_key);
+        return redirect()->route('cart.index');
+    }
+
+    public function destroy()
+    {
+        $this->cart->destroy();
+        return redirect()->route('cart.index');
+    }
 }
