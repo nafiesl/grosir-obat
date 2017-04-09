@@ -52,6 +52,19 @@ class CartCollection
         return null;
     }
 
+    public function updateDraftAttributes($draftKey, $draftAttributes)
+    {
+        $content = $this->getContent();
+
+        foreach ($draftAttributes as $attribute => $value) {
+            $content[$draftKey]->{$attribute} = $value;
+        }
+
+        $this->session->put($this->instance, $content);
+
+        return $content[$draftKey];
+    }
+
     public function removeDraft($draftKey)
     {
         $content = $this->getContent();
@@ -85,39 +98,28 @@ class CartCollection
         $this->session->remove($this->instance);
     }
 
-    public function addItemToCart($draftKey, $item)
+    public function addProductToDraft($draftKey, $item)
     {
         $content = $this->getContent();
-        $content[$draftKey]->addItem($item);
-        $content[$draftKey] = $this->updateCart($content[$draftKey]);
+        $content[$draftKey]->addProduct($item);
+        $content[$draftKey] = $this->updateDraft($content[$draftKey]);
 
         $this->session->put($this->instance, $content);
     }
 
-    public function updateCart(Cart $draft)
-    {
-        $draft->charged_weight = $draft->getChargedWeight();
-        $draft->items_count = $draft->itemsCount();
-        $draft->pcs_count = $draft->itemsCount();
-        $draft->base_charge = $draft->getCharge();
-        $draft->subtotal = $draft->getCharge();
-        $draft->total = $draft->getCharge();
-        return $draft;
-    }
-
-    public function updateCartItem($draftKey, $itemKey, $newItemData)
+    public function updateDraftProduct($draftKey, $itemKey, $newProductData)
     {
         $content = $this->getContent();
-        $content[$draftKey]->updateItem($itemKey, $newItemData);
-        $content[$draftKey] = $this->updateCart($content[$draftKey]);
+        $content[$draftKey]->updateProduct($itemKey, $newProductData);
+        $content[$draftKey] = $this->updateDraft($content[$draftKey]);
 
         $this->session->put($this->instance, $content);
     }
 
-    public function removeItemFromCart($draftKey, $itemKey)
+    public function removeProductFromDraft($draftKey, $itemKey)
     {
         $content = $this->getContent();
-        $content[$draftKey]->removeItem($itemKey);
+        $content[$draftKey]->removeProduct($itemKey);
 
         $this->session->put($this->instance, $content);
     }

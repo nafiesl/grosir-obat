@@ -97,4 +97,52 @@ class CartCollectionTest extends TestCase
         $this->assertCount(0, $cart->content());
         $this->assertTrue($cart->isEmpty());
     }
+
+    /** @test */
+    public function it_has_content_keys()
+    {
+        $cart = new CartCollection;
+
+        $cashDraft = new CashDraft;
+        $creditDraft = new CreditDraft;
+
+        $cart->add($cashDraft);
+        $cart->add($creditDraft);
+
+        $this->assertCount(2, $cart->keys());
+        $cart->removeDraft($cart->content()->keys()->last());
+        $this->assertCount(1, $cart->keys());
+    }
+
+    /** @test */
+    public function it_can_update_a_draft_attributes()
+    {
+        $cart = new CartCollection;
+
+        $draft = $cart->add(new CashDraft);
+        $this->assertCount(1, $cart->content());
+
+        $newDraftAttribute = [
+            'invoice_no' => 2,
+            'date'       => 1,
+            'items'      => [],
+            'total'      => 0,
+            'payment'    => 0,
+            'customer'   => 0,
+            'status_id'  => 0,
+            'creator_id' => 0,
+            'remark'     => 0,
+        ];
+
+        $cart->updateDraftAttributes($draft->draftKey, $newDraftAttribute);
+        $this->assertArrayHasKey('invoice_no', $draft->toArray());
+        $this->assertArrayHasKey('date', $draft->toArray());
+        $this->assertArrayHasKey('items', $draft->toArray());
+        $this->assertArrayHasKey('total', $draft->toArray());
+        $this->assertArrayHasKey('payment', $draft->toArray());
+        $this->assertArrayHasKey('customer', $draft->toArray());
+        $this->assertArrayHasKey('status_id', $draft->toArray());
+        $this->assertArrayHasKey('creator_id', $draft->toArray());
+        $this->assertArrayHasKey('remark', $draft->toArray());
+    }
 }

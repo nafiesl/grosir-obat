@@ -5,7 +5,7 @@ namespace App\Cart;
 /**
 * Credit Draft
 */
-class CreditDraft implements TransactionDraft
+class CreditDraft extends TransactionDraft
 {
     public $draftKey;
 }
