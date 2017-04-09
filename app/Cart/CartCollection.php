@@ -43,6 +43,22 @@ class CartCollection
         return $draft;
     }
 
+    public function get($draftKey)
+    {
+        $content = $this->getContent();
+        if (isset($content[$draftKey]))
+            return $content[$draftKey];
+
+        return null;
+    }
+
+    public function removeDraft($draftKey)
+    {
+        $content = $this->getContent();
+        $content->pull($draftKey);
+        $this->session->put($this->instance, $content);
+    }
+
     public function content()
     {
         if (is_null($this->session->get($this->instance))) {
@@ -57,6 +73,53 @@ class CartCollection
         $content = $this->session->has($this->instance) ? $this->session->get($this->instance) : collect([]);
 
         return $content;
+    }
+
+    public function keys()
+    {
+        return $this->getContent()->keys();
+    }
+
+    public function destroy()
+    {
+        $this->session->remove($this->instance);
+    }
+
+    public function addItemToCart($draftKey, $item)
+    {
+        $content = $this->getContent();
+        $content[$draftKey]->addItem($item);
+        $content[$draftKey] = $this->updateCart($content[$draftKey]);
+
+        $this->session->put($this->instance, $content);
+    }
+
+    public function updateCart(Cart $draft)
+    {
+        $draft->charged_weight = $draft->getChargedWeight();
+        $draft->items_count = $draft->itemsCount();
+        $draft->pcs_count = $draft->itemsCount();
+        $draft->base_charge = $draft->getCharge();
+        $draft->subtotal = $draft->getCharge();
+        $draft->total = $draft->getCharge();
+        return $draft;
+    }
+
+    public function updateCartItem($draftKey, $itemKey, $newItemData)
+    {
+        $content = $this->getContent();
+        $content[$draftKey]->updateItem($itemKey, $newItemData);
+        $content[$draftKey] = $this->updateCart($content[$draftKey]);
+
+        $this->session->put($this->instance, $content);
+    }
+
+    public function removeItemFromCart($draftKey, $itemKey)
+    {
+        $content = $this->getContent();
+        $content[$draftKey]->removeItem($itemKey);
+
+        $this->session->put($this->instance, $content);
     }
 
     public function count()
