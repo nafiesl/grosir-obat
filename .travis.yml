@@ -8,6 +8,8 @@ php:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
+  - cp .env.travis .env
+  - php artisan key:generate
 
 script:
   - phpunit
