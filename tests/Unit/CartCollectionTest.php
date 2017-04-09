@@ -5,6 +5,8 @@ namespace Tests\Unit;
 use App\Cart\CartCollection;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
+use App\Cart\Item;
+use App\Product;
 use Tests\TestCase;
 
 class CartCollectionTest extends TestCase
@@ -145,4 +147,54 @@ class CartCollectionTest extends TestCase
         $this->assertArrayHasKey('creator_id', $draft->toArray());
         $this->assertArrayHasKey('remark', $draft->toArray());
     }
+
+    /** @test */
+    public function it_can_add_product_to_draft()
+    {
+        $cart = new CartCollection;
+
+        $draft = $cart->add(new CashDraft);
+        $count = 2;
+        $item = new Item(new Product(['cash_price' => 1000]), $count);
+
+        $cart->addItemToDraft($draft->draftKey, $item);
+        $this->assertEquals(2000, $draft->getTotal());
+    }
+
+    /** @test */
+    public function it_can_remove_item_from_draft()
+    {
+        $cart = new CartCollection;
+
+        $draft = $cart->add(new CashDraft);
+        $item = new Item(new Product(['cash_price' => 1000]), 3);
+
+        $cart->addItemToDraft($draft->draftKey, $item);
+        $this->assertCount(1, $draft->items());
+        $cart->removeItemFromDraft($draft->draftKey, 0);
+        $this->assertCount(0, $draft->items());
+        $this->assertEquals(0, $draft->getTotal());
+    }
+
+    /** @test */
+    public function it_can_update_an_item_of_draft()
+    {
+        $cart = new CartCollection;
+
+        $draft = $cart->add(new CashDraft);
+        $item = new Item(new Product(['cash_price' => 1100]), 3);
+
+        $cart->addItemToDraft($draft->draftKey, $item);
+        $this->assertCount(1, $draft->items());
+        $this->assertEquals(3300, $draft->getTotal());
+
+        $newItemData = [
+            'qty' => 2,
+            'item_discount' => 100,
+        ];
+
+        $cart->updateDraftItem($draft->draftKey, 0, $newItemData);
+        $this->assertEquals(2000, $draft->getTotal());
+    }
+
 }

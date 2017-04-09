@@ -2,6 +2,7 @@
 
 namespace App\Cart;
 
+use App\Product;
 use Illuminate\Support\Collection;
 
 /**
@@ -98,28 +99,26 @@ class CartCollection
         $this->session->remove($this->instance);
     }
 
-    public function addProductToDraft($draftKey, $item)
+    public function addItemToDraft($draftKey, Item $item)
     {
         $content = $this->getContent();
-        $content[$draftKey]->addProduct($item);
-        $content[$draftKey] = $this->updateDraft($content[$draftKey]);
+        $content[$draftKey]->addItem($item);
 
         $this->session->put($this->instance, $content);
     }
 
-    public function updateDraftProduct($draftKey, $itemKey, $newProductData)
+    public function updateDraftItem($draftKey, $itemKey, $newItemData)
     {
         $content = $this->getContent();
-        $content[$draftKey]->updateProduct($itemKey, $newProductData);
-        $content[$draftKey] = $this->updateDraft($content[$draftKey]);
+        $content[$draftKey]->updateItem($itemKey, $newItemData);
 
         $this->session->put($this->instance, $content);
     }
 
-    public function removeProductFromDraft($draftKey, $itemKey)
+    public function removeItemFromDraft($draftKey, $itemKey)
     {
         $content = $this->getContent();
-        $content[$draftKey]->removeProduct($itemKey);
+        $content[$draftKey]->removeItem($itemKey);
 
         $this->session->put($this->instance, $content);
     }
