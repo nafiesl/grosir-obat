@@ -43,6 +43,11 @@ abstract class TransactionDraft
         unset($this->items[$itemKey]);
     }
 
+    public function empty()
+    {
+        $this->items = [];
+    }
+
     public function getTotal()
     {
         return $this->items()->sum('subtotal');
@@ -51,6 +56,11 @@ abstract class TransactionDraft
     public function getTotalQty()
     {
         return $this->items()->sum('qty');
+    }
+
+    public function getDiscountTotal()
+    {
+        return $this->items()->sum('item_discount_subtotal');
     }
 
     public function updateItem($itemKey, $newItemData)

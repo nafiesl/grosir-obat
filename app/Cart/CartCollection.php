@@ -66,6 +66,13 @@ class CartCollection
         return $content[$draftKey];
     }
 
+    public function emptyDraft($draftKey)
+    {
+        $content = $this->getContent();
+        $content[$draftKey]->empty();
+        $this->session->put($this->instance, $content);
+    }
+
     public function removeDraft($draftKey)
     {
         $content = $this->getContent();

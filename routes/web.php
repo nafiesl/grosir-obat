@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('cart/add-draft/{product}', 'CartController@add')->name('cart.add');
 Route::post('cart/add-draft-item/{draftKey}/{product}', 'CartController@addDraftItem')->name('cart.add-draft-item');
+Route::patch('cart/update-draft-item/{draftKey}', 'CartController@updateDraftItem')->name('cart.update-draft-item');
 Route::delete('cart/remove-draft-item/{draftKey}', 'CartController@removeDraftItem')->name('cart.remove-draft-item');
+Route::delete('cart/empty/{draftKey}', 'CartController@empty')->name('cart.empty');
 Route::delete('cart/remove', 'CartController@remove')->name('cart.remove');
 Route::delete('cart/destroy', 'CartController@destroy')->name('cart.destroy');
