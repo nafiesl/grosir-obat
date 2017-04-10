@@ -3,8 +3,6 @@
 namespace Tests\Unit\Integration;
 
 use App\Product;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ProductTest extends TestCase

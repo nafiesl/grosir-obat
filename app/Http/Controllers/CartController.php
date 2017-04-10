@@ -15,7 +15,7 @@ class CartController extends Controller
 
     public function __construct()
     {
-        $this->cart = new CartCollection;
+        $this->cart = new CartCollection();
     }
 
     public function index(Request $request)
@@ -27,21 +27,22 @@ class CartController extends Controller
 
     public function show(Request $request, $draftKey)
     {
-        $queriedProducts = Product::where(function($query) use ($request) {
-            return $query->where('name', 'like', '%' . $request->get('query') . '%');
+        $queriedProducts = Product::where(function ($query) use ($request) {
+            return $query->where('name', 'like', '%'.$request->get('query').'%');
         })->get();
 
         $draft = $this->cart->get($draftKey);
 
-        return view('cart.index', compact('draft','queriedProducts'));
+        return view('cart.index', compact('draft', 'queriedProducts'));
     }
 
     public function add(Request $request)
     {
-        if ($request->has('create-cash-draft'))
-            $this->cart->add(new CashDraft);
-        else
-            $this->cart->add(new CreditDraft);
+        if ($request->has('create-cash-draft')) {
+            $this->cart->add(new CashDraft());
+        } else {
+            $this->cart->add(new CreditDraft());
+        }
 
         return redirect()->route('cart.show', $this->cart->content()->last()->draftKey);
     }
@@ -56,31 +57,36 @@ class CartController extends Controller
 
     public function updateDraftItem(Request $request, $draftKey)
     {
-        $this->cart->updateDraftItem($draftKey, $request->item_key, $request->only('qty','item_discount'));
+        $this->cart->updateDraftItem($draftKey, $request->item_key, $request->only('qty', 'item_discount'));
+
         return redirect()->route('cart.index', $draftKey);
     }
 
     public function removeDraftItem(Request $request, $draftKey)
     {
         $this->cart->removeItemFromDraft($draftKey, $request->item_index);
+
         return redirect()->route('cart.index', $draftKey);
     }
 
     public function empty($draftKey)
     {
         $this->cart->emptyDraft($draftKey);
+
         return redirect()->route('cart.index', $draftKey);
     }
 
     public function remove(Request $request)
     {
         $this->cart->removeDraft($request->draft_key);
+
         return redirect()->route('cart.index');
     }
 
     public function destroy()
     {
         $this->cart->destroy();
+
         return redirect()->route('cart.index');
     }
 }

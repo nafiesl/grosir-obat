@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('drafts', 'CartController@index')->name('cart.index');
     Route::get('drafts/{draftKey}', 'CartController@show')->name('cart.show');
     Route::post('cart/add-draft', 'CartController@add')->name('cart.add');

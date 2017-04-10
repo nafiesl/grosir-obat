@@ -28,8 +28,8 @@ class UserLoginTest extends BrowserKitTestCase
         $user = factory(User::class)->create(['password' => '123456']);
 
         $this->visit(route('login'));
-        $this->type($user->username,'username');
-        $this->type('123456','password');
+        $this->type($user->username, 'username');
+        $this->type('123456', 'password');
         $this->press('Login');
 
         $this->seePageIs(route('home'));

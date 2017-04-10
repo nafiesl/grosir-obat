@@ -3,8 +3,8 @@
 namespace App\Cart;
 
 /**
-* Credit Draft
-*/
+ * Credit Draft.
+ */
 class CreditDraft extends TransactionDraft
 {
     public $draftKey;

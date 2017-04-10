@@ -14,17 +14,17 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_has_a_default_instance()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
         $this->assertEquals('drafts', $cart->currentInstance());
     }
 
     /** @test */
     public function it_can_have_multiple_instances()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $cashDraft = new CashDraft;
-        $creditDraft = new CreditDraft;
+        $cashDraft = new CashDraft();
+        $creditDraft = new CreditDraft();
 
         $cart->add($cashDraft);
         $cart->add($creditDraft);
@@ -39,9 +39,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function cart_collection_consist_of_transacion_draft()
     {
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
-        $creditDraft = new CreditDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
+        $creditDraft = new CreditDraft();
 
         $cart->add($cashDraft);
         $cart->add($creditDraft);
@@ -53,8 +53,8 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_get_a_draft_by_key()
     {
-        $draft = new CashDraft;
-        $cart = new CartCollection;
+        $draft = new CashDraft();
+        $cart = new CartCollection();
 
         $cart->add($draft);
         $gottenDraft = $cart->get($draft->draftKey);
@@ -67,9 +67,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_remove_draft_from_draft_collection()
     {
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
-        $creditDraft = new CreditDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
+        $creditDraft = new CreditDraft();
 
         $cart->add($cashDraft);
         $cart->add($creditDraft);
@@ -82,10 +82,10 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_be_empty_out()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $cashDraft = new CashDraft;
-        $creditDraft = new CreditDraft;
+        $cashDraft = new CashDraft();
+        $creditDraft = new CreditDraft();
 
         $cart->add($cashDraft);
         $cart->add($cashDraft);
@@ -103,10 +103,10 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_has_content_keys()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $cashDraft = new CashDraft;
-        $creditDraft = new CreditDraft;
+        $cashDraft = new CashDraft();
+        $creditDraft = new CreditDraft();
 
         $cart->add($cashDraft);
         $cart->add($creditDraft);
@@ -119,9 +119,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_update_a_draft_attributes()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $draft = $cart->add(new CashDraft);
+        $draft = $cart->add(new CashDraft());
         $this->assertCount(1, $cart->content());
 
         $newDraftAttribute = [
@@ -151,9 +151,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_add_product_to_draft()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $draft = $cart->add(new CashDraft);
+        $draft = $cart->add(new CashDraft());
         $count = 2;
         $item = new Item(new Product(['cash_price' => 1000]), $count);
 
@@ -164,9 +164,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_remove_item_from_draft()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $draft = $cart->add(new CashDraft);
+        $draft = $cart->add(new CashDraft());
         $item = new Item(new Product(['cash_price' => 1000]), 3);
 
         $cart->addItemToDraft($draft->draftKey, $item);
@@ -179,9 +179,9 @@ class CartCollectionTest extends TestCase
     /** @test */
     public function it_can_update_an_item_of_draft()
     {
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
-        $draft = $cart->add(new CashDraft);
+        $draft = $cart->add(new CashDraft());
         $item = new Item(new Product(['cash_price' => 1100]), 3);
 
         $cart->addItemToDraft($draft->draftKey, $item);
@@ -189,12 +189,11 @@ class CartCollectionTest extends TestCase
         $this->assertEquals(3300, $draft->getTotal());
 
         $newItemData = [
-            'qty' => 2,
+            'qty'           => 2,
             'item_discount' => 100,
         ];
 
         $cart->updateDraftItem($draft->draftKey, 0, $newItemData);
         $this->assertEquals(2000, $draft->getTotal());
     }
-
 }

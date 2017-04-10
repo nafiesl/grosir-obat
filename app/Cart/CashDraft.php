@@ -3,8 +3,8 @@
 namespace App\Cart;
 
 /**
-* Cash Draft
-*/
+ * Cash Draft.
+ */
 class CashDraft extends TransactionDraft
 {
     public $draftKey;

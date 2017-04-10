@@ -5,8 +5,8 @@ namespace App\Cart;
 use App\Product;
 
 /**
-* Draft Item class
-*/
+ * Draft Item class.
+ */
 class Item
 {
     public $id;
@@ -20,24 +20,24 @@ class Item
 
     public function __construct(Product $product, $qty)
     {
-        $this->id       = $product->id;
-        $this->product  = $product;
-        $this->qty      = $qty;
-        $this->price    = $product->getPrice();
+        $this->id = $product->id;
+        $this->product = $product;
+        $this->qty = $qty;
+        $this->price = $product->getPrice();
         $this->subtotal = $product->getPrice() * $qty;
     }
 
     public function updateAttribute(array $newItemData)
     {
         if (isset($newItemData['qty'])) {
-            $this->qty      = $newItemData['qty'];
+            $this->qty = $newItemData['qty'];
             $this->subtotal = $this->price * $this->qty;
         }
 
         if (isset($newItemData['item_discount'])) {
-            $this->item_discount          = $newItemData['item_discount'];
+            $this->item_discount = $newItemData['item_discount'];
             $this->item_discount_subtotal = $this->item_discount * $this->qty;
-            $this->subtotal               = $this->subtotal - $this->item_discount_subtotal;
+            $this->subtotal = $this->subtotal - $this->item_discount_subtotal;
         }
 
         return $this;

@@ -19,8 +19,8 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->loginAsUser();
 
         // Add new draft to collection
-        $cart = new CartCollection;
-        $draft = $cart->add(new CashDraft);
+        $cart = new CartCollection();
+        $draft = $cart->add(new CashDraft());
 
         $this->visit(route('cart.index'));
 
@@ -35,12 +35,12 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->visit(route('home'));
 
         $this->press(trans('transaction.create'));
-        $cart = new CartCollection;
+        $cart = new CartCollection();
         $draft = $cart->content()->last();
         $this->seePageIs(route('cart.show', $draft->draftKey));
 
         $this->press(trans('transaction.create_credit'));
-        $cart = new CartCollection;
+        $cart = new CartCollection();
         $draft = $cart->content()->last();
         $this->seePageIs(route('cart.show', $draft->draftKey));
     }
@@ -51,8 +51,8 @@ class TransactionEntryTest extends BrowserKitTestCase
         $product = factory(Product::class)->create(['name' => 'Testing Produk 1']);
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $draft = new CreditDraft;
+        $cart = new CartCollection();
+        $draft = new CreditDraft();
         $cart->add($draft);
 
         // Visit cart index page

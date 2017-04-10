@@ -19,7 +19,7 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
+        $cart = new CartCollection();
 
         $response = $this->post(route('cart.add'), ['create-cash-draft'=> trans('transaction.create')]);
         $response = $this->post(route('cart.add'), ['create-credit-draft'=> trans('transaction.create_credit')]);
@@ -37,8 +37,8 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $draft = new CashDraft;
+        $cart = new CartCollection();
+        $draft = new CashDraft();
         $cart->add($draft);
 
         // Add Product to database
@@ -47,7 +47,7 @@ class CartControllerTest extends TestCase
 
         // Add Product as CashDraft item
         $response = $this->post(route('cart.add-draft-item', [$draft->draftKey, $product->id]), [
-            'qty' => $itemQty
+            'qty' => $itemQty,
         ]);
 
         $cashDraft = $cart->content()->first();
@@ -60,10 +60,10 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
         $product = factory(Product::class)->create(['cash_price' => 1100], ['credit_price' => 1000]);
-        $item  = new Item($product, 2);
+        $item = new Item($product, 2);
 
         $cashDraft->addItem($item);
         $cart->add($cashDraft);
@@ -73,7 +73,7 @@ class CartControllerTest extends TestCase
 
         // Remove Item Product from CashDraft
         $response = $this->delete(route('cart.remove-draft-item', [$cashDraft->draftKey]), [
-            'item_index' => 0
+            'item_index' => 0,
         ]);
 
         $this->assertEquals(0, $cashDraft->getTotalQty());
@@ -86,8 +86,8 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
         $cart->add($cashDraft);
 
         $this->assertFalse($cart->isEmpty());
@@ -95,7 +95,7 @@ class CartControllerTest extends TestCase
 
         // Remove a transaction draft
         $response = $this->delete(route('cart.remove'), [
-            'draft_key' => $cashDraft->draftKey
+            'draft_key' => $cashDraft->draftKey,
         ]);
 
         $this->assertTrue($cart->isEmpty());
@@ -106,8 +106,8 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
         $cart->add($cashDraft);
         $cart->add($cashDraft);
 
@@ -125,10 +125,10 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
         $product = factory(Product::class)->create(['cash_price' => 1100], ['credit_price' => 1000]);
-        $item  = new Item($product, 2);
+        $item = new Item($product, 2);
 
         $cashDraft->addItem($item);
         $cart->add($cashDraft);
@@ -149,10 +149,10 @@ class CartControllerTest extends TestCase
     {
         $this->loginAsUser();
 
-        $cart = new CartCollection;
-        $cashDraft = new CashDraft;
+        $cart = new CartCollection();
+        $cashDraft = new CashDraft();
         $product = factory(Product::class)->create(['cash_price' => 1100], ['credit_price' => 1000]);
-        $item  = new Item($product, 2);
+        $item = new Item($product, 2);
 
         $cashDraft->addItem($item);
         $cart->add($cashDraft);
@@ -162,8 +162,8 @@ class CartControllerTest extends TestCase
 
         // Update draft item on a transaction draft
         $response = $this->patch(route('cart.update-draft-item', [$cashDraft->draftKey]), [
-            'item_key' => 0,
-            'qty' => 3,
+            'item_key'      => 0,
+            'qty'           => 3,
             'item_discount' => 100,
         ]);
 
