@@ -2,12 +2,11 @@
 
 namespace App\Cart;
 
-use App\Product;
 use Illuminate\Support\Collection;
 
 /**
-* Cart Collection Class
-*/
+ * Cart Collection Class.
+ */
 class CartCollection
 {
     private $instance;
@@ -47,10 +46,9 @@ class CartCollection
     public function get($draftKey)
     {
         $content = $this->getContent();
-        if (isset($content[$draftKey]))
+        if (isset($content[$draftKey])) {
             return $content[$draftKey];
-
-        return null;
+        }
     }
 
     public function updateDraftAttributes($draftKey, $draftAttributes)
@@ -112,6 +110,7 @@ class CartCollection
         $content[$draftKey]->addItem($item);
 
         $this->session->put($this->instance, $content);
+
         return $item->product;
     }
 
@@ -145,5 +144,4 @@ class CartCollection
     {
         return !$this->isEmpty();
     }
-
 }

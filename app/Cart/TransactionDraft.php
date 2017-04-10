@@ -2,11 +2,9 @@
 
 namespace App\Cart;
 
-use App\Product;
-
 /**
-* Transaction Draft Interface
-*/
+ * Transaction Draft Interface.
+ */
 abstract class TransactionDraft
 {
     public $items = [];
@@ -65,8 +63,9 @@ abstract class TransactionDraft
 
     public function updateItem($itemKey, $newItemData)
     {
-        if (!isset($this->items[$itemKey]))
-            return null;
+        if (!isset($this->items[$itemKey])) {
+            return;
+        }
 
         $item = $this->items[$itemKey];
 
