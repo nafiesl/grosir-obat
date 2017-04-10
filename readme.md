@@ -2,11 +2,11 @@
 
 <h1 align="center">Aplikasi Grosir Obat</h1>
 
+>**Development in progress**
 
 ## Tentang
 
 Aplikasi Grosir Obat adalah sebuah sistem kasir dan manajemen produk obat yang dibuat menggunakan framework Laravel.
-
 
 ## Fitur
 
@@ -44,10 +44,10 @@ Fitur pada Aplikasi ini meliputi:
 
 **Keranjang Belanja** didesain agar mengikuti hirarki berikut:
 - Kelas **CartCollection** memiliki beberapa kelas **CashDraft** dan atau **CreditDraft**
-- Kelas **CashDraft** memiliki beberapa **Product** dengan harga **Tunai**
-- Kelas **CreditDraft** memiliki beberapa **Product** dengan harga **Kredit**
-- Kelas **CashDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Cash**
-- Kelas **CreditDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Credit**
+- Kelas **CashDraft** memiliki beberapa **Item** dengan harga **Tunai**
+- Kelas **CreditDraft** memiliki beberapa **Item** dengan harga **Kredit**
+- Kelas **CashDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Tunai**
+- Kelas **CreditDraft** akan disimpan sebagai transaksi dengan model **Transaction** tipe **Kredit**
 
 ### Proses Entry Transaksi
 
