@@ -17,14 +17,33 @@ class CartController extends Controller
     {
         $this->cart = new CartCollection;
     }
-    public function add(Request $request, $type)
+
+    public function index(Request $request)
     {
-        if ($type == 1)
+        $draft = $this->cart->content()->last();
+
+        return view('cart.index', compact('draft'));
+    }
+
+    public function show(Request $request, $draftKey)
+    {
+        $queriedProducts = Product::where(function($query) use ($request) {
+            return $query->where('name', 'like', '%' . $request->get('query') . '%');
+        })->get();
+
+        $draft = $this->cart->get($draftKey);
+
+        return view('cart.index', compact('draft','queriedProducts'));
+    }
+
+    public function add(Request $request)
+    {
+        if ($request->has('create-cash-draft'))
             $this->cart->add(new CashDraft);
         else
             $this->cart->add(new CreditDraft);
 
-        return redirect()->route('cart.index', $item->draftKey);
+        return redirect()->route('cart.show', $this->cart->content()->last()->draftKey);
     }
 
     public function addDraftItem(Request $request, $draftKey, Product $product)

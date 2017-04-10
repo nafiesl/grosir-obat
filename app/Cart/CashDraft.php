@@ -8,4 +8,6 @@ namespace App\Cart;
 class CashDraft extends TransactionDraft
 {
     public $draftKey;
+    public $type = 'cash';
+    public $type_id = 1;
 }

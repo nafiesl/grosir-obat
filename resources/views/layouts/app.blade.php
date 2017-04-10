@@ -42,14 +42,23 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
+                    @if (Auth::check())
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::check())
+                            <li>
+                                <form class="" action="{{ route('cart.add') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="submit" class="btn btn-default navbar-btn" name="create-cash-draft" id="cash-draft-create-button" value="{{ trans('transaction.create') }}">
+                                    <input type="submit" class="btn btn-default navbar-btn" name="create-credit-draft" id="credit-draft-create-button" value="{{ trans('transaction.create_credit') }}">
+                                </form>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -76,7 +85,9 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
