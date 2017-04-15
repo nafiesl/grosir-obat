@@ -2,6 +2,7 @@
 
 namespace App\Cart;
 
+use App\Product;
 use Illuminate\Support\Collection;
 
 /**
@@ -80,11 +81,7 @@ class CartCollection
 
     public function content()
     {
-        if (is_null($this->session->get($this->instance))) {
-            return collect([]);
-        }
-
-        return $this->session->get($this->instance);
+        return $this->getContent();
     }
 
     protected function getContent()
@@ -112,6 +109,13 @@ class CartCollection
         $this->session->put($this->instance, $content);
 
         return $item->product;
+    }
+
+    public function draftHasItem(TransactionDraft $draft, Product $product)
+    {
+        $item = $draft->search($product);
+
+        return ! is_null($item);
     }
 
     public function updateDraftItem($draftKey, $itemKey, $newItemData)

@@ -2,6 +2,8 @@
 
 namespace App\Cart;
 
+use App\Product;
+
 /**
  * Transaction Draft Interface.
  */
@@ -72,5 +74,11 @@ abstract class TransactionDraft
         $this->items[$itemKey] = $item->updateAttribute($newItemData);
 
         return $item;
+    }
+
+    public function search(Product $product)
+    {
+        $productItem = $this->items()->where('id', $product->id)->first();
+        return $productItem;
     }
 }

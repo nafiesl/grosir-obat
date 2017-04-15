@@ -52,7 +52,7 @@ class CartController extends Controller
         $item = new Item($product, $request->qty);
         $this->cart->addItemToDraft($draftKey, $item);
 
-        return redirect()->route('cart.index', $item->draftKey);
+        return back();
     }
 
     public function updateDraftItem(Request $request, $draftKey)

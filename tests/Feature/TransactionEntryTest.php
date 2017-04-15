@@ -67,6 +67,29 @@ class TransactionEntryTest extends BrowserKitTestCase
         // See product list appears
         $this->see($product->name);
         $this->see($product->credit_price);
+        $this->seeElement('form', ['action' => route('cart.add-draft-item', [$draft->draftKey, $product->id])]);
+        $this->seeElement('input', ['id' => 'qty-' . $product->id, 'name' => 'qty']);
+        $this->seeElement('input', ['id' => 'add-product-' . $product->id]);
         $this->dontSee($product->cash_price);
+    }
+
+    /** @test */
+    public function user_can_add_item_to_draft()
+    {
+        $product = factory(Product::class)->create(['name' => 'Testing Produk 1','cash_price' => 400,'credit_price' => 500]);
+        $this->loginAsUser();
+
+        $cart = new CartCollection();
+        $draft = new CashDraft();
+        $cart->add($draft);
+
+        // Visit cart index with searched item
+        $this->visit(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
+
+        $this->type(2, 'qty');
+        $this->press('add-product-' . $product->id);
+        $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
+        $this->assertTrue($cart->draftHasItem($draft, $product));
+        $this->assertEquals(800, $draft->getTotal());
     }
 }

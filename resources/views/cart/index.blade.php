@@ -34,6 +34,12 @@
         @foreach($queriedProducts as $product)
         <li>{{ $product->name }}</li>
         <li>{{ $draft->type == 'cash' ? $product->cash_price : $product->credit_price }}</li>
+        <li>
+            <form action="{{ route('cart.add-draft-item', [$draft->draftKey, $product->id]) }}" method="post">
+                <input type="number" id="qty-{{ $product->id }}" name="qty" value="1">
+                <input type="submit" id="add-product-{{ $product->id }}">
+            </form>
+        </li>
         @endforeach
     </ul>
     @endif
