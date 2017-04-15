@@ -20,16 +20,21 @@ class CartController extends Controller
 
     public function index(Request $request)
     {
-        $draft = $this->cart->content()->last();
+        $queriedProducts = [];
+        $draft = $this->cart->content()->first();
 
-        return view('cart.index', compact('draft'));
+        return view('cart.index', compact('draft','queriedProducts'));
     }
 
     public function show(Request $request, $draftKey)
     {
-        $queriedProducts = Product::where(function ($query) use ($request) {
-            return $query->where('name', 'like', '%'.$request->get('query').'%');
-        })->get();
+        $query = $request->get('query');
+        $queriedProducts = [];
+        if ($query) {
+            $queriedProducts = Product::where(function ($q) use ($query) {
+                $q->where('name', 'like', '%'.$query.'%');
+            })->get();
+        }
 
         $draft = $this->cart->get($draftKey);
 
@@ -59,14 +64,14 @@ class CartController extends Controller
     {
         $this->cart->updateDraftItem($draftKey, $request->item_key, $request->only('qty', 'item_discount'));
 
-        return redirect()->route('cart.index', $draftKey);
+        return back();
     }
 
     public function removeDraftItem(Request $request, $draftKey)
     {
         $this->cart->removeItemFromDraft($draftKey, $request->item_index);
 
-        return redirect()->route('cart.index', $draftKey);
+        return back();
     }
 
     public function empty($draftKey)

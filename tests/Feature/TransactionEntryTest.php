@@ -59,7 +59,7 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->visit(route('cart.index'));
 
         // Visit search for products
-        $this->submitForm(trans('product.search'), [
+        $this->submitForm(trans('cart.product_search'), [
             'query' => 'testing',
         ]);
 
@@ -91,5 +91,10 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
         $this->assertTrue($cart->draftHasItem($draft, $product));
         $this->assertEquals(800, $draft->getTotal());
+
+        $this->see(formatRp(800));
+        // $this->seeElement('input', ['id' => 'qty' . 0]);
+        // $this->seeElement('input', ['id' => 'item_discount-' . 0]);
+        $this->seeElement('input', ['id' => 'remove-item-' . 0]);
     }
 }
