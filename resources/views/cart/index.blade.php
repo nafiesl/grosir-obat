@@ -66,47 +66,46 @@
         </div>
         @endif
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nama Item</th>
-                <th>Harga Satuan</th>
-                <th>Qty</th>
-                <th>Diskon</th>
-                <th>Subtotal</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        @forelse($draft->items() as $key => $item)
-            <tr>
-                <td>{{ $key + 1 }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ formatRp($item->price) }}</td>
-                <td>{{ $item->qty }}</td>
-                <td>{{ $item->item_discount }}</td>
-                {{--
-                <form action="{{ route('cart.update-draft-item', $draft->draftKey) }}" method="post">
-                    {{ csrf_field() }} {{ method_field('patch') }}
-                    <td><input type="number" style="width:50px" id="qty-{{ $key }}" name="qty" value="{{ $item->qty }}"></td>
-                    <td><input type="text" id="item_discount-{{ $key }}" name="item_discount" value="{{ $item->item_discount }}"></td>
-                </form>
-                 --}}
-                <td>{{ formatRp($item->subtotal) }}</td>
-                <td>
-                    <form
-                        action="{{ route('cart.remove-draft-item', $draft->draftKey) }}"
-                        method="post"
-                        onsubmit="return confirm('Yakin ingin menghapus Item ini?')"
-                    >
-                        {{ csrf_field() }} {{ method_field('delete') }}
-                        <input type="hidden" name="item_index" value="{{ $key }}">
-                        <input type="submit" id="remove-item-{{ $key }}" value="x">
-                    </form>
-                </td>
-            </tr>
-        @empty
-        @endforelse
-    </table>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Items</h3></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama Item</th>
+                    <th>Harga Satuan</th>
+                    <th>Qty</th>
+                    <th>Diskon</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            @forelse($draft->items() as $key => $item)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ formatRp($item->price) }}</td>
+                    {!! Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) !!}
+                    <input type="hidden" name="item_key" value="{{ $key }}">
+                    <td>{!! FormField::text('qty', ['value' => $item->qty, 'id' => 'qty-' . $key, 'style' => 'width:50px', 'label' => false]) !!}</td>
+                    <td>{{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key]) }}</td>
+                    {!! Form::close() !!}
+                    <td>{{ formatRp($item->subtotal) }}</td>
+                    <td>
+                        <form
+                            action="{{ route('cart.remove-draft-item', $draft->draftKey) }}"
+                            method="post"
+                            onsubmit="return confirm('Yakin ingin menghapus Item ini?')"
+                        >
+                            {{ csrf_field() }} {{ method_field('delete') }}
+                            <input type="hidden" name="item_index" value="{{ $key }}">
+                            <input type="submit" id="remove-item-{{ $key }}" value="x">
+                        </form>
+                    </td>
+                </tr>
+            @empty
+            @endforelse
+        </table>
+    </div>
 @endif
 @endsection

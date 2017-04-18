@@ -93,8 +93,8 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->assertEquals(800, $draft->getTotal());
 
         $this->see(formatRp(800));
-        // $this->seeElement('input', ['id' => 'qty' . 0]);
-        // $this->seeElement('input', ['id' => 'item_discount-' . 0]);
+        $this->seeElement('input', ['id' => 'qty-' . 0]);
+        $this->seeElement('input', ['id' => 'item_discount-' . 0]);
         $this->seeElement('input', ['id' => 'remove-item-' . 0]);
     }
 }

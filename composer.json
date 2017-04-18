@@ -8,7 +8,7 @@
         "php": ">=5.6.4",
         "laravel/browser-kit-testing": "^1.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "luthfi/formfield": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

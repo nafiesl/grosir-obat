@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
+        Luthfi\FormField\FormFieldServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,6 +226,9 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
 
+        'Form'         => Collective\Html\FormFacade::class,
+        'Html'         => Collective\Html\HtmlFacade::class,
+        'FormField'    => Luthfi\FormField\FormFieldFacade::class,
     ],
 
 ];
