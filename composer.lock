@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "368165fbcebe846c9c2075a5c891d081",
+    "content-hash": "360ad09108ebcf2e18cdc61e59e298d9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -430,16 +430,16 @@
         },
         {
             "name": "luthfi/formfield",
-            "version": "dev-master",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nafiesl/FormField.git",
-                "reference": "1042513145c227eaf2325e7be83c8c193e1b3955"
+                "reference": "2f6222d1f72562d102811bc5a0e584b4b78f86b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/1042513145c227eaf2325e7be83c8c193e1b3955",
-                "reference": "1042513145c227eaf2325e7be83c8c193e1b3955",
+                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/2f6222d1f72562d102811bc5a0e584b4b78f86b6",
+                "reference": "2f6222d1f72562d102811bc5a0e584b4b78f86b6",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
                 }
             ],
             "description": "Form Field helper class for Laravel 5.3 with Twitter Bootstrap",
-            "time": "2017-04-18 15:38:34"
+            "time": "2017-04-19T04:09:24+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3233,9 +3233,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luthfi/formfield": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

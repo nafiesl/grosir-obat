@@ -21,7 +21,7 @@ class CartControllerTest extends TestCase
 
         $cart = new CartCollection();
 
-        $response = $this->post(route('cart.add'), ['create-cash-draft'=> trans('transaction.create')]);
+        $response = $this->post(route('cart.add'), ['create-cash-draft'=> trans('transaction.create_cash')]);
         $response = $this->post(route('cart.add'), ['create-credit-draft'=> trans('transaction.create_credit')]);
         $response->assertSessionHas('transactions.drafts');
 
@@ -33,7 +33,7 @@ class CartControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_add_item_product_into_cart_draft()
+    public function user_can_add_item_product_into_cash_draft()
     {
         $this->loginAsUser();
 
@@ -53,6 +53,30 @@ class CartControllerTest extends TestCase
         $cashDraft = $cart->content()->first();
         $this->assertTrue($cashDraft instanceof CashDraft);
         $this->assertEquals(2200, $cashDraft->getTotal());
+    }
+
+    /** @test */
+    public function user_can_add_item_product_into_credit_draft()
+    {
+        $this->loginAsUser();
+
+        $cart = new CartCollection();
+        $draft = new CreditDraft();
+        $cart->add($draft);
+
+        // Add Product to database
+        $product = factory(Product::class)->create(['cash_price' => 1100], ['credit_price' => 1000]);
+        $itemQty = 2;
+
+        // Add Product as CreditDraft item
+        $response = $this->post(route('cart.add-draft-item', [$draft->draftKey, $product->id]), [
+            'qty' => $itemQty,
+        ]);
+        // $response->assertStatus(200);
+
+        $cashDraft = $cart->content()->first();
+        $this->assertTrue($cashDraft instanceof CreditDraft);
+        $this->assertEquals(2000, $cashDraft->getTotal());
     }
 
     /** @test */

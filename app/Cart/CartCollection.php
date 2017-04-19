@@ -104,6 +104,13 @@ class CartCollection
     public function addItemToDraft($draftKey, Item $item)
     {
         $content = $this->getContent();
+        $draft = $content[$draftKey];
+
+        if ($draft->type == 'credit') {
+            $item->price = $item->product->getPrice('credit');
+            $item->subtotal = $item->product->getPrice('credit') * $item->qty;
+        }
+
         $content[$draftKey]->addItem($item);
 
         $this->session->put($this->instance, $content);

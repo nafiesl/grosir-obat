@@ -9,7 +9,7 @@
         <?php $active = ($draft->draftKey == $key) ? 'class=active' : '' ?>
         <li {{ $active }} role="presentation">
             <a href="{{ route('cart.show', $key) }}">
-                {{ $content->type }} - {{ $key }}
+                {{ trans('transaction.' . $content->type) }} - {{ $key }}
                 <form action="{{ route('cart.remove') }}" method="post" style="display:inline" onsubmit="return confirm('Yakin ingin menghapus Draft Transaksi ini?')">
                     {{ csrf_field() }}
                     {{ method_field('delete') }}
@@ -67,7 +67,6 @@
         @endif
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">Items</h3></div>
         <table class="table">
             <thead>
                 <tr>
@@ -75,36 +74,42 @@
                     <th>Nama Item</th>
                     <th>Harga Satuan</th>
                     <th>Qty</th>
-                    <th>Diskon</th>
+                    <th>Diskon per Item</th>
                     <th>Subtotal</th>
                     <th>Action</th>
                 </tr>
             </thead>
+            <tbody>
             @forelse($draft->items() as $key => $item)
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ formatRp($item->price) }}</td>
-                    {!! Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) !!}
-                    <input type="hidden" name="item_key" value="{{ $key }}">
-                    <td>{!! FormField::text('qty', ['value' => $item->qty, 'id' => 'qty-' . $key, 'style' => 'width:50px', 'label' => false]) !!}</td>
-                    <td>{{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key]) }}</td>
-                    {!! Form::close() !!}
+                    <td>
+                        {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
+                        {{ Form::hidden('item_key', $key) }}
+                        {{ Form::hidden('item_discount', $item->item_discount) }}
+                        {{ Form::number('qty', $item->qty, ['id' => 'qty-' . $key, 'style' => 'width:50px;text-align:center']) }}
+                        {{ Form::close() }}
+                    </td>
+                    <td>
+                        {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
+                        {{ Form::hidden('item_key', $key) }}
+                        {{ Form::hidden('qty', $item->qty) }}
+                        {{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key, 'style' => 'width:100px;text-align:right']) }}
+                        {{ Form::close() }}
+                    </td>
                     <td>{{ formatRp($item->subtotal) }}</td>
                     <td>
-                        <form
-                            action="{{ route('cart.remove-draft-item', $draft->draftKey) }}"
-                            method="post"
-                            onsubmit="return confirm('Yakin ingin menghapus Item ini?')"
-                        >
-                            {{ csrf_field() }} {{ method_field('delete') }}
-                            <input type="hidden" name="item_index" value="{{ $key }}">
-                            <input type="submit" id="remove-item-{{ $key }}" value="x">
-                        </form>
+                        {!! FormField::delete([
+                            'route' => ['cart.remove-draft-item', $draft->draftKey],
+                            'onsubmit' => 'Yakin ingin menghapus Item ini?',
+                        ], 'x', ['id' => 'remove-item-' . $key, 'class' => 'btn btn-danger btn-xs'], ['item_index' => $key]) !!}
                     </td>
                 </tr>
             @empty
             @endforelse
+            </tbody>
         </table>
     </div>
 @endif
