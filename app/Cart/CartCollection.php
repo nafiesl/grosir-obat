@@ -122,7 +122,7 @@ class CartCollection
     {
         $item = $draft->search($product);
 
-        return ! is_null($item);
+        return !is_null($item);
     }
 
     public function updateDraftItem($draftKey, $itemKey, $newItemData)

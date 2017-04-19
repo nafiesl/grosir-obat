@@ -23,7 +23,7 @@ class CartController extends Controller
         $queriedProducts = [];
         $draft = $this->cart->content()->first();
 
-        return view('cart.index', compact('draft','queriedProducts'));
+        return view('cart.index', compact('draft', 'queriedProducts'));
     }
 
     public function show(Request $request, $draftKey)
