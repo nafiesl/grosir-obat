@@ -79,6 +79,7 @@ abstract class TransactionDraft
     public function search(Product $product)
     {
         $productItem = $this->items()->where('id', $product->id)->first();
+
         return $productItem;
     }
 }

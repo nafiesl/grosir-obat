@@ -20,11 +20,11 @@ class Item
 
     public function __construct(Product $product, $qty)
     {
-        $this->id       = $product->id;
-        $this->name     = $product->name;
-        $this->product  = $product;
-        $this->qty      = $qty;
-        $this->price    = $product->getPrice();
+        $this->id = $product->id;
+        $this->name = $product->name;
+        $this->product = $product;
+        $this->qty = $qty;
+        $this->price = $product->getPrice();
         $this->subtotal = $product->getPrice() * $qty;
     }
 

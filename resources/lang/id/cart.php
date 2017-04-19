@@ -2,5 +2,5 @@
 
 return [
     // Labels
-    'product_search' => 'Cari Produk'
+    'product_search' => 'Cari Produk',
 ];
