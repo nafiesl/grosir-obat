@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Cart\CartCollection;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
+use App\Cart\Item;
 use App\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\BrowserKitTestCase;
@@ -66,7 +67,7 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
         // See product list appears
         $this->see($product->name);
-        $this->see($product->credit_price);
+        $this->see(formatRp($product->credit_price));
         $this->seeElement('form', ['action' => route('cart.add-draft-item', [$draft->draftKey, $product->id])]);
         $this->seeElement('input', ['id' => 'qty-'.$product->id, 'name' => 'qty']);
         $this->seeElement('input', ['id' => 'add-product-'.$product->id]);
@@ -74,9 +75,10 @@ class TransactionEntryTest extends BrowserKitTestCase
     }
 
     /** @test */
-    public function user_can_add_item_to_draft()
+    public function user_can_add_item_to_cash_draft()
     {
-        $product = factory(Product::class)->create(['name' => 'Testing Produk 1', 'cash_price' => 400, 'credit_price' => 500]);
+        $product1 = factory(Product::class)->create(['name' => 'Testing Produk 1', 'cash_price' => 400, 'credit_price' => 500]);
+        $product2 = factory(Product::class)->create(['name' => 'Testing Produk 2', 'cash_price' => 1000, 'credit_price' => 1100]);
         $this->loginAsUser();
 
         $cart = new CartCollection();
@@ -87,14 +89,81 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->visit(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
 
         $this->type(2, 'qty');
-        $this->press('add-product-'.$product->id);
+        $this->press('add-product-'.$product1->id);
+        $this->type(3, 'qty');
+        $this->press('add-product-'.$product2->id);
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
-        $this->assertTrue($cart->draftHasItem($draft, $product));
-        $this->assertEquals(800, $draft->getTotal());
+        $this->assertTrue($cart->draftHasItem($draft, $product1));
+        $this->assertTrue($cart->draftHasItem($draft, $product2));
+        $this->assertEquals(3800, $draft->getTotal());
 
-        $this->see(formatRp(800));
         $this->seeElement('input', ['id' => 'qty-'. 0]);
         $this->seeElement('input', ['id' => 'item_discount-'. 0]);
         $this->seeElement('button', ['id' => 'remove-item-'. 0]);
+        $this->see(formatRp(3800));
+    }
+
+    /** @test */
+    public function user_can_add_item_to_credit_draft()
+    {
+        $product1 = factory(Product::class)->create(['name' => 'Testing Produk 1', 'cash_price' => 400, 'credit_price' => 500]);
+        $product2 = factory(Product::class)->create(['name' => 'Testing Produk 2', 'cash_price' => 1000, 'credit_price' => 1100]);
+        $this->loginAsUser();
+
+        $cart = new CartCollection();
+        $draft = new CreditDraft();
+        $cart->add($draft);
+
+        // Visit cart index with searched item
+        $this->visit(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
+
+        $this->type(2, 'qty');
+        $this->press('add-product-'.$product1->id);
+        $this->type(3, 'qty');
+        $this->press('add-product-'.$product2->id);
+
+        $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
+        $this->assertTrue($cart->draftHasItem($draft, $product1));
+        $this->assertTrue($cart->draftHasItem($draft, $product2));
+        $this->assertEquals(4300, $draft->getTotal());
+    }
+
+    /** @test */
+    public function user_can_update_item_qty()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 2000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $this->loginAsUser();
+        $this->visit(route('cart.show', $draft->draftKey));
+
+        $this->submitForm('update-item-0', [
+            'item_key'      => 0,
+            'qty'           => 2,
+            'item_discount' => 100,
+        ]);
+
+        $this->submitForm('update-item-1', [
+            'item_key'      => 1,
+            'qty'           => 2,
+            'item_discount' => 100,
+        ]);
+
+        $this->assertEquals(400, $draft->getDiscountTotal());
+        $this->assertEquals(6000, $draft->getSubtotal());
+        $this->assertEquals(5600, $draft->getTotal());
+
+        $this->see(formatRp($draft->getSubtotal()));
+        $this->see(formatRp($draft->getTotal()));
     }
 }

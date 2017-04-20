@@ -36,11 +36,16 @@ class Item
         }
 
         if (isset($newItemData['item_discount'])) {
-            $this->item_discount = $newItemData['item_discount'];
-            $this->item_discount_subtotal = $this->item_discount * $this->qty;
-            $this->subtotal = $this->subtotal - $this->item_discount_subtotal;
+            $this->setItemDiscount($newItemData['item_discount']);
         }
 
         return $this;
+    }
+
+    public function setItemDiscount(int $discount)
+    {
+        $this->item_discount = $discount;
+        $this->item_discount_subtotal = $discount * $this->qty;
+        $this->subtotal = $this->subtotal - $this->item_discount_subtotal;
     }
 }
