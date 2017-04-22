@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Entry Transaksi')
+
 @section('content')
 <?php use Facades\App\Cart\CartCollection; ?>
 

@@ -18,29 +18,23 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ formatRp($item->price) }}</td>
-                    <td>
                         {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
                         {{ Form::hidden('item_key', $key) }}
-                        {{ Form::hidden('qty', $item->qty) }}
+                    <td>
                         {{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key, 'style' => 'width:100px;text-align:right']) }}
-                        {{ Form::submit('update-item-' . $key, ['style'=>'display:none']) }}
-                        {{ Form::close() }}
                     </td>
                     <td>
-                        {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
-                        {{ Form::hidden('item_key', $key) }}
-                        {{ Form::hidden('item_discount', $item->item_discount) }}
                         {{ Form::number('qty', $item->qty, ['id' => 'qty-' . $key, 'style' => 'width:50px;text-align:center']) }}
-                        {{ Form::submit('update-item-' . $key, ['style'=>'display:none']) }}
-                        {{ Form::close() }}
                     </td>
                     <td class="text-right">{{ formatRp($item->subtotal) }}</td>
-                    <td class="text-center">
+                        {{ Form::submit('update-item-' . $key, ['style'=>'display:none']) }}
+                        {{ Form::close() }}
+                    <td class="text-center show-on-hover-parent">
                         {!! FormField::delete([
                             'route' => ['cart.remove-draft-item', $draft->draftKey],
                             'onsubmit' => 'Yakin ingin menghapus Item ini?',
                             'class' => '',
-                        ], 'x', ['id' => 'remove-item-' . $key, 'class' => 'btn btn-danger btn-xs'], ['item_index' => $key]) !!}
+                        ], 'x', ['id' => 'remove-item-' . $key, 'class' => 'btn btn-danger btn-xs show-on-hover','title' => 'Hapus item ini'], ['item_index' => $key]) !!}
                     </td>
                 </tr>
             @empty
