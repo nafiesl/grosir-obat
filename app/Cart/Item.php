@@ -46,6 +46,5 @@ class Item
     {
         $this->item_discount = $discount;
         $this->item_discount_subtotal = $discount * $this->qty;
-        $this->subtotal = $this->subtotal - $this->item_discount_subtotal;
     }
 }

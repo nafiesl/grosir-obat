@@ -8,9 +8,9 @@
                         <tr>
                             <th>#</th>
                             <th>Nama Item</th>
-                            <th>Harga Satuan</th>
-                            <th>Diskon per Item</th>
-                            <th>Qty</th>
+                            <th class="text-right">Harga Satuan</th>
+                            <th class="text-right">Diskon per Item</th>
+                            <th class="text-center">Qty</th>
                             <th class="text-right">Subtotal</th>
                         </tr>
                     </thead>
@@ -19,9 +19,9 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ formatRp($item->price) }}</td>
-                            <td>{{ formatRp($item->item_discount) }}</td>
-                            <td>{{ $item->qty }}</td>
+                            <td class="text-right">{{ formatRp($item->price) }}</td>
+                            <td class="text-right">{{ formatRp($item->item_discount) }}</td>
+                            <td class="text-center">{{ $item->qty }}</td>
                             <td class="text-right">{{ formatRp($item->subtotal) }}</td>
                         </tr>
                         @empty

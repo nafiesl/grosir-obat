@@ -141,12 +141,20 @@ class TransactionDraftTest extends TestCase
     }
 
     /** @test */
-    public function transaction_draft_has_detail()
+    public function transaction_draft_has_payment_and_exchange()
     {
-        // TODO: check corrent draft attributes
         $cart = new CartCollection();
 
         $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->make(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->make(['cash_price' => 2000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
         $draftAttributes = [
             'customer' => [
                 'name' => 'Nafies',
@@ -157,14 +165,13 @@ class TransactionDraftTest extends TestCase
         ];
         $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
 
-        $this->assertArrayHasKey('invoice_no', $draft->toArray());
-        $this->assertArrayHasKey('date', $draft->toArray());
-        $this->assertArrayHasKey('items', $draft->toArray());
-        $this->assertArrayHasKey('total', $draft->toArray());
-        $this->assertArrayHasKey('payment', $draft->toArray());
-        $this->assertArrayHasKey('customer', $draft->toArray());
-        $this->assertArrayHasKey('status_id', $draft->toArray());
-        $this->assertArrayHasKey('creator_id', $draft->toArray());
-        $this->assertArrayHasKey('remark', $draft->toArray());
+        $this->assertEquals(10000, $draft->payment);
+        $this->assertEquals(7000, $draft->getTotal());
+        $this->assertEquals(3000, $draft->getExchange());
+        $this->assertEquals([
+            'name' => 'Nafies',
+            'phone' => '081234567890',
+        ], $draft->customer);
+        $this->assertEquals('Catatan', $draft->notes);
     }
 }

@@ -196,6 +196,7 @@ class TransactionEntryTest extends BrowserKitTestCase
 
         $this->see(trans('transaction.confirm'));
         $this->see(formatRp(10000));
+        $this->see(formatRp(3000));
         $this->seeElement('input', ['id' => 'save-transaction-draft']);
     }
 }
