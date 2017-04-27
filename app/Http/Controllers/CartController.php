@@ -31,6 +31,7 @@ class CartController extends Controller
         $draft = $this->cart->get($draftKey);
         if (is_null($draft)) {
             flash(trans('transaction.draft_not_found'), 'danger');
+
             return redirect()->route('cart.index');
         }
 
@@ -94,6 +95,7 @@ class CartController extends Controller
         }
 
         $lastDraft = $this->cart->content()->last();
+
         return redirect()->route('cart.show', $lastDraft->draftKey);
     }
 
@@ -117,10 +119,12 @@ class CartController extends Controller
 
         if ($draft->getItemsCount() == 0) {
             flash(trans('transaction.item_list_empty'), 'warning')->important();
+
             return redirect()->route('cart.show', [$draftKey]);
         }
 
         flash(trans('transaction.confirm_instruction', ['back_link' => link_to_route('cart.show', trans('app.back'), $draftKey)]), 'warning')->important();
+
         return redirect()->route('cart.show', [$draftKey, 'action' => 'confirm']);
     }
 
@@ -134,6 +138,7 @@ class CartController extends Controller
         $transaction = $draft->store();
         $draft->destroy();
         flash(trans('transaction.created', ['invoice_no' => $transaction->invoice_no]), 'success')->important();
+
         return redirect()->route('cart.index');
     }
 }
