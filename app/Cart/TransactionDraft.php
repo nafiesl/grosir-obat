@@ -105,7 +105,7 @@ abstract class TransactionDraft
 
     public function store()
     {
-        $transaction = new Transaction;
+        $transaction = new Transaction();
         $transaction->invoice_no = $this->getNewInvoiceNo();
         $transaction->items = $this->getItemsArray();
         $transaction->customer = $this->customer;
@@ -123,16 +123,16 @@ abstract class TransactionDraft
     {
         $prefix = date('ym');
 
-        $lastTransaction = Transaction::orderBy('invoice_no','desc')->first();
+        $lastTransaction = Transaction::orderBy('invoice_no', 'desc')->first();
 
-        if (! is_null($lastTransaction)) {
+        if (!is_null($lastTransaction)) {
             $lastInvoiceNo = $lastTransaction->invoice_no;
             if (substr($lastInvoiceNo, 0, 4) == $prefix) {
                 return ++$lastInvoiceNo;
             }
         }
 
-        return $prefix . '0001';
+        return $prefix.'0001';
     }
 
     protected function getItemsArray()
@@ -140,13 +140,13 @@ abstract class TransactionDraft
         $items = [];
         foreach ($this->items as $item) {
             $items[] = [
-                'id' => $item->product->id,
-                'name' => $item->name,
-                'price' => $item->price,
-                'qty' => $item->qty,
-                'item_discount' => $item->item_discount,
+                'id'                     => $item->product->id,
+                'name'                   => $item->name,
+                'price'                  => $item->price,
+                'qty'                    => $item->qty,
+                'item_discount'          => $item->item_discount,
                 'item_discount_subtotal' => $item->item_discount_subtotal,
-                'subtotal' => $item->subtotal,
+                'subtotal'               => $item->subtotal,
             ];
         }
 

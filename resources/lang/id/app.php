@@ -34,4 +34,5 @@ return [
     'count'                 => 'Jumlah',
     'welcome'               => 'Selamat datang',
     'export-pdf'            => 'Export PDF',
+
 ];

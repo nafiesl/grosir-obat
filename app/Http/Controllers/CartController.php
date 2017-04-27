@@ -89,8 +89,9 @@ class CartController extends Controller
     {
         $this->cart->removeDraft($request->draft_key);
 
-        if ($this->cart->isEmpty())
+        if ($this->cart->isEmpty()) {
             return redirect()->route('cart.index');
+        }
 
         $lastDraft = $this->cart->content()->last();
         return redirect()->route('cart.show', $lastDraft->draftKey);
@@ -107,12 +108,12 @@ class CartController extends Controller
     public function proccess(Request $request, $draftKey)
     {
         $this->validate($request, [
-            'customer.name' => 'required|string|max:30',
+            'customer.name'  => 'required|string|max:30',
             'customer.phone' => 'nullable|string|max:20',
-            'payment' => 'required|numeric',
-            'notes' => 'nullable|string|max:100',
+            'payment'        => 'required|numeric',
+            'notes'          => 'nullable|string|max:100',
         ]);
-        $draft = $this->cart->updateDraftAttributes($draftKey, $request->only('customer','notes','payment'));
+        $draft = $this->cart->updateDraftAttributes($draftKey, $request->only('customer', 'notes', 'payment'));
 
         if ($draft->getItemsCount() == 0) {
             flash(trans('transaction.item_list_empty'), 'warning')->important();
@@ -126,8 +127,9 @@ class CartController extends Controller
     public function store(Request $request, $draftKey)
     {
         $draft = $this->cart->get($draftKey);
-        if (is_null($draft))
+        if (is_null($draft)) {
             return redirect()->route('cart.index');
+        }
 
         $transaction = $draft->store();
         $draft->destroy();
