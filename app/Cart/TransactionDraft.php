@@ -3,6 +3,7 @@
 namespace App\Cart;
 
 use App\Product;
+use App\Transaction;
 
 /**
  * Transaction Draft Interface.
@@ -100,5 +101,61 @@ abstract class TransactionDraft
     public function getExchange()
     {
         return $this->payment - $this->getTotal();
+    }
+
+    public function store()
+    {
+        $transaction = new Transaction;
+        $transaction->invoice_no = $this->getNewInvoiceNo();
+        $transaction->items = $this->getItemsArray();
+        $transaction->customer = $this->customer;
+        $transaction->payment = $this->payment;
+        $transaction->total = $this->getTotal();
+        $transaction->notes = $this->notes;
+        $transaction->user_id = auth()->id() ?: 1;
+
+        $transaction->save();
+
+        return $transaction;
+    }
+
+    public function getNewInvoiceNo()
+    {
+        $prefix = date('ym');
+
+        $lastTransaction = Transaction::orderBy('invoice_no','desc')->first();
+
+        if (! is_null($lastTransaction)) {
+            $lastInvoiceNo = $lastTransaction->invoice_no;
+            if (substr($lastInvoiceNo, 0, 4) == $prefix) {
+                return ++$lastInvoiceNo;
+            }
+        }
+
+        return $prefix . '0001';
+    }
+
+    protected function getItemsArray()
+    {
+        $items = [];
+        foreach ($this->items as $item) {
+            $items[] = [
+                'id' => $item->product->id,
+                'name' => $item->name,
+                'price' => $item->price,
+                'qty' => $item->qty,
+                'item_discount' => $item->item_discount,
+                'item_discount_subtotal' => $item->item_discount_subtotal,
+                'subtotal' => $item->subtotal,
+            ];
+        }
+
+        return $items;
+    }
+
+    public function destroy()
+    {
+        $cart = app(CartCollection::class);
+        return $cart->removeDraft($this->draftKey);
     }
 }

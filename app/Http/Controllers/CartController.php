@@ -28,6 +28,10 @@ class CartController extends Controller
 
     public function show(Request $request, $draftKey)
     {
+        $draft = $this->cart->get($draftKey);
+        if (is_null($draft))
+            return redirect()->route('cart.index');
+
         $query = $request->get('query');
         $queriedProducts = [];
         if ($query) {
@@ -35,8 +39,6 @@ class CartController extends Controller
                 $q->where('name', 'like', '%'.$query.'%');
             })->get();
         }
-
-        $draft = $this->cart->get($draftKey);
 
         return view('cart.index', compact('draft', 'queriedProducts'));
     }
@@ -101,7 +103,24 @@ class CartController extends Controller
 
     public function proccess(Request $request, $draftKey)
     {
+        $this->validate($request, [
+            'customer.name' => 'required|string|max:30',
+            'customer.phone' => 'nullable|string|max:20',
+            'payment' => 'required|numeric',
+            'notes' => 'nullable|string|max:100',
+        ]);
         $this->cart->updateDraftAttributes($draftKey, $request->only('customer','notes','payment'));
         return redirect()->route('cart.show', [$draftKey, 'action' => 'confirm']);
+    }
+
+    public function store(Request $request, $draftKey)
+    {
+        $draft = $this->cart->get($draftKey);
+        if (is_null($draft))
+            return redirect()->route('cart.index');
+
+        $draft->store();
+        $draft->destroy();
+        return redirect()->route('cart.index');
     }
 }

@@ -41,6 +41,17 @@ class TransactionDraftTest extends TestCase
     }
 
     /** @test */
+    public function it_has_destroy_method()
+    {
+        $cart = new CartCollection();
+        $draft = $cart->add(new CashDraft());
+        $draftKey = $draft->draftKey;
+        $this->assertNotNull($draft);
+        $draft->destroy();
+        $this->assertNull($cart->get($draftKey));
+    }
+
+    /** @test */
     public function it_has_get_total_method()
     {
         $cart = new CartCollection();
@@ -141,7 +152,7 @@ class TransactionDraftTest extends TestCase
     }
 
     /** @test */
-    public function transaction_draft_has_payment_and_exchange()
+    public function it_has_payment_and_exchange()
     {
         $cart = new CartCollection();
 
@@ -173,5 +184,43 @@ class TransactionDraftTest extends TestCase
             'phone' => '081234567890',
         ], $draft->customer);
         $this->assertEquals('Catatan', $draft->notes);
+    }
+
+    /** @test */
+    public function it_has_store_method_to_save_to_database()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 2000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $draftAttributes = [
+            'customer' => [
+                'name' => 'Nafies',
+                'phone' => '081234567890',
+            ],
+            'payment' => 10000,
+            'notes' => 'Catatan',
+        ];
+        $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
+
+        $draft->store();
+
+        $this->assertDatabaseHas('transactions', [
+            'invoice_no' => date('ym') . '0001',
+            'items' => '[{"id":' . $product1->id . ',"name":"' . $product1->name . '","price":1000,"qty":1,"item_discount":0,"item_discount_subtotal":0,"subtotal":1000},{"id":' . $product2->id . ',"name":"' . $product2->name . '","price":2000,"qty":3,"item_discount":0,"item_discount_subtotal":0,"subtotal":6000}]',
+            'customer' => '{"name":"Nafies","phone":"081234567890"}',
+            'payment' => 10000,
+            'total' => 7000,
+            'notes' => 'Catatan',
+            'user_id' => 1,
+        ]);
     }
 }

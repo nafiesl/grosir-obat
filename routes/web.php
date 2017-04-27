@@ -21,6 +21,7 @@ Route::get('/home', 'CartController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('drafts', 'CartController@index')->name('cart.index');
     Route::get('drafts/{draftKey}', 'CartController@show')->name('cart.show');
+    Route::post('drafts/{draftKey}', 'CartController@store')->name('cart.store');
     Route::post('cart/add-draft', 'CartController@add')->name('cart.add');
     Route::post('cart/add-draft-item/{draftKey}/{product}', 'CartController@addDraftItem')->name('cart.add-draft-item');
     Route::patch('cart/update-draft-item/{draftKey}', 'CartController@updateDraftItem')->name('cart.update-draft-item');

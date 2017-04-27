@@ -63,7 +63,7 @@
                 </table>
             </div>
             <div class="panel-footer">
-                {{ Form::open() }}
+                {{ Form::open(['route' => ['cart.store', $draft->draftKey]]) }}
                 {{ Form::submit(trans('transaction.save'), ['id' => 'save-transaction-draft', 'class' => 'btn btn-success']) }}
                 {{ link_to_route('cart.show', trans('app.back'), $draft->draftKey, ['class' => 'btn btn-default']) }}
                 {{ Form::close() }}
