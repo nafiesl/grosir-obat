@@ -94,4 +94,10 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
     }
+
+    public function proccess(Request $request, $draftKey)
+    {
+        $this->cart->updateDraftAttributes($draftKey, $request->only('customer','notes','payment'));
+        return redirect()->route('cart.show', [$draftKey, 'action' => 'confirm']);
+    }
 }

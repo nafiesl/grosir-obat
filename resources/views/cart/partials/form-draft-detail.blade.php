@@ -1,0 +1,10 @@
+<legend>{{ trans('transaction.detail') }}</legend>
+{{ Form::open(['route' => ['cart.draft-proccess', $draft->draftKey], 'method' => 'patch']) }}
+{!! FormField::text('customer[name]', ['label' => trans('transaction.customer_name'), 'value' => $draft->customer['name']]) !!}
+<div class="row">
+    <div class="col-md-6">{!! FormField::text('customer[phone]', ['label' => trans('transaction.customer_phone'), 'value' => $draft->customer['phone']]) !!}</div>
+    <div class="col-md-6">{!! FormField::price('payment', ['label' => trans('transaction.payment'), 'value' => $draft->payment]) !!}</div>
+</div>
+{!! FormField::textarea('notes', ['label' => trans('transaction.notes'), 'value' => $draft->notes]) !!}
+{{ Form::submit(trans('transaction.proccess'), ['class' => 'btn btn-info']) }}
+{{ Form::close() }}

@@ -166,4 +166,36 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->see(formatRp($draft->getSubtotal()));
         $this->see(formatRp($draft->getTotal()));
     }
+
+    /** @test */
+    public function user_can_update_draft_transaction_detail_and_get_confirm_page()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 2000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $this->loginAsUser();
+        $this->visit(route('cart.show', $draft->draftKey));
+
+        $this->type('Nafies', 'customer[name]');
+        $this->type('-', 'customer[phone]');
+        $this->type('catatan', 'notes');
+        $this->type(10000, 'payment');
+        $this->press(trans('transaction.proccess'));
+
+        $this->seePageIs(route('cart.show', [$draft->draftKey, 'action' => 'confirm']));
+
+        $this->see(trans('transaction.confirm'));
+        $this->see(formatRp(10000));
+        $this->seeElement('input', ['id' => 'save-transaction-draft']);
+    }
 }

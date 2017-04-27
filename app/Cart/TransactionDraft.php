@@ -11,12 +11,16 @@ abstract class TransactionDraft
 {
     public $items = [];
 
+    public $customer = ['name' => null, 'phone' => null];
+    public $notes;
+    public $payment;
+
     public function toArray()
     {
         return [
             'invoice_no' => 2,
             'date'       => 1,
-            'items'      => [],
+            'items'      => $this->items(),
             'total'      => 0,
             'payment'    => 0,
             'customer'   => 0,
@@ -86,5 +90,10 @@ abstract class TransactionDraft
         $productItem = $this->items()->where('id', $product->id)->first();
 
         return $productItem;
+    }
+
+    public function getExchange()
+    {
+        return $this->payment - $this->getTotal();
     }
 }

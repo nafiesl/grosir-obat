@@ -1,3 +1,4 @@
+<legend>{{ trans('transaction.items') }} <small class="text-muted">({{ $draft->items()->count() }} Item)</small></legend>
 <div class="panel panel-default">
     <div class="panel-body">
         <table class="table">
@@ -21,7 +22,7 @@
                         {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
                         {{ Form::hidden('item_key', $key) }}
                     <td>
-                        {{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key, 'style' => 'width:100px;text-align:right']) }}
+                        {{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key, 'style' => 'width:80px;text-align:right']) }}
                     </td>
                     <td>
                         {{ Form::number('qty', $item->qty, ['id' => 'qty-' . $key, 'style' => 'width:50px;text-align:center']) }}
@@ -42,17 +43,17 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="5" class="text-right">Subtotal :</th>
+                    <th colspan="5" class="text-right">{{ trans('transaction.subtotal') }} :</th>
                     <th class="text-right">{{ formatRp($draft->getSubtotal()) }}</th>
                     <th></th>
                 </tr>
                 <tr>
-                    <th colspan="5" class="text-right">Diskon Total :</th>
+                    <th colspan="5" class="text-right">{{ trans('transaction.discount_total') }} :</th>
                     <th class="text-right">{{ formatRp($draft->getDiscountTotal()) }}</th>
                     <th></th>
                 </tr>
                 <tr>
-                    <th colspan="5" class="text-right">Total :</th>
+                    <th colspan="5" class="text-right">{{ trans('transaction.total') }} :</th>
                     <th class="text-right">{{ formatRp($draft->getTotal()) }}</th>
                     <th></th>
                 </tr>

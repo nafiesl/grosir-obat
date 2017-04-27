@@ -139,4 +139,32 @@ class TransactionDraftTest extends TestCase
         $this->assertEquals(7000, $draft->getSubtotal());
         $this->assertEquals(6700, $draft->getTotal());
     }
+
+    /** @test */
+    public function transaction_draft_has_detail()
+    {
+        // TODO: check corrent draft attributes
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+        $draftAttributes = [
+            'customer' => [
+                'name' => 'Nafies',
+                'phone' => '081234567890',
+            ],
+            'payment' => 10000,
+            'notes' => 'Catatan',
+        ];
+        $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
+
+        $this->assertArrayHasKey('invoice_no', $draft->toArray());
+        $this->assertArrayHasKey('date', $draft->toArray());
+        $this->assertArrayHasKey('items', $draft->toArray());
+        $this->assertArrayHasKey('total', $draft->toArray());
+        $this->assertArrayHasKey('payment', $draft->toArray());
+        $this->assertArrayHasKey('customer', $draft->toArray());
+        $this->assertArrayHasKey('status_id', $draft->toArray());
+        $this->assertArrayHasKey('creator_id', $draft->toArray());
+        $this->assertArrayHasKey('remark', $draft->toArray());
+    }
 }
