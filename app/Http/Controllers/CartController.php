@@ -29,8 +29,10 @@ class CartController extends Controller
     public function show(Request $request, $draftKey)
     {
         $draft = $this->cart->get($draftKey);
-        if (is_null($draft))
+        if (is_null($draft)) {
+            flash(trans('transaction.draft_not_found'), 'danger');
             return redirect()->route('cart.index');
+        }
 
         $query = $request->get('query');
         $queriedProducts = [];
@@ -97,6 +99,7 @@ class CartController extends Controller
     public function destroy()
     {
         $this->cart->destroy();
+        flash(trans('transaction.draft_destroyed'), 'warning');
 
         return redirect()->route('cart.index');
     }
@@ -109,7 +112,14 @@ class CartController extends Controller
             'payment' => 'required|numeric',
             'notes' => 'nullable|string|max:100',
         ]);
-        $this->cart->updateDraftAttributes($draftKey, $request->only('customer','notes','payment'));
+        $draft = $this->cart->updateDraftAttributes($draftKey, $request->only('customer','notes','payment'));
+
+        if ($draft->getItemsCount() == 0) {
+            flash(trans('transaction.item_list_empty'), 'warning')->important();
+            return redirect()->route('cart.show', [$draftKey]);
+        }
+
+        flash(trans('transaction.confirm_instruction', ['back_link' => link_to_route('cart.show', trans('app.back'), $draftKey)]), 'warning')->important();
         return redirect()->route('cart.show', [$draftKey, 'action' => 'confirm']);
     }
 
@@ -119,8 +129,9 @@ class CartController extends Controller
         if (is_null($draft))
             return redirect()->route('cart.index');
 
-        $draft->store();
+        $transaction = $draft->store();
         $draft->destroy();
+        flash(trans('transaction.created', ['invoice_no' => $transaction->invoice_no]), 'success')->important();
         return redirect()->route('cart.index');
     }
 }

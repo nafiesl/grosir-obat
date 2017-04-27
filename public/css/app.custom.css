@@ -15,7 +15,7 @@ body { font-family: "Trebuchet MS", serif; }
 /* Layout */
 .page-header { margin-top: 0px; }
 h3.page-header { padding-bottom: 15px; }
-div.notifier { z-index: 100; position: absolute; top: 30px; left: 50%; transform: translate(-50%,-50%); }
+div.notifier { z-index: 1001; position: absolute; top: 40px; left: 50%; transform: translate(-50%,-50%); }
 /* End of Layout */
 
 /* Form */

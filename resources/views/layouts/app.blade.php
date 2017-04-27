@@ -26,8 +26,9 @@
 <body>
     @include('layouts.partials.top-nav')
     <div class="container">
+        @include('flash::message')
         @yield('content')
-        {{-- @include('flash::message') --}}
+        <br>
     </div>
 
     <!-- Scripts -->
