@@ -62,6 +62,11 @@ abstract class TransactionDraft
         return $this->items()->sum('subtotal') - $this->getDiscountTotal();
     }
 
+    public function getItemsCount()
+    {
+        return $this->items()->count();
+    }
+
     public function getTotalQty()
     {
         return $this->items()->sum('qty');

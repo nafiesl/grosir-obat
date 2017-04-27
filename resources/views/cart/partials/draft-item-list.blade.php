@@ -1,4 +1,9 @@
-<legend>{{ trans('transaction.items') }} <small class="text-muted">({{ $draft->items()->count() }} Item)</small></legend>
+<legend>
+    {{ trans('transaction.items') }}
+    <small class="text-muted">
+        ({{ $draft->getItemsCount() }} Item, {{ $draft->getTotalQty() }} Pcs)
+    </small>
+</legend>
 <div class="panel panel-default">
     <div class="panel-body">
         <table class="table">

@@ -85,7 +85,11 @@ class CartController extends Controller
     {
         $this->cart->removeDraft($request->draft_key);
 
-        return redirect()->route('cart.index');
+        if ($this->cart->isEmpty())
+            return redirect()->route('cart.index');
+
+        $lastDraft = $this->cart->content()->last();
+        return redirect()->route('cart.show', $lastDraft->draftKey);
     }
 
     public function destroy()
