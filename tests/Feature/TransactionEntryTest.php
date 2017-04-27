@@ -195,8 +195,55 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'action' => 'confirm']));
 
         $this->see(trans('transaction.confirm'));
+        $this->see($draft->customer['name']);
+        $this->see($draft->customer['phone']);
+        $this->see($draft->notes);
         $this->see(formatRp(10000));
         $this->see(formatRp(3000));
         $this->seeElement('input', ['id' => 'save-transaction-draft']);
+    }
+
+    /** @test */
+    public function user_can_save_transaction_if_draft_is_completed()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 2000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $draftAttributes = [
+            'customer' => [
+                'name' => 'Nafies',
+                'phone' => '081234567890',
+            ],
+            'payment' => 10000,
+            'notes' => 'Catatan',
+        ];
+        $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
+
+        $user = $this->loginAsUser();
+        $this->visit(route('cart.show', [$draft->draftKey, 'action' => 'confirm']));
+
+        $this->press(trans('transaction.save'));
+
+        $this->seePageIs(route('cart.index'));
+
+        $this->seeInDatabase('transactions', [
+            'invoice_no' => date('ym') . '0001',
+            'items' => '[{"id":' . $product1->id . ',"name":"' . $product1->name . '","price":1000,"qty":1,"item_discount":0,"item_discount_subtotal":0,"subtotal":1000},{"id":' . $product2->id . ',"name":"' . $product2->name . '","price":2000,"qty":3,"item_discount":0,"item_discount_subtotal":0,"subtotal":6000}]',
+            'customer' => '{"name":"Nafies","phone":"081234567890"}',
+            'payment' => 10000,
+            'total' => 7000,
+            'notes' => 'Catatan',
+            'user_id' => $user->id,
+        ]);
     }
 }
