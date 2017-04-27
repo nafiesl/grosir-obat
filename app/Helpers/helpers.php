@@ -29,5 +29,4 @@ function html_link_to_route($name, $title = null, $parameters = [], $attributes 
     }
 
     return app('html')->decode(link_to_route($name, $title, $parameters, $attributes));
-
 }

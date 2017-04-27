@@ -156,6 +156,7 @@ abstract class TransactionDraft
     public function destroy()
     {
         $cart = app(CartCollection::class);
+
         return $cart->removeDraft($this->draftKey);
     }
 }

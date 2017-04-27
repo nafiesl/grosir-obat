@@ -214,8 +214,8 @@ class TransactionDraftTest extends TestCase
         $draft->store();
 
         $this->assertDatabaseHas('transactions', [
-            'invoice_no' => date('ym') . '0001',
-            'items'      => '[{"id":' . $product1->id . ',"name":"' . $product1->name . '","price":1000,"qty":1,"item_discount":0,"item_discount_subtotal":0,"subtotal":1000},{"id":' . $product2->id . ',"name":"' . $product2->name . '","price":2000,"qty":3,"item_discount":0,"item_discount_subtotal":0,"subtotal":6000}]',
+            'invoice_no' => date('ym').'0001',
+            'items'      => '[{"id":'.$product1->id.',"name":"'.$product1->name.'","price":1000,"qty":1,"item_discount":0,"item_discount_subtotal":0,"subtotal":1000},{"id":'.$product2->id.',"name":"'.$product2->name.'","price":2000,"qty":3,"item_discount":0,"item_discount_subtotal":0,"subtotal":6000}]',
             'customer'   => '{"name":"Nafies","phone":"081234567890"}',
             'payment'    => 10000,
             'total'      => 7000,
