@@ -2,7 +2,7 @@
 
 return [
     // Labels
-    'master'         => 'Produk',
+    'product'        => 'Produk',
     'list'           => 'Daftar Produk',
     'search'         => 'Cari Produk',
     'not_found'      => 'Produk tidak ditemukan',

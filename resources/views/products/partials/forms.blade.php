@@ -26,6 +26,9 @@
     @if (request('q'))
         {{ Form::hidden('q', request('q')) }}
     @endif
+    @if (request('page'))
+        {{ Form::hidden('page', request('page')) }}
+    @endif
     {!! Form::submit(trans('product.update'), ['class' => 'btn btn-success']) !!}
     {{ link_to_route('products.index', trans('app.cancel'), Request::only('q'), ['class' => 'btn btn-default']) }}
     {!! Form::close() !!}
@@ -50,7 +53,8 @@
                 'class'=>'btn btn-danger'
             ], [
                 'product_id'=>$editableProduct->id,
-                'q' => request('q')
+                'page' => request('page'),
+                'q' => request('q'),
             ]) !!}
             {{ link_to_route('products.index', trans('app.cancel'), Request::only('q'), ['class' => 'btn btn-default']) }}
         </div>

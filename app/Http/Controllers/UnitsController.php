@@ -10,7 +10,7 @@ class UnitsController extends Controller
     public function index(Request $request)
     {
         $editableUnit = null;
-        $units = Unit::all();
+        $units = Unit::withCount('products')->get();
 
         if (in_array($request->get('action'), ['edit','delete']) && $request->has('id'))
             $editableUnit = Unit::find($request->get('id'));

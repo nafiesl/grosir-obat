@@ -5,6 +5,7 @@ return [
     'unit'           => 'Satuan',
     'list'           => 'Daftar Satuan',
     'empty'          => 'Belum ada Satuan',
+    'products_count' => 'Jumlah Produk',
     'back_to_index'  => 'Kembali ke daftar Satuan',
 
     // Actions

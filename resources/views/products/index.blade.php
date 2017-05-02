@@ -3,7 +3,10 @@
 @section('title', trans('product.list'))
 
 @section('content')
-<h3 class="page.header">{{ trans('product.list') }}</h3>
+<h3 class="page-header">
+    {{ trans('product.list') }}
+    <small>{{ trans('app.total') }} : {{ $products->total() }} {{ trans('product.product') }}</small>
+</h3>
 
 <div class="row">
     <div class="col-md-8">
@@ -36,13 +39,14 @@
                         <td class="text-right">{{ formatRp($product->cash_price) }}</td>
                         <td class="text-right">{{ formatRp($product->credit_price) }}</td>
                         <td class="text-center">
-                            {!! link_to_route('products.index', trans('app.edit'), ['action' => 'edit', 'id' => $product->id] + Request::only('q'), ['id' => 'edit-product-' . $product->id]) !!} |
-                            {!! link_to_route('products.index', trans('app.delete'), ['action' => 'delete', 'id' => $product->id] + Request::only('q'), ['id' => 'del-product-' . $product->id]) !!}
+                            {!! link_to_route('products.index', trans('app.edit'), ['action' => 'edit', 'id' => $product->id] + Request::only('page','q'), ['id' => 'edit-product-' . $product->id]) !!} |
+                            {!! link_to_route('products.index', trans('app.delete'), ['action' => 'delete', 'id' => $product->id] + Request::only('page','q'), ['id' => 'del-product-' . $product->id]) !!}
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="panel-body">{!! str_replace('/?', '?', $products->appends(Request::except('page'))->render()) !!}</div>
         </div>
     </div>
     <div class="col-md-4">

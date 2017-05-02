@@ -50,7 +50,7 @@ class ProductsController extends Controller
             'credit_price' => 'nullable|numeric',
         ]);
 
-        $routeParam = $request->only('q');
+        $routeParam = $request->only('page','q');
 
         $product = Product::findOrFail($productId)->update($request->only('name','cash_price','credit_price','unit_id'));
 
@@ -65,7 +65,7 @@ class ProductsController extends Controller
             'product_id' => 'required|exists:products,id',
         ]);
 
-        $routeParam = $request->only('q');
+        $routeParam = $request->only('page','q');
 
         if ($request->get('product_id') == $productId && Product::findOrFail($productId)->delete()) {
             flash(trans('product.deleted'), 'success');
