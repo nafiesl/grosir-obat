@@ -10,8 +10,7 @@ class Product extends Model
 
     public function getPrice($type = 'cash')
     {
-        // TODO: if there is no credit_price then return cash_price
-        if ($type == 'credit') {
+        if ($type == 'credit' && $this->credit_price) {
             return $this->credit_price;
         }
 

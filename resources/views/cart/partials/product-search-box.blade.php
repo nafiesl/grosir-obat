@@ -4,7 +4,7 @@
             <label for="query">{{ trans('cart.product_search') }}</label>
             <input type="text" id="query" name="query" value="{{ request('query') }}">
             <input type="submit" value="{{ trans('cart.product_search') }}" class="btn btn-sm">
-            <a href="{{ route('cart.show', $draft->draftKey) }}" class="btn btn-sm">Refresh</a>
+            {{ link_to_route('cart.show', 'Bersihkan Pencarian', [$draft->draftKey], ['class' => 'btn btn-sm']) }}
         </form>
     </div>
     @includeWhen ($queriedProducts, 'cart.partials.product-search-result-box')

@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->unit->name }}</td>
-                <td>{{ formatRp($draft->type == 'cash' ? $product->cash_price : $product->credit_price) }}</td>
+                <td>{{ formatRp($product->getPrice($draft->type)) }}</td>
                 <td>
                     <form action="{{ route('cart.add-draft-item', [$draft->draftKey, $product->id]) }}" method="post" style="display:inline">
                         {{ csrf_field() }}
