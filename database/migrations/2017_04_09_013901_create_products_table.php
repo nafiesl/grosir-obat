@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedInteger('cash_price');
-            $table->unsignedInteger('credit_price');
+            $table->unsignedInteger('credit_price')->nullable();
             $table->timestamps();
         });
     }

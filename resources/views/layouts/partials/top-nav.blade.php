@@ -22,11 +22,14 @@
                 <!-- Authentication Links -->
                 @if (Auth::check())
                 <li>
-                    <form class="" action="{{ route('cart.add') }}" method="POST">
+                    <form class="" style="padding-left: 10px;" action="{{ route('cart.add') }}" method="POST">
                         {{ csrf_field() }}
                         <input type="submit" class="btn btn-default navbar-btn" name="create-cash-draft" id="cash-draft-create-button" value="{{ trans('transaction.create_cash') }}">
                         <input type="submit" class="btn btn-default navbar-btn" name="create-credit-draft" id="credit-draft-create-button" value="{{ trans('transaction.create_credit') }}">
                     </form>
+                </li>
+                <li>
+                    {{ link_to_route('products.index', trans('product.list')) }}
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

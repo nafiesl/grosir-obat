@@ -17,8 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'CartController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
+    /**
+     * Pages Routes
+     */
+    Route::get('/home', 'CartController@index')->name('home');
+
+    /**
+     * Cart / Trasanction Draft Routes
+     */
     Route::get('drafts', 'CartController@index')->name('cart.index');
     Route::get('drafts/{draftKey}', 'CartController@show')->name('cart.show');
     Route::post('drafts/{draftKey}', 'CartController@store')->name('cart.store');
@@ -30,4 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('cart/empty/{draftKey}', 'CartController@empty')->name('cart.empty');
     Route::delete('cart/remove', 'CartController@remove')->name('cart.remove');
     Route::delete('cart/destroy', 'CartController@destroy')->name('cart.destroy');
+
+    /**
+     * Products Routes
+     */
+    Route::resource('products', 'ProductsController');
 });
