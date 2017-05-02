@@ -1,3 +1,4 @@
+@inject('unit', 'App\Unit')
 @if (! Request::has('action'))
 {{ link_to_route('products.index', trans('product.create'), ['action' => 'create'], ['class' => 'btn btn-success pull-right']) }}
 @endif
@@ -8,6 +9,7 @@
         <div class="col-md-6">{!! FormField::price('cash_price', ['label' => trans('product.cash_price'), 'required' => true]) !!}</div>
         <div class="col-md-6">{!! FormField::price('credit_price', ['label' => trans('product.credit_price')]) !!}</div>
     </div>
+    {!! FormField::select('unit_id', $unit->pluck('name','id'), ['label' => trans('product.unit'), 'required' => true]) !!}
     {!! Form::submit(trans('product.create'), ['class' => 'btn btn-success']) !!}
     {!! Form::hidden('cat', 'product') !!}
     {{ link_to_route('products.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
@@ -20,6 +22,7 @@
         <div class="col-md-6">{!! FormField::price('cash_price', ['label' => trans('product.cash_price'), 'required' => true]) !!}</div>
         <div class="col-md-6">{!! FormField::price('credit_price', ['label' => trans('product.credit_price')]) !!}</div>
     </div>
+    {!! FormField::select('unit_id', $unit->pluck('name','id'), ['label' => trans('product.unit'), 'required' => true]) !!}
     @if (request('q'))
         {{ Form::hidden('q', request('q')) }}
     @endif
@@ -34,6 +37,7 @@
             <table class="table table-condensed">
                 <tbody>
                     <tr><th>{{ trans('product.name') }}</th><td>{{ $editableProduct->name }}</td></tr>
+                    <tr><th>{{ trans('product.unit') }}</th><td>{{ $editableProduct->unit->name }}</td></tr>
                     <tr><th>{{ trans('product.cash_price') }}</th><td>{{ formatRp($editableProduct->cash_price) }}</td></tr>
                     <tr><th>{{ trans('product.credit_price') }}</th><td>{{ formatRp($editableProduct->credit_price) }}</td></tr>
                 </tbody>

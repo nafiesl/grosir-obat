@@ -41,5 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
     /**
      * Products Routes
      */
-    Route::resource('products', 'ProductsController');
+    Route::resource('products', 'ProductsController', ['except' => ['create','show','edit']]);
+
+    /**
+     * Units Routes
+     */
+    Route::resource('units', 'UnitsController', ['except' => ['create','show','edit']]);
 });

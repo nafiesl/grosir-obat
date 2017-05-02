@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Product;
+use App\Unit;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\BrowserKitTestCase;
 
@@ -40,6 +41,7 @@ class ManageProductsTest extends BrowserKitTestCase
     /** @test */
     public function user_can_create_a_product()
     {
+        $unit = factory(Unit::class)->create(['name' => 'Testing 123']);
         $this->loginAsUser();
         $this->visit(route('products.index'));
 
@@ -49,6 +51,7 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
         $this->type('1200', 'credit_price');
+        $this->type($unit->id, 'unit_id');
         $this->press(trans('product.create'));
 
         $this->seePageIs(route('products.index'));
@@ -64,6 +67,7 @@ class ManageProductsTest extends BrowserKitTestCase
     /** @test */
     public function user_can_edit_a_product_within_search_query()
     {
+        $unit = factory(Unit::class)->create(['name' => 'Testing 123']);
         $this->loginAsUser();
         $product = factory(Product::class)->create(['name' => 'Testing 123']);
 
@@ -74,6 +78,7 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
         $this->type('1200', 'credit_price');
+        $this->type($unit->id, 'unit_id');
         $this->press(trans('product.update'));
 
         $this->seePageIs(route('products.index', ['q' => '123']));
@@ -88,6 +93,7 @@ class ManageProductsTest extends BrowserKitTestCase
     /** @test */
     public function user_can_create_a_product_with_only_cash_price()
     {
+        $unit = factory(Unit::class)->create(['name' => 'Testing 123']);
         $this->loginAsUser();
         $this->visit(route('products.index'));
 
@@ -97,6 +103,7 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
         $this->type('', 'credit_price');
+        $this->type($unit->id, 'unit_id');
         $this->press(trans('product.create'));
 
         $this->seePageIs(route('products.index'));
@@ -112,6 +119,7 @@ class ManageProductsTest extends BrowserKitTestCase
     /** @test */
     public function user_can_edit_a_product()
     {
+        $unit = factory(Unit::class)->create(['name' => 'Testing 123']);
         $this->loginAsUser();
         $product = factory(Product::class)->create();
 
@@ -122,6 +130,7 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
         $this->type('1200', 'credit_price');
+        $this->type($unit->id, 'unit_id');
         $this->press(trans('product.update'));
 
         $this->seeInDatabase('products', [

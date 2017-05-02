@@ -30,9 +30,10 @@ class ProductsController extends Controller
             'name' => 'required|max:20',
             'cash_price' => 'required|numeric',
             'credit_price' => 'nullable|numeric',
+            'unit_id' => 'required|numeric',
         ]);
 
-        Product::create($request->only('name','cash_price','credit_price'));
+        Product::create($request->only('name','cash_price','credit_price','unit_id'));
 
         flash(trans('product.created'), 'success');
 
@@ -49,7 +50,7 @@ class ProductsController extends Controller
 
         $routeParam = $request->only('q');
 
-        $product = Product::findOrFail($productId)->update($request->only('name','cash_price','credit_price'));
+        $product = Product::findOrFail($productId)->update($request->only('name','cash_price','credit_price','unit_id'));
 
         flash(trans('product.updated'), 'success');
 
