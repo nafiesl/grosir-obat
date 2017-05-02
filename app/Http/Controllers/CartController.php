@@ -40,7 +40,7 @@ class CartController extends Controller
         if ($query) {
             $queriedProducts = Product::where(function ($q) use ($query) {
                 $q->where('name', 'like', '%'.$query.'%');
-            })->get();
+            })->with('unit')->get();
         }
 
         return view('cart.index', compact('draft', 'queriedProducts'));

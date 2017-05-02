@@ -8,6 +8,7 @@ return [
     'not_found'      => 'Produk tidak ditemukan',
     'empty'          => 'Belum ada Produk',
     'price'          => 'Harga',
+    'unit'           => 'Satuan',
     'back_to_index'  => 'Kembali ke daftar Produk',
 
     // Actions

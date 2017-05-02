@@ -12,11 +12,13 @@ class ProductsController extends Controller
         $editableProduct = null;
         $q = $request->get('q');
         $products = Product::where(function($query) use ($q) {
-                if ($q) {
-                    $query->where('name', 'like', '%' . $q . '%');
-                }
-            })
-            ->orderBy('name')->paginate(25);
+            if ($q) {
+                $query->where('name', 'like', '%' . $q . '%');
+            }
+        })
+        ->orderBy('name')
+        ->with('unit')
+        ->paginate(25);
 
         if (in_array($request->get('action'), ['edit','delete']) && $request->has('id'))
             $editableProduct = Product::find($request->get('id'));

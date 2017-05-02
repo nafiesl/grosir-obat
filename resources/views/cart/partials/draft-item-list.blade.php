@@ -5,15 +5,15 @@
     </small>
 </legend>
 <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nama Item</th>
                     <th>Harga Satuan</th>
-                    <th>Diskon per Item</th>
-                    <th>Qty</th>
+                    <th class="text-right">Diskon per Item</th>
+                    <th class="text-center">Qty</th>
                     <th class="text-right">Subtotal</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -22,15 +22,25 @@
             @forelse($draft->items() as $key => $item)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $item->name }}</td>
+                    <td>
+                        {{ $item->name }} <br>
+                        <small class="text-primary">({{ $item->unit }})</small>
+                    </td>
                     <td>{{ formatRp($item->price) }}</td>
                         {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
                         {{ Form::hidden('item_key', $key) }}
-                    <td>
-                        {{ Form::text('item_discount', $item->item_discount, ['id' => 'item_discount-' . $key, 'style' => 'width:80px;text-align:right']) }}
+                    <td class="text-right">
+                        {{ Form::text('item_discount', $item->item_discount, [
+                            'id' => 'item_discount-' . $key,
+                            'style' => 'width:80px;text-align:right']
+                        ) }}
                     </td>
-                    <td>
-                        {{ Form::number('qty', $item->qty, ['id' => 'qty-' . $key, 'style' => 'width:50px;text-align:center']) }}
+                    <td class="text-center">
+                        {{ Form::number('qty', $item->qty, [
+                            'id' => 'qty-' . $key,
+                            'style' => 'width:50px;text-align:center',
+                            'min' => 1
+                        ]) }}
                     </td>
                     <td class="text-right">{{ formatRp($item->subtotal) }}</td>
                         {{ Form::submit('update-item-' . $key, ['style'=>'display:none']) }}

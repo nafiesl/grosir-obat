@@ -12,6 +12,7 @@ class Item
     public $id;
     public $product;
     public $name;
+    public $unit;
     public $price;
     public $qty;
     public $item_discount = 0;
@@ -22,6 +23,7 @@ class Item
     {
         $this->id = $product->id;
         $this->name = $product->name;
+        $this->unit = $product->unit_id ? $product->unit->name : null;
         $this->product = $product;
         $this->qty = $qty;
         $this->price = $product->getPrice();

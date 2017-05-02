@@ -20,6 +20,7 @@
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
                         <th>{{ trans('product.name') }}</th>
+                        <th>{{ trans('product.unit') }}</th>
                         <th class="text-right">{{ trans('product.cash_price') }}</th>
                         <th class="text-right">{{ trans('product.credit_price') }}</th>
                         <th class="text-center">{{ trans('app.action') }}</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <td class="text-center">{{ $products->firstItem() + $key }}</td>
                         <td>{{ $product->name }}</td>
+                        <td>{{ $product->unit->name }}</td>
                         <td class="text-right">{{ formatRp($product->cash_price) }}</td>
                         <td class="text-right">{{ formatRp($product->credit_price) }}</td>
                         <td class="text-center">
