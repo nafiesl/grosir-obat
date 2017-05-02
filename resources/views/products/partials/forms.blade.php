@@ -20,7 +20,9 @@
         <div class="col-md-6">{!! FormField::price('cash_price', ['label' => trans('product.cash_price'), 'required' => true]) !!}</div>
         <div class="col-md-6">{!! FormField::price('credit_price', ['label' => trans('product.credit_price')]) !!}</div>
     </div>
-    {{ Form::hidden('q', request('q')) }}
+    @if (request('q'))
+        {{ Form::hidden('q', request('q')) }}
+    @endif
     {!! Form::submit(trans('product.update'), ['class' => 'btn btn-success']) !!}
     {{ link_to_route('products.index', trans('app.cancel'), Request::only('q'), ['class' => 'btn btn-default']) }}
     {!! Form::close() !!}
@@ -40,7 +42,12 @@
             {{ trans('product.delete_confirm') }}
         </div>
         <div class="panel-footer">
-            {!! FormField::delete(['route'=>['products.destroy',$editableProduct->id]], trans('app.delete_confirm_button'), ['class'=>'btn btn-danger'], ['product_id'=>$editableProduct->id]) !!}
+            {!! FormField::delete(['route'=>['products.destroy',$editableProduct->id]], trans('app.delete_confirm_button'), [
+                'class'=>'btn btn-danger'
+            ], [
+                'product_id'=>$editableProduct->id,
+                'q' => request('q')
+            ]) !!}
             {{ link_to_route('products.index', trans('app.cancel'), Request::only('q'), ['class' => 'btn btn-default']) }}
         </div>
     </div>

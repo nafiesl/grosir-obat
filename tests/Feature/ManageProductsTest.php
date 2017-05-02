@@ -151,4 +151,26 @@ class ManageProductsTest extends BrowserKitTestCase
             'id' => $product->id
         ]);
     }
+
+    /** @test */
+    public function user_can_delete_a_product_within_search_query()
+    {
+        $this->loginAsUser();
+        $product = factory(Product::class)->create(['name' => 'Product 123']);
+
+        $this->visit(route('products.index', ['q' => '123']));
+        $this->click('del-product-' . $product->id);
+
+        $this->seePageIs(route('products.index', ['action' => 'delete','id' => $product->id, 'q' => '123']));
+        $this->seeInDatabase('products', [
+            'id' => $product->id
+        ]);
+
+        $this->press(trans('app.delete_confirm_button'));
+
+        $this->seePageIs(route('products.index', ['q' => '123']));
+        $this->dontSeeInDatabase('products', [
+            'id' => $product->id
+        ]);
+    }
 }

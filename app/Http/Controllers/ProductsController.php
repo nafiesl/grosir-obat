@@ -62,9 +62,11 @@ class ProductsController extends Controller
             'product_id' => 'required|exists:products,id',
         ]);
 
+        $routeParam = $request->only('q');
+
         if ($request->get('product_id') == $productId && Product::findOrFail($productId)->delete()) {
             flash(trans('product.deleted'), 'success');
-            return redirect()->route('products.index');
+            return redirect()->route('products.index', $routeParam);
         }
 
         flash(trans('product.undeleted'), 'error');
