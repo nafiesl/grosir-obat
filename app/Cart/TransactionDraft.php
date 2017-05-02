@@ -142,6 +142,7 @@ abstract class TransactionDraft
             $items[] = [
                 'id'                     => $item->product->id,
                 'name'                   => $item->name,
+                'unit'                   => $item->unit,
                 'price'                  => $item->price,
                 'qty'                    => $item->qty,
                 'item_discount'          => $item->item_discount,
