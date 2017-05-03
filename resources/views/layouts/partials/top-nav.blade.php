@@ -17,13 +17,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            @if (Auth::check())
             <ul class="nav navbar-nav">
-                <li>{{ link_to_route('cart.index', trans('cart.list')) }}</li>
+                <li>{{ link_to_route('cart.index', trans('nav_menu.draft_list')) }}</li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if (Auth::check())
                 <li>
                     <form class="" style="padding-left: 10px;" action="{{ route('cart.add') }}" method="POST">
                         {{ csrf_field() }}
@@ -59,8 +59,8 @@
                         </li>
                     </ul>
                 </li>
-                @endif
             </ul>
+            @endif
         </div>
     </div>
 </nav>
