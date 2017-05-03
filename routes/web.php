@@ -47,4 +47,12 @@ Route::group(['middleware' => 'auth'], function () {
      * Units Routes
      */
     Route::resource('units', 'UnitsController', ['except' => ['create','show','edit']]);
+
+    /**
+     * Backup Restore Database Routes
+     */
+    Route::post('backups/upload', ['as'=>'backups.upload', 'uses'=>'BackupsController@upload']);
+    Route::post('backups/{fileName}/restore', ['as'=>'backups.restore', 'uses'=>'BackupsController@restore']);
+    Route::get('backups/{fileName}/dl', ['as'=>'backups.download', 'uses'=>'BackupsController@download']);
+    Route::resource('backups','BackupsController', ['except' => ['create', 'show', 'edit']]);
 });

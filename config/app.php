@@ -166,9 +166,10 @@ return [
         /*
          * Package Service Providers...
          */
-        Luthfi\FormField\FormFieldServiceProvider::class,
+        BackupManager\Laravel\Laravel5ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Luthfi\FormField\FormFieldServiceProvider::class,
 
         /*
          * Application Service Providers...
