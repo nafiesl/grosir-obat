@@ -3,6 +3,9 @@
 @section('title', trans('product.list'))
 
 @section('content')
+<div class="pull-right">
+    {{ link_to_route('products.index', trans('product.create'), ['action' => 'create'], ['class' => 'btn btn-success pull-right']) }}
+</div>
 <h3 class="page-header">
     {{ trans('product.list') }}
     <small>{{ trans('app.total') }} : {{ $products->total() }} {{ trans('product.product') }}</small>

@@ -1,7 +1,4 @@
 @inject('unit', 'App\Unit')
-@if (! Request::has('action'))
-{{ link_to_route('products.index', trans('product.create'), ['action' => 'create'], ['class' => 'btn btn-success pull-right']) }}
-@endif
 @if (Request::get('action') == 'create')
     {!! Form::open(['route' => 'products.store']) !!}
     {!! FormField::text('name', ['label' => trans('product.name'), 'required' => true]) !!}
@@ -11,7 +8,6 @@
     </div>
     {!! FormField::select('unit_id', $unit->pluck('name','id'), ['label' => trans('product.unit'), 'required' => true]) !!}
     {!! Form::submit(trans('product.create'), ['class' => 'btn btn-success']) !!}
-    {!! Form::hidden('cat', 'product') !!}
     {{ link_to_route('products.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
     {!! Form::close() !!}
 @endif
