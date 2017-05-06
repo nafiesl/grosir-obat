@@ -234,7 +234,7 @@ class TransactionEntryTest extends BrowserKitTestCase
 
         $this->press(trans('transaction.save'));
 
-        $this->seePageIs(route('cart.index'));
+        $this->seePageIs(route('transactions.show', date('ym').'0001'));
         $this->see(trans('transaction.created', ['invoice_no' => date('ym').'0001']));
 
         $this->seeInDatabase('transactions', [

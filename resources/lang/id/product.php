@@ -10,6 +10,10 @@ return [
     'price'          => 'Harga',
     'unit'           => 'Satuan',
     'back_to_index'  => 'Kembali ke daftar Produk',
+    'item_price'     => 'Harga Satuan',
+    'item_discount'  => 'Diskon Item',
+    'item_qty'       => 'Qty',
+    'item_subtotal'  => 'Subtotal',
 
     // Actions
     'create'         => 'Input Produk Baru',

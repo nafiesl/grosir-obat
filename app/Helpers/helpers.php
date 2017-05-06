@@ -8,7 +8,7 @@ function formatNo($number)
 function formatRp($number)
 {
     if ($number == 0) {
-        return '-';
+        return 0;
     }
 
     return 'Rp. '.formatNo($number);

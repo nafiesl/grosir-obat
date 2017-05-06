@@ -2,6 +2,8 @@
 
 return [
     // Labels
+    'transaction'     => 'Transaksi',
+    'list'            => 'List Transaksi',
     'create'          => 'Buat Transaksi',
     'create_cash'     => 'Buat Transaksi Tunai',
     'create_credit'   => 'Buat Transaksi Kredit',
@@ -18,6 +20,7 @@ return [
     'draft_removed'   => 'Draft transaksi telah dihapus.',
     'draft_destroyed' => 'Seluruh Draft transaksi telah dihapus.',
     'draft_not_found' => 'Draft transaksi tidak ditemukan.',
+    'items_count'     => 'Jumlah Item',
 
     // Actions
     'proccess'            => 'Proses Transaksi',
@@ -27,6 +30,7 @@ return [
     'created'             => 'Transaksi berhasil disimpan, No. Invoice: <strong>:invoice_no</strong>',
 
     // Attributes
+    'invoice_no'     => 'No. Invoice',
     'customer'       => 'Customer',
     'customer_name'  => 'Nama Customer',
     'customer_phone' => 'Hp/Telp.',

@@ -10,4 +10,23 @@ class Transaction extends Model
         'items'    => 'array',
         'customer' => 'array',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'invoice_no';
+    }
+
+    public function getItemsCountAttribute($value)
+    {
+        $pcsCount = 0;
+        foreach ($this->items as $item) {
+            $pcsCount += $item['qty'];
+        }
+        return count($this->items) . ' Item, ' . $pcsCount . ' Pcs';
+    }
+
+    public function getExchange()
+    {
+        return $this->payment - $this->total;
+    }
 }

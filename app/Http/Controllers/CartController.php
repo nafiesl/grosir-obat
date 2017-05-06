@@ -139,6 +139,6 @@ class CartController extends Controller
         $draft->destroy();
         flash(trans('transaction.created', ['invoice_no' => $transaction->invoice_no]), 'success')->important();
 
-        return redirect()->route('cart.index');
+        return redirect()->route('transactions.show', $transaction->invoice_no);
     }
 }

@@ -19,7 +19,12 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             @if (Auth::check())
             <ul class="nav navbar-nav">
-                <li>{{ link_to_route('cart.index', trans('nav_menu.draft_list')) }}</li>
+                <li {{ (Request::segment(1) == 'drafts') ? 'class=active' : '' }}>
+                    {{ link_to_route('cart.index', trans('nav_menu.draft_list'), [], ['class' => 'strong text-primary']) }}
+                </li>
+                <li {{ (Request::segment(1) == 'transactions') ? 'class=active' : '' }}>
+                    {{ link_to_route('transactions.index', trans('transaction.list')) }}
+                </li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
@@ -33,7 +38,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Produk <span class="caret"></span>
+                        {{ trans('product.product') }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>{{ link_to_route('products.index', trans('product.list')) }}</li>

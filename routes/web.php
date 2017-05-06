@@ -49,6 +49,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('units', 'UnitsController', ['except' => ['create','show','edit']]);
 
     /**
+     * Transactions Routes
+     */
+    Route::get('transactions', ['as' => 'transactions.index', 'uses' => 'TransactionsController@index']);
+    Route::get('transactions/{transaction}', ['as' => 'transactions.show', 'uses' => 'TransactionsController@show']);
+    Route::get('transactions/{transaction}/pdf', ['as' => 'transactions.pdf', 'uses' => 'TransactionsController@pdf']);
+
+    /**
      * Backup Restore Database Routes
      */
     Route::post('backups/upload', ['as'=>'backups.upload', 'uses'=>'BackupsController@upload']);
