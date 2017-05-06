@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             @if (Auth::check())
             <ul class="nav navbar-nav">
-                <li {{ (Request::segment(1) == 'drafts') ? 'class=active' : '' }}>
+                <li {{ in_array(Request::segment(1), ['drafts','home']) ? 'class=active' : '' }}>
                     {{ link_to_route('cart.index', trans('nav_menu.draft_list'), [], ['class' => 'strong text-primary']) }}
                 </li>
                 <li {{ (Request::segment(1) == 'transactions') ? 'class=active' : '' }}>
