@@ -58,8 +58,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->see(trans('product.created'));
 
         $this->seeInDatabase('products', [
-            'name' => 'Product 1',
-            'cash_price' => 1000,
+            'name'         => 'Product 1',
+            'cash_price'   => 1000,
             'credit_price' => 1200,
         ]);
     }
@@ -72,8 +72,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $product = factory(Product::class)->create(['name' => 'Testing 123']);
 
         $this->visit(route('products.index', ['q' => '123']));
-        $this->click('edit-product-' . $product->id);
-        $this->seePageIs(route('products.index', ['action' => 'edit','id' => $product->id, 'q' => '123']));
+        $this->click('edit-product-'.$product->id);
+        $this->seePageIs(route('products.index', ['action' => 'edit', 'id' => $product->id, 'q' => '123']));
 
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
@@ -84,8 +84,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->seePageIs(route('products.index', ['q' => '123']));
 
         $this->seeInDatabase('products', [
-            'name' => 'Product 1',
-            'cash_price' => 1000,
+            'name'         => 'Product 1',
+            'cash_price'   => 1000,
             'credit_price' => 1200,
         ]);
     }
@@ -110,8 +110,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->see(trans('product.created'));
 
         $this->seeInDatabase('products', [
-            'name' => 'Product 1',
-            'cash_price' => 1000,
+            'name'         => 'Product 1',
+            'cash_price'   => 1000,
             'credit_price' => null,
         ]);
     }
@@ -124,8 +124,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $product = factory(Product::class)->create();
 
         $this->visit(route('products.index'));
-        $this->click('edit-product-' . $product->id);
-        $this->seePageIs(route('products.index', ['action' => 'edit','id' => $product->id]));
+        $this->click('edit-product-'.$product->id);
+        $this->seePageIs(route('products.index', ['action' => 'edit', 'id' => $product->id]));
 
         $this->type('Product 1', 'name');
         $this->type('1000', 'cash_price');
@@ -134,8 +134,8 @@ class ManageProductsTest extends BrowserKitTestCase
         $this->press(trans('product.update'));
 
         $this->seeInDatabase('products', [
-            'name' => 'Product 1',
-            'cash_price' => 1000,
+            'name'         => 'Product 1',
+            'cash_price'   => 1000,
             'credit_price' => 1200,
         ]);
     }
@@ -147,17 +147,17 @@ class ManageProductsTest extends BrowserKitTestCase
         $product = factory(Product::class)->create();
 
         $this->visit(route('products.index'));
-        $this->click('del-product-' . $product->id);
-        $this->seePageIs(route('products.index', ['action' => 'delete','id' => $product->id]));
+        $this->click('del-product-'.$product->id);
+        $this->seePageIs(route('products.index', ['action' => 'delete', 'id' => $product->id]));
 
         $this->seeInDatabase('products', [
-            'id' => $product->id
+            'id' => $product->id,
         ]);
 
         $this->press(trans('app.delete_confirm_button'));
 
         $this->dontSeeInDatabase('products', [
-            'id' => $product->id
+            'id' => $product->id,
         ]);
     }
 
@@ -168,18 +168,18 @@ class ManageProductsTest extends BrowserKitTestCase
         $product = factory(Product::class)->create(['name' => 'Product 123']);
 
         $this->visit(route('products.index', ['q' => '123']));
-        $this->click('del-product-' . $product->id);
+        $this->click('del-product-'.$product->id);
 
-        $this->seePageIs(route('products.index', ['action' => 'delete','id' => $product->id, 'q' => '123']));
+        $this->seePageIs(route('products.index', ['action' => 'delete', 'id' => $product->id, 'q' => '123']));
         $this->seeInDatabase('products', [
-            'id' => $product->id
+            'id' => $product->id,
         ]);
 
         $this->press(trans('app.delete_confirm_button'));
 
         $this->seePageIs(route('products.index', ['q' => '123']));
         $this->dontSeeInDatabase('products', [
-            'id' => $product->id
+            'id' => $product->id,
         ]);
     }
 }

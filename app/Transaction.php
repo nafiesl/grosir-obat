@@ -22,7 +22,8 @@ class Transaction extends Model
         foreach ($this->items as $item) {
             $pcsCount += $item['qty'];
         }
-        return count($this->items) . ' Item, ' . $pcsCount . ' Pcs';
+
+        return count($this->items).' Item, '.$pcsCount.' Pcs';
     }
 
     public function getExchange()

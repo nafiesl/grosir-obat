@@ -18,12 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    /**
+    /*
      * Pages Routes
      */
     Route::get('/home', 'CartController@index')->name('home');
 
-    /**
+    /*
      * Cart / Trasanction Draft Routes
      */
     Route::get('drafts', 'CartController@index')->name('cart.index');
@@ -38,28 +38,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('cart/remove', 'CartController@remove')->name('cart.remove');
     Route::delete('cart/destroy', 'CartController@destroy')->name('cart.destroy');
 
-    /**
+    /*
      * Products Routes
      */
-    Route::resource('products', 'ProductsController', ['except' => ['create','show','edit']]);
+    Route::resource('products', 'ProductsController', ['except' => ['create', 'show', 'edit']]);
 
-    /**
+    /*
      * Units Routes
      */
-    Route::resource('units', 'UnitsController', ['except' => ['create','show','edit']]);
+    Route::resource('units', 'UnitsController', ['except' => ['create', 'show', 'edit']]);
 
-    /**
+    /*
      * Transactions Routes
      */
     Route::get('transactions', ['as' => 'transactions.index', 'uses' => 'TransactionsController@index']);
     Route::get('transactions/{transaction}', ['as' => 'transactions.show', 'uses' => 'TransactionsController@show']);
     Route::get('transactions/{transaction}/pdf', ['as' => 'transactions.pdf', 'uses' => 'TransactionsController@pdf']);
 
-    /**
+    /*
      * Backup Restore Database Routes
      */
     Route::post('backups/upload', ['as'=>'backups.upload', 'uses'=>'BackupsController@upload']);
     Route::post('backups/{fileName}/restore', ['as'=>'backups.restore', 'uses'=>'BackupsController@restore']);
     Route::get('backups/{fileName}/dl', ['as'=>'backups.download', 'uses'=>'BackupsController@download']);
-    Route::resource('backups','BackupsController', ['except' => ['create', 'show', 'edit']]);
+    Route::resource('backups', 'BackupsController', ['except' => ['create', 'show', 'edit']]);
 });
