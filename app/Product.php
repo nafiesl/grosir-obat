@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name','cash_price','credit_price','unit_id'];
+    protected $fillable = ['name', 'cash_price', 'credit_price', 'unit_id'];
 
     public function getPrice($type = 'cash')
     {

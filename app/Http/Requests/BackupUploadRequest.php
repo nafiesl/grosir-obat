@@ -24,7 +24,7 @@ class BackupUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'backup_file' => 'required|sql_gz'
+            'backup_file' => 'required|sql_gz',
         ];
     }
 
@@ -39,9 +39,10 @@ class BackupUploadRequest extends FormRequest
     {
         $validator = parent::getValidatorInstance();
 
-        $validator->addImplicitExtension('sql_gz', function($attribute, $value, $parameters) {
-            if ($value)
+        $validator->addImplicitExtension('sql_gz', function ($attribute, $value, $parameters) {
+            if ($value) {
                 return $value->getClientOriginalExtension() == 'gz';
+            }
 
             return false;
         });

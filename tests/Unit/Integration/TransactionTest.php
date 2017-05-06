@@ -13,7 +13,7 @@ class TransactionTest extends TestCase
     /** @test */
     public function it_has_items_count_attribute()
     {
-        $transaction = new Transaction;
+        $transaction = new Transaction();
 
         $items = [
             [
@@ -45,7 +45,7 @@ class TransactionTest extends TestCase
     /** @test */
     public function it_has_get_exchange_method()
     {
-        $transaction = new Transaction;
+        $transaction = new Transaction();
         $transaction->payment = 100000;
         $transaction->total = 90000;
 

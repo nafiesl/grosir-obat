@@ -9,7 +9,8 @@ class TransactionsController extends Controller
 {
     public function index(Request $request)
     {
-        $transactions = Transaction::orderBy('invoice_no','desc')->paginate(24);
+        $transactions = Transaction::orderBy('invoice_no', 'desc')->paginate(24);
+
         return view('transactions.index', compact('transactions'));
     }
 
