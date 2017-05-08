@@ -168,6 +168,7 @@ return [
          */
         BackupManager\Laravel\Laravel5ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Luthfi\FormField\FormFieldServiceProvider::class,
 
@@ -230,8 +231,9 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
 
         'Form'         => Collective\Html\FormFacade::class,
-        'Html'         => Collective\Html\HtmlFacade::class,
         'FormField'    => Luthfi\FormField\FormFieldFacade::class,
+        'PDF'          => Barryvdh\DomPDF\Facade::class,
+        'Html'         => Collective\Html\HtmlFacade::class,
     ],
 
 ];

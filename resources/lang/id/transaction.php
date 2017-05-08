@@ -21,6 +21,7 @@ return [
     'draft_destroyed' => 'Seluruh Draft transaksi telah dihapus.',
     'draft_not_found' => 'Draft transaksi tidak ditemukan.',
     'items_count'     => 'Jumlah Item',
+    'cashier'         => 'Kasir',
 
     // Actions
     'proccess'            => 'Proses Transaksi',
@@ -28,6 +29,7 @@ return [
     'item_list_empty'     => 'Masukkan setidaknya 1 item produk.',
     'save'                => 'Simpan Transaksi',
     'created'             => 'Transaksi berhasil disimpan, No. Invoice: <strong>:invoice_no</strong>',
+    'invoice_print'       => 'Cetak Invoice',
 
     // Attributes
     'invoice_no'     => 'No. Invoice',
