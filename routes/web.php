@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Products Routes
      */
+    Route::get('products/price-list', ['as' => 'products.price-list', 'uses' => 'ProductsController@priceList']);
     Route::resource('products', 'ProductsController', ['except' => ['create', 'show', 'edit']]);
 
     /*

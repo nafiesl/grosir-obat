@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProductsController extends Controller
 {
@@ -77,5 +78,14 @@ class ProductsController extends Controller
         flash(trans('product.undeleted'), 'error');
 
         return back();
+    }
+
+    public function priceList()
+    {
+        $products = Product::orderBy('name')->with('unit')->get();
+        return view('products.price-list', compact('products'));
+
+        // $pdf = PDF::loadView('products.price-list', compact('products'));
+        // return $pdf->stream('price-list.pdf');
     }
 }

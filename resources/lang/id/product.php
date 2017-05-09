@@ -14,6 +14,8 @@ return [
     'item_discount'  => 'Diskon Item',
     'item_qty'       => 'Qty',
     'item_subtotal'  => 'Subtotal',
+    'price_list'     => 'Daftar Harga',
+    'print_price_list' => 'Cetak Daftar Harga',
 
     // Actions
     'create'         => 'Input Produk Baru',

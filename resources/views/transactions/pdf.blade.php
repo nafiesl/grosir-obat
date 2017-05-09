@@ -1,6 +1,6 @@
 @extends('layouts.pdf')
 
-@section('title', $transaction->invoice_no . ' - ' . trans('transaction.invoice_print'))
+@section('title', $transaction->invoice_no.' - '.trans('transaction.invoice_print'))
 
 @section('content')
 
@@ -27,9 +27,10 @@
                 <br>
             </td>
         </tr>
+        <?php $discountTotal = 0; ?>
+        @foreach(collect($transaction->items)->chunk(30) as $chuncked30Items)
         <tr>
-            <?php $discountTotal = 0; ?>
-            @foreach(collect($transaction->items)->chunk(10) as $chunckedItems)
+            @foreach($chuncked30Items->chunk(10) as $chunckedItems)
             <td style="width:250px;padding-right: 10px">
                 <table class="main-table">
                     <tbody>
@@ -41,7 +42,7 @@
                         </tr>
                         @foreach($chunckedItems as $key => $item)
                         <tr>
-                            <td colspan="3">{{ $key + 1 }})&nbsp;{{ $item['name'] }} ({{ $item['unit'] }})</td>
+                            <td class="strong" colspan="3">{{ $key + 1 }})&nbsp;{{ $item['name'] }} ({{ $item['unit'] }})</td>
                         </tr>
                         <tr>
                             <td class="text-center border-bottom">{{ $item['qty'] }}</td>
@@ -52,7 +53,7 @@
                         </tr>
                         <?php $discountTotal += $item['item_discount_subtotal'] ?>
                         @endforeach
-                        @if ($loop->last)
+                        @if ($loop->last && $loop->parent->last)
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.subtotal') }} :</th>
                             <th class="text-right">{{ formatRp($transaction['total'] + $discountTotal) }}</th>
@@ -78,9 +79,8 @@
                 </table>
             </td>
             @endforeach
-            {{-- <td style="width:250px;">&nbsp;</td> --}}
-            {{-- <td style="width:250px;">&nbsp;</td> --}}
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection
