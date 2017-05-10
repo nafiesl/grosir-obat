@@ -43,6 +43,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>{{ link_to_route('products.index', trans('product.list')) }}</li>
                         <li>{{ link_to_route('units.index', trans('unit.product_unit')) }}</li>
+                        <li role="separator" class="divider"></li>
+                        <li>{{ link_to_route('products.price-list', trans('product.print_price_list')) }}</li>
                     </ul>
                 </li>
                 <li class="dropdown">

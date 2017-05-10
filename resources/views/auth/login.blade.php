@@ -1,13 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('title', 'Login')
 
 @section('content')
-<div class="container">
+<div class="login-page">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        {{-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> --}}
+        <div class="login-form">
+            <p class="text-center lead">
+                Selamat datang di aplikasi <br><strong>{{ config('app.name') }}</strong>
+            </p>
+            <p class="text-center">Silakan login untuk melanjutkan aktifitas Anda.</p>
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading"><h3 class="panel-title text-center">Login</strong></h3></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -52,4 +57,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('ext_css')
+{{ Html::style('css/login.css') }}
 @endsection
