@@ -27,6 +27,7 @@
 @endif
 @endsection
 
+@if ($draft)
 @section('script')
 <script>
 (function() {
@@ -59,3 +60,4 @@
 })();
 </script>
 @endsection
+@endif

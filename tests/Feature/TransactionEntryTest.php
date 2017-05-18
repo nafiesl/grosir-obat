@@ -90,8 +90,18 @@ class TransactionEntryTest extends BrowserKitTestCase
 
         $this->type(2, 'qty');
         $this->press('add-product-'.$product1->id);
+        $this->see(trans('cart.item_added', [
+            'product_name' => $product1->name . ' (' . $product1->unit->name . ')',
+            'qty' => 2
+        ]));
+
         $this->type(3, 'qty');
         $this->press('add-product-'.$product2->id);
+        $this->see(trans('cart.item_added', [
+            'product_name' => $product2->name . ' (' . $product2->unit->name . ')',
+            'qty' => 3
+        ]));
+
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
         $this->assertTrue($cart->draftHasItem($draft, $product1));
         $this->assertTrue($cart->draftHasItem($draft, $product2));

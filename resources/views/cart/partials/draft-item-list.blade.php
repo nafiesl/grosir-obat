@@ -19,9 +19,10 @@
                 </tr>
             </thead>
             <tbody>
+            <?php $no = 1 ?>
             @forelse($draft->items() as $key => $item)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $no }} <?php $no++ ?></td>
                     <td>
                         {{ $item->name }} <br>
                         <small class="text-primary">({{ $item->unit }})</small>

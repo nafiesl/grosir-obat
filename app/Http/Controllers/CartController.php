@@ -62,8 +62,14 @@ class CartController extends Controller
         $item = new Item($product, $request->qty);
         $this->cart->addItemToDraft($draftKey, $item);
 
-        if ($request->has('query'));
+        flash(trans('cart.item_added', [
+            'product_name' => $product->name . ' (' . $product->unit->name . ')',
+            'qty' => $request->qty,
+        ]));
+
+        if ($request->has('query')) {
             return redirect()->route('cart.show', [$draftKey, 'query' => $request->get('query')]);
+        }
 
         return back();
     }

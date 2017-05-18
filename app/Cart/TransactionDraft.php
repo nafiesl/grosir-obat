@@ -33,7 +33,7 @@ abstract class TransactionDraft
 
     public function items()
     {
-        return collect($this->items);
+        return collect($this->items)->sortBy('name');
     }
 
     public function addItem(Item $item)

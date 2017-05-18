@@ -21,6 +21,11 @@
                         <input type="number" id="qty-{{ $product->id }}" style="width:50px" name="qty" value="1" min="1">
                         <input type="submit" id="add-product-{{ $product->id }}" value="Tambah">
                     </form>
+                    @if ($loop->last)
+                    {{ link_to_route('cart.show', trans('cart.search_box_cleanup'), [$draftKey], [
+                        'class' => 'btn btn-sm btn-default pull-right'
+                    ]) }}
+                    @endif
                 </td>
             </tr>
             @empty
