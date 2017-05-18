@@ -28,9 +28,9 @@ class SearchProductsTest extends TestCase
         $user = $this->loginAsUser();
 
         $response = $this->post(route('api.products.search'), [
-            'query'=> 'Bis',
+            'query'    => 'Bis',
             'draftType'=> $draft->type,
-            'draftKey'=> $draft->draftKey,
+            'draftKey' => $draft->draftKey,
         ]);
 
         $response->assertSuccessful();

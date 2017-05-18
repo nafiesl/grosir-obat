@@ -83,6 +83,7 @@ class ProductsController extends Controller
     public function priceList()
     {
         $products = Product::orderBy('name')->with('unit')->get();
+
         return view('products.price-list', compact('products'));
 
         // $pdf = PDF::loadView('products.price-list', compact('products'));

@@ -10,9 +10,9 @@ class ProductsController extends Controller
 {
     public function search(Request $request)
     {
-        $query     = $request->get('query');
+        $query = $request->get('query');
         $draftType = $request->get('draftType');
-        $draftKey  = $request->get('draftKey');
+        $draftKey = $request->get('draftKey');
         $formToken = $request->get('formToken');
         $queriedProducts = [];
         if ($query) {
@@ -21,6 +21,6 @@ class ProductsController extends Controller
             })->with('unit')->get();
         }
 
-        return view('cart.partials.product-search-result-box', compact('queriedProducts','draftType','draftKey','formToken'));
+        return view('cart.partials.product-search-result-box', compact('queriedProducts', 'draftType', 'draftKey', 'formToken'));
     }
 }

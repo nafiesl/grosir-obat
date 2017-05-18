@@ -63,8 +63,8 @@ class CartController extends Controller
         $this->cart->addItemToDraft($draftKey, $item);
 
         flash(trans('cart.item_added', [
-            'product_name' => $product->name . ' (' . $product->unit->name . ')',
-            'qty' => $request->qty,
+            'product_name' => $product->name.' ('.$product->unit->name.')',
+            'qty'          => $request->qty,
         ]));
 
         if ($request->has('query')) {
