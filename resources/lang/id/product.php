@@ -2,19 +2,19 @@
 
 return [
     // Labels
-    'product'        => 'Produk',
-    'list'           => 'Daftar Produk',
-    'search'         => 'Cari Produk',
-    'not_found'      => 'Produk tidak ditemukan',
-    'empty'          => 'Belum ada Produk',
-    'price'          => 'Harga',
-    'unit'           => 'Satuan',
-    'back_to_index'  => 'Kembali ke daftar Produk',
-    'item_price'     => 'Harga Satuan',
-    'item_discount'  => 'Diskon Item',
-    'item_qty'       => 'Qty',
-    'item_subtotal'  => 'Subtotal',
-    'price_list'     => 'Daftar Harga',
+    'product'          => 'Produk',
+    'list'             => 'Daftar Produk',
+    'search'           => 'Cari Produk',
+    'not_found'        => 'Produk tidak ditemukan',
+    'empty'            => 'Belum ada Produk',
+    'price'            => 'Harga',
+    'unit'             => 'Satuan',
+    'back_to_index'    => 'Kembali ke daftar Produk',
+    'item_price'       => 'Harga Satuan',
+    'item_discount'    => 'Diskon Item',
+    'item_qty'         => 'Qty',
+    'item_subtotal'    => 'Subtotal',
+    'price_list'       => 'Daftar Harga',
     'print_price_list' => 'Cetak Daftar Harga',
 
     // Actions

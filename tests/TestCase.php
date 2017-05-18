@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use App\User;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\Exceptions\Handler;
+use App\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -23,9 +23,15 @@ abstract class TestCase extends BaseTestCase
     {
         // Disable Laravel's default exception handling
         // and allow exceptions to bubble up the stack
-        $this->app->instance(ExceptionHandler::class, new class extends Handler {
-            public function __construct() {}
-            public function report(\Exception $exception) {}
+        $this->app->instance(ExceptionHandler::class, new class() extends Handler {
+            public function __construct()
+            {
+            }
+
+            public function report(\Exception $exception)
+            {
+            }
+
             public function render($request, \Exception $exception)
             {
                 throw $exception;

@@ -24,7 +24,7 @@ class TransactionsController extends Controller
     {
         // return view('transactions.pdf', compact('transaction'));
         $pdf = PDF::loadView('transactions.pdf', compact('transaction'));
-        return $pdf->stream($transaction->invoice_no.'.faktur.pdf');
 
+        return $pdf->stream($transaction->invoice_no.'.faktur.pdf');
     }
 }
