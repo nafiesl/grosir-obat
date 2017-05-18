@@ -7,5 +7,10 @@
             {{ link_to_route('cart.show', 'Bersihkan Pencarian', [$draft->draftKey], ['class' => 'btn btn-sm']) }}
         </form>
     </div>
-    @includeWhen ($queriedProducts, 'cart.partials.product-search-result-box')
+    <div id="product-search-result-box">
+    @includeWhen ($queriedProducts, 'cart.partials.product-search-result-box', [
+        'draftType' => $draft->type,
+        'draftKey' => $draft->draftKey
+    ])
+    </div>
 </div>

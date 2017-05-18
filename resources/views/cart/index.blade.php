@@ -26,3 +26,36 @@
     @endif
 @endif
 @endsection
+
+@section('script')
+<script>
+(function() {
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+
+    $('#query').keyup(function() {
+        delay(function() {
+            var query = $('#query').val();
+            if (query.length >= 3) {
+                $.post(
+                    "{{ route('api.products.search') }}",
+                    {
+                        query: query,
+                        draftKey: '{{ $draft->draftKey }}',
+                        draftType: '{{ $draft->type }}',
+                        formToken: '{{ csrf_token() }}',
+                    },
+                    function(data) {
+                    $('#product-search-result-box').html(data);
+                });
+            }
+        }, 200 );
+    });
+})();
+</script>
+@endsection

@@ -10,7 +10,10 @@ class ProductsController extends Controller
 {
     public function search(Request $request)
     {
-        $query = $request->get('query');
+        $query     = $request->get('query');
+        $draftType = $request->get('draftType');
+        $draftKey  = $request->get('draftKey');
+        $formToken = $request->get('formToken');
         $queriedProducts = [];
         if ($query) {
             $queriedProducts = Product::where(function ($q) use ($query) {
@@ -18,7 +21,6 @@ class ProductsController extends Controller
             })->with('unit')->get();
         }
 
-        return response()->json($queriedProducts, 200);
-        // return view('cart.partials.product-search-result-box', $queriedProducts);
+        return view('cart.partials.product-search-result-box', compact('queriedProducts','draftType','draftKey','formToken'));
     }
 }

@@ -4,7 +4,7 @@
             <tr>
                 <th>{{ trans('product.name') }}</th>
                 <th>{{ trans('product.unit') }}</th>
-                <th>{{ trans('product.price') }} ({{ $draft->type }})</th>
+                <th>{{ trans('product.price') }} ({{ $draftType }})</th>
                 <th>{{ trans('app.action') }}</th>
             </tr>
         </thead>
@@ -13,10 +13,11 @@
             <tr>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->unit->name }}</td>
-                <td>{{ formatRp($product->getPrice($draft->type)) }}</td>
+                <td>{{ formatRp($product->getPrice($draftType)) }}</td>
                 <td>
-                    <form action="{{ route('cart.add-draft-item', [$draft->draftKey, $product->id]) }}" method="post" style="display:inline">
-                        {{ csrf_field() }}
+                    <form action="{{ route('cart.add-draft-item', [$draftKey, $product->id]) }}" method="post" style="display:inline">
+                        <input type="hidden" name="query" value="{{ isset($query) ? $query : request('query') }}">
+                        <input type="hidden" name="_token" value="{{ isset($formToken) ? $formToken : csrf_token() }}">
                         <input type="number" id="qty-{{ $product->id }}" style="width:50px" name="qty" value="1" min="1">
                         <input type="submit" id="add-product-{{ $product->id }}" value="Tambah">
                     </form>
