@@ -159,6 +159,30 @@ class CartCollectionTest extends TestCase
 
         $cart->addItemToDraft($draft->draftKey, $item);
         $this->assertEquals(2000, $draft->getTotal());
+        $this->assertEquals(1, $draft->getItemsCount());
+        $this->assertEquals(2, $draft->getTotalQty());
+    }
+
+    /** @test */
+    public function it_adds_product_qty_to_draft_if_product_id_exists()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+        $count = 2;
+
+        $item = new Item(new Product(['id' => 1, 'cash_price' => 1000]), $count);
+        $cart->addItemToDraft($draft->draftKey, $item);
+
+        $item = new Item(new Product(['id' => 1, 'cash_price' => 1000]), $count);
+        $cart->addItemToDraft($draft->draftKey, $item);
+
+        $item = new Item(new Product(['id' => 2, 'cash_price' => 1000]), $count);
+        $cart->addItemToDraft($draft->draftKey, $item);
+
+        $this->assertEquals(6000, $draft->getTotal());
+        $this->assertEquals(2, $draft->getItemsCount());
+        $this->assertEquals(6, $draft->getTotalQty());
     }
 
     /** @test */

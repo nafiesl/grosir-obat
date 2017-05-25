@@ -111,7 +111,15 @@ class CartCollection
             $item->subtotal = $item->product->getPrice('credit') * $item->qty;
         }
 
-        $content[$draftKey]->addItem($item);
+        $foundItem = $draft->search($item->product);
+
+        if (!is_null($foundItem)) {
+            $itemKey = $draft->searchItemKeyFor($item->product);
+            $content[$draftKey]->updateItem($itemKey, ['qty' => $foundItem->qty + $item->qty]);
+        } else {
+            $content[$draftKey]->addItem($item);
+        }
+
 
         $this->session->put($this->instance, $content);
 

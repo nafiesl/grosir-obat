@@ -158,8 +158,8 @@ class TransactionDraftTest extends TestCase
 
         $draft = $cart->add(new CashDraft());
 
-        $product1 = factory(Product::class)->make(['cash_price' => 1000]);
-        $product2 = factory(Product::class)->make(['cash_price' => 2000]);
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 2000]);
         $item1 = new Item($product1, 1);
         $item2 = new Item($product2, 3);
         // Add items to draft
@@ -222,5 +222,46 @@ class TransactionDraftTest extends TestCase
             'notes'      => 'Catatan',
             'user_id'    => 1,
         ]);
+    }
+
+    /** @test */
+    public function it_has_product_search_method()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+        $count = 2;
+        $product1 = factory(Product::class)->create(['cash_price' => 1000]);
+        $item1 = new Item($product1, $count);
+
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+
+        $this->assertEquals($draft->search($product1)->id, $product1->id);
+    }
+
+    /** @test */
+    public function it_has_search_item_key_for_product_method()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+        $count = 2;
+
+        $product1 = factory(Product::class)->create();
+        $item1 = new Item($product1, $count);
+        $cart->addItemToDraft($draft->draftKey, $item1);
+
+        $product2 = factory(Product::class)->create();
+        $item2 = new Item($product2, $count);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $product3 = factory(Product::class)->create();
+        $item3 = new Item($product3, $count);
+        $cart->addItemToDraft($draft->draftKey, $item3);
+
+        $this->assertEquals($draft->searchItemKeyFor($product3), 2);
+        $this->assertEquals($draft->searchItemKeyFor($product2), 1);
+        $this->assertEquals($draft->searchItemKeyFor($product1), 0);
     }
 }
