@@ -53,6 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('units', 'UnitsController', ['except' => ['create', 'show', 'edit']]);
 
     /*
+     * Users Routes
+     */
+    Route::resource('users', 'UsersController', ['except' => ['create', 'show', 'edit']]);
+
+    /*
      * Transactions Routes
      */
     Route::get('transactions', ['as' => 'transactions.index', 'uses' => 'TransactionsController@index']);

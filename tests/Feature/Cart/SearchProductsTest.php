@@ -15,7 +15,7 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function retrieving_product_list_by_ajax_post_request()
     {
-        $this->disableExceptionHandling();
+        // $this->disableExceptionHandling();
         factory(Product::class)->create(['name' => 'Hemaviton']);
         factory(Product::class)->create(['name' => 'Zee']);
         $product1 = factory(Product::class)->create(['name' => 'Bisolvon 1', 'cash_price' => 2000, 'credit_price' => 2100]);
