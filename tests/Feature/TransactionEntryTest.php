@@ -214,6 +214,42 @@ class TransactionEntryTest extends BrowserKitTestCase
     }
 
     /** @test */
+    public function it_validates_proper_payment_amount()
+    {
+        $cart = new CartCollection();
+
+        $draft = $cart->add(new CashDraft());
+
+        $product1 = factory(Product::class)->create(['cash_price' => 100000]);
+        $product2 = factory(Product::class)->create(['cash_price' => 50000]);
+        $item1 = new Item($product1, 1);
+        $item2 = new Item($product2, 3);
+
+        // Add items to draft
+        $cart->addItemToDraft($draft->draftKey, $item1);
+        $cart->addItemToDraft($draft->draftKey, $item2);
+
+        $this->loginAsUser();
+        $this->visit(route('cart.show', $draft->draftKey));
+
+        $this->type('Nafies', 'customer[name]');
+        $this->type('-', 'customer[phone]');
+        $this->type('catatan', 'notes');
+
+        $this->type(100000, 'payment');
+        $this->press(trans('transaction.proccess'));
+        $this->dontSee(trans('transaction.confirm'));
+
+        $this->type(350001, 'payment');
+        $this->press(trans('transaction.proccess'));
+        $this->dontSee(trans('transaction.confirm'));
+
+        $this->type(350000, 'payment');
+        $this->press(trans('transaction.proccess'));
+        $this->see(trans('transaction.confirm'));
+    }
+
+    /** @test */
     public function user_can_save_transaction_if_draft_is_completed()
     {
         $cart = new CartCollection();
