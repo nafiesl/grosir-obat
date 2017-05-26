@@ -37,7 +37,7 @@ $factory->define(App\Transaction::class, function (Faker\Generator $faker) {
         },
         'invoice_no' => str_random(5),
         'items' => [],
-        'customer' => [],
+        'customer' => ['name' => $faker->name, 'phone' => $faker->phoneNumber],
         'payment' => 1000,
         'total' => 1000,
     ];

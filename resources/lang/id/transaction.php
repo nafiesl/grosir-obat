@@ -22,6 +22,7 @@ return [
     'draft_not_found' => 'Draft transaksi tidak ditemukan.',
     'items_count'     => 'Jumlah Item',
     'cashier'         => 'Kasir',
+    'search'          => 'Cari Invoice',
 
     // Actions
     'proccess'            => 'Proses Transaksi',

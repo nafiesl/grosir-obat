@@ -126,7 +126,7 @@ class CartController extends Controller
             'notes'          => 'nullable|string|max:100',
         ], [
             'payment.min' => 'Pembayaran minimal ' . formatRp($request->get('total')) . '.',
-            'payment.max' => 'Pembayaran terlalu besar.'
+            'payment.max' => 'Pembayaran terlalu besar ' . formatRp($request->get('payment')) . '.'
         ]);
         $draft = $this->cart->updateDraftAttributes($draftKey, $request->only('customer', 'notes', 'payment'));
 
