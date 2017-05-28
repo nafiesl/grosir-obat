@@ -17,9 +17,9 @@ class UserChangePasswordTest extends BrowserKitTestCase
         $this->actingAs($user);
         $this->visit(route('change-password'));
 
-        $this->type('secret','old_password');
-        $this->type('member','password');
-        $this->type('member','password_confirmation');
+        $this->type('secret', 'old_password');
+        $this->type('member', 'password');
+        $this->type('member', 'password_confirmation');
         $this->press(trans('auth.change_password'));
         $this->see(trans('auth.old_password_success'));
         $this->seePageIs(route('change-password'));
