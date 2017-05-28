@@ -122,11 +122,11 @@ class CartController extends Controller
             'customer.name'  => 'required|string|max:30',
             'customer.phone' => 'nullable|string|max:20',
             'total'          => 'required|numeric',
-            'payment'        => 'required|numeric|min:' . $request->get('total') . '|max:' . ($request->get('total') + 100000),
+            'payment'        => 'required|numeric|min:'.$request->get('total').'|max:'.($request->get('total') + 100000),
             'notes'          => 'nullable|string|max:100',
         ], [
-            'payment.min' => 'Pembayaran minimal ' . formatRp($request->get('total')) . '.',
-            'payment.max' => 'Pembayaran terlalu besar ' . formatRp($request->get('payment')) . '.'
+            'payment.min' => 'Pembayaran minimal '.formatRp($request->get('total')).'.',
+            'payment.max' => 'Pembayaran terlalu besar '.formatRp($request->get('payment')).'.',
         ]);
         $draft = $this->cart->updateDraftAttributes($draftKey, $request->only('customer', 'notes', 'payment'));
 

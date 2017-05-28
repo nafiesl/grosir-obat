@@ -12,9 +12,11 @@ class TransactionsController extends Controller
     {
         $q = $request->get('q');
         $transactions = Transaction::orderBy('invoice_no', 'desc')
-            ->where(function($query) use ($q) {
-                if ($q)
-                    $query->where('invoice_no', 'like', '%' . $q . '%');
+            ->where(function ($query) use ($q) {
+                if ($q) {
+                    $query->where('invoice_no', 'like', '%'.$q.'%');
+                    $query->orWhere('customer', 'like', '%'.$q.'%');
+                }
             })->paginate(25);
 
         return view('transactions.index', compact('transactions'));

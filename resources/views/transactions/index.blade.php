@@ -25,7 +25,7 @@
                     <th>{{ trans('transaction.customer') }}</th>
                     <th>{{ trans('transaction.items_count') }}</th>
                     <th class="text-right">{{ trans('transaction.total') }}</th>
-                    <th>{{ trans('app.action') }}</th>
+                    <th class="text-center">{{ trans('app.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,10 +34,13 @@
                     <td>{{ 1 + $key }}</td>
                     <td>{{ $transaction->invoice_no }}</td>
                     <td>{{ $transaction->created_at->format('Y-m-d') }}</td>
-                    <td>{{ $transaction->customer['name'] }}</td>
+                    <td>
+                        {{ $transaction->customer['name'] }}
+                        {{ $transaction->customer['phone'] ? '(' . $transaction->customer['phone'] . ')' : '' }}
+                    </td>
                     <td>{{ $transaction->items_count }}</td>
                     <td class="text-right">{{ formatRp($transaction->total) }}</td>
-                    <td>
+                    <td class="text-center">
                         {{ link_to_route('transactions.show', trans('app.show'), $transaction->invoice_no) }} |
                         {{ link_to_route('transactions.pdf', trans('app.print'), $transaction->invoice_no) }}
                     </td>
@@ -46,6 +49,7 @@
                 @endforelse
             </tbody>
         </table>
+        <div>{!! str_replace('/?', '?', $transactions->appends(Request::except('page'))->render()) !!}</div>
     </div>
 </div>
 @endsection

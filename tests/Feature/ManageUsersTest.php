@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Transaction;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\BrowserKitTestCase;
 
@@ -41,7 +41,7 @@ class ManageUsersTest extends BrowserKitTestCase
         $this->seePageIs(route('users.index'));
 
         $this->seeInDatabase('users', [
-            'name' => 'User 1',
+            'name'     => 'User 1',
             'username' => 'username',
         ]);
     }
@@ -64,8 +64,8 @@ class ManageUsersTest extends BrowserKitTestCase
         $this->seePageIs(route('users.index'));
 
         $this->seeInDatabase('users', [
-            'id' => $user->id,
-            'name' => 'User 1',
+            'id'       => $user->id,
+            'name'     => 'User 1',
             'username' => 'username',
         ]);
     }

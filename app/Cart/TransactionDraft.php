@@ -100,7 +100,7 @@ abstract class TransactionDraft
 
     public function searchItemKeyFor(Product $product)
     {
-        return $this->items()->search(function($item, $key) use ($product) {
+        return $this->items()->search(function ($item, $key) use ($product) {
             return $item->product->id == $product->id;
         });
     }

@@ -32,13 +32,13 @@ $factory->define(App\Unit::class, function (Faker\Generator $faker) {
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Transaction::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'user_id' => function () {
             return factory(App\User::class)->create()->id;
         },
         'invoice_no' => str_random(5),
-        'items' => [],
-        'customer' => ['name' => $faker->name, 'phone' => $faker->phoneNumber],
-        'payment' => 1000,
-        'total' => 1000,
+        'items'      => [],
+        'customer'   => ['name' => $faker->name, 'phone' => $faker->phoneNumber],
+        'payment'    => 1000,
+        'total'      => 1000,
     ];
 });

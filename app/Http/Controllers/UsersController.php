@@ -22,18 +22,18 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:60',
+            'name'     => 'required|max:60',
             'username' => 'required|max:30',
             'password' => 'nullable|between:5,15',
         ]);
 
-        $newUserData = $request->only('name','username');
+        $newUserData = $request->only('name', 'username');
 
-        if ($request->has('password'))
+        if ($request->has('password')) {
             $newUserData['password'] = $request->get('password');
-        else
+        } else {
             $newUserData['password'] = 'rahasia';
-
+        }
 
         $user = User::create($newUserData);
 
@@ -45,14 +45,15 @@ class UsersController extends Controller
     public function update(Request $request, $userId)
     {
         $this->validate($request, [
-            'name' => 'required|max:60',
-            'username' => 'required|max:30|unique:users,username,' . $request->segment(2),
+            'name'     => 'required|max:60',
+            'username' => 'required|max:30|unique:users,username,'.$request->segment(2),
             'password' => 'nullable|between:5,15',
         ]);
 
-        $userData = $request->only('name','username');
-        if ($request->has('password'))
+        $userData = $request->only('name', 'username');
+        if ($request->has('password')) {
             $userData['password'] = $request->get('password');
+        }
 
         User::findOrFail($userId)->update($userData);
 
