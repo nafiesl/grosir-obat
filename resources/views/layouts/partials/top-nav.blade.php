@@ -55,6 +55,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>{{ link_to_route('users.index', trans('user.list')) }}</li>
                         <li>{{ link_to_route('backups.index', trans('backup.list')) }}</li>
+                        <li>{{ link_to_route('change-password', trans('auth.change_password')) }}</li>
                         <li>
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();

@@ -20,6 +20,10 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+// Change Password Routes...
+Route::get('change-password', 'Auth\ChangePasswordController@getChangePassword')->name('change-password');
+Route::post('change-password', 'Auth\ChangePasswordController@postChangePassword')->name('change-password');
+
 Route::group(['middleware' => 'auth'], function () {
     /*
      * Pages Routes
