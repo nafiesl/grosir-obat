@@ -17,7 +17,8 @@ Aplikasi Grosir Obat adalah sebuah sistem kasir dan manajemen produk obat yang d
 4. [Proses Transaksi](#proses-transksi)
     - [Keranjang Belanja](#keranjang-belanja)
     - [Proses Entry Transaksi](#proses-entry-transaksi)
-5. [Lisensi](#license)
+5. [Screenshots](#screenshots)
+6. [Lisensi](#license)
 
 <hr>
 
@@ -135,6 +136,25 @@ Proses Entry transaksi baru:
 12. **Cetak Nota** format PDF ukuran A4.
 
 <hr>
+
+## Screenshots
+
+#### Shopping Cart
+![Shopping Cart](public/imgs/01-shopping-cart.jpg "Shopping Cart")
+
+#### Konfirmasi Entry Transaksi
+![Konfirmasi Entry Transaksi](public/imgs/02-konfirmasi-entry-transaksi.jpg "Konfirmasi Entry Transaksi")
+
+#### List Transaksi
+![List Transaksi](public/imgs/03-list-transaksi.jpg "List Transaksi")
+
+#### Daftar Produk
+![Daftar Produk](public/imgs/04-daftar-produk.jpg "Daftar Produk")
+
+#### Testing
+![Testing](public/imgs/05-testing.jpg "Testing")
+
+
 
 ## License
 
