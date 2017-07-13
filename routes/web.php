@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('backups/{fileName}/dl', ['as'=>'backups.download', 'uses'=>'BackupsController@download']);
     Route::resource('backups', 'BackupsController', ['except' => ['create', 'show', 'edit']]);
 
-    /**
+    /*
      * Log Viewer routes
      */
     Route::get('log-files', ['as' => 'log-files.index', 'uses' => 'LogFilesController@index']);
