@@ -2,23 +2,27 @@
 
 <h1 align="center">Aplikasi Grosir Obat</h1>
 
+[![Build Status](https://travis-ci.org/nafiesl/grosir-obat.svg?branch=master)](https://travis-ci.org/nafiesl/grosir-obat)
+[![StyleCI](https://styleci.io/repos/87638082/shield?branch=master)](https://styleci.io/repos/87638082)
+
 Aplikasi Grosir Obat adalah sebuah sistem kasir dan manajemen produk obat yang dibuat menggunakan framework Laravel, dibangun dengan Test-Driven Development.
 
 <hr>
 
 ## Daftar Isi
 1. [Fitur](#fitur)
-2. [Instalasi](#instalasi)
+2. [Demo Aplikasi](#demo-aplikasi)
+3. [Instalasi](#instalasi)
     - [Spesifikasi yang Dibutuhkan](#spesifikasi)
     - [Cara Install](#cara-install)
     - [Login Admin](#cara-install)
     - [Testing](#automated-testing)
-3. [Input Produk dan Satuan](#input-produk-dan-satuan)
-4. [Proses Transaksi](#proses-transksi)
+4. [Input Produk dan Satuan](#input-produk-dan-satuan)
+5. [Proses Transaksi](#proses-transksi)
     - [Keranjang Belanja](#keranjang-belanja)
     - [Proses Entry Transaksi](#proses-entry-transaksi)
-5. [Screenshots](#screenshots)
-6. [Lisensi](#license)
+6. [Screenshots](#screenshots)
+7. [Lisensi](#license)
 
 <hr>
 
@@ -59,6 +63,15 @@ Fitur pada Aplikasi ini meliputi:
 
 Catatan:
 - **Transaksi Kredit** saat ini hanya ditujukan untuk membedakan harga produk, bukan input pembayaran yang diangsur oleh customer. Dipersilakan jika ada yang berkenan mengembangkan fitur tersebut.
+
+<hr>
+
+## Demo Aplikasi
+
+| URL | https://grosir-obat.tk/login |
+| --- | --- |
+| username | admin |
+| password | secret |
 
 <hr>
 
