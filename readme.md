@@ -68,7 +68,7 @@ Catatan:
 
 ## Demo Aplikasi
 
-| URL | https://grosir-obat.tk/login |
+| URL | http://grosir-obat.nafies.id/login |
 | --- | --- |
 | username | admin |
 | password | secret |
