@@ -3,7 +3,10 @@
 @section('title', $transaction->invoice_no . ' - ' . trans('transaction.detail'))
 
 @section('content')
-<div class="pull-right">{{ link_to_route('transactions.pdf', trans('transaction.invoice_print'), [$transaction->invoice_no], ['class' => 'btn btn-info']) }}</div>
+<div class="pull-right">
+    {{ link_to_route('transactions.pdf', trans('transaction.invoice_pdf'), [$transaction->invoice_no], ['class' => 'btn btn-default']) }}
+    {{ link_to_route('transactions.receipt', trans('transaction.invoice_print'), [$transaction->invoice_no], ['class' => 'btn btn-default']) }}
+</div>
 <h3 class="page-header">{{ $transaction->invoice_no }} <small>{{ trans('transaction.detail') }}</small></h3>
 <div class="row">
     <div class="col-sm-4">

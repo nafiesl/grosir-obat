@@ -30,7 +30,8 @@ return [
     'item_list_empty'     => 'Masukkan setidaknya 1 item produk.',
     'save'                => 'Simpan Transaksi',
     'created'             => 'Transaksi berhasil disimpan, No. Invoice: <strong>:invoice_no</strong>',
-    'invoice_print'       => 'Cetak Invoice',
+    'invoice_print'       => 'Cetak Nota',
+    'invoice_pdf'         => 'Cetak PDF',
 
     // Attributes
     'invoice_no'     => 'No. Invoice',

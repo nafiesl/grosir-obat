@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('transactions', ['as' => 'transactions.index', 'uses' => 'TransactionsController@index']);
     Route::get('transactions/{transaction}', ['as' => 'transactions.show', 'uses' => 'TransactionsController@show']);
     Route::get('transactions/{transaction}/pdf', ['as' => 'transactions.pdf', 'uses' => 'TransactionsController@pdf']);
+    Route::get('transactions/{transaction}/receipt', ['as' => 'transactions.receipt', 'uses' => 'TransactionsController@receipt']);
 
     /*
      * Backup Restore Database Routes

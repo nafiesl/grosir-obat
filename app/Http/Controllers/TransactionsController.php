@@ -32,6 +32,11 @@ class TransactionsController extends Controller
         return view('transactions.show', compact('transaction'));
     }
 
+    public function receipt(Transaction $transaction)
+    {
+        return view('transactions.receipt', compact('transaction'));
+    }
+
     public function pdf(Transaction $transaction)
     {
         // return view('transactions.pdf', compact('transaction'));

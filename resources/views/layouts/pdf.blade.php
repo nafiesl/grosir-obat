@@ -8,6 +8,7 @@
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
     {{ Html::style(url('css/pdf.css')) }}
+    @yield('style')
 </head>
 <body>
     <div class="container">
