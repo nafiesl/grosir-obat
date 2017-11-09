@@ -21,8 +21,8 @@ class CartControllerTest extends TestCase
 
         $cart = new CartCollection();
 
-        $response = $this->post(route('cart.add'), ['create-cash-draft'=> trans('transaction.create_cash')]);
-        $response = $this->post(route('cart.add'), ['create-credit-draft'=> trans('transaction.create_credit')]);
+        $response = $this->post(route('cart.add'), ['create-cash-draft' => trans('transaction.create_cash')]);
+        $response = $this->post(route('cart.add'), ['create-credit-draft' => trans('transaction.create_credit')]);
         $response->assertSessionHas('transactions.drafts');
 
         $cashDraft = $cart->content()->first();

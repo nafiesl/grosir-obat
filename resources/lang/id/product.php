@@ -31,7 +31,7 @@ return [
     'undeleteable'   => 'Data Produk tidak dapat dihapus.',
 
     // Attributes
-    'name'           => 'Nama Produk',
-    'cash_price'     => 'Harga Tunai',
-    'credit_price'   => 'Harga Kredit',
+    'name'         => 'Nama Produk',
+    'cash_price'   => 'Harga Tunai',
+    'credit_price' => 'Harga Kredit',
 ];

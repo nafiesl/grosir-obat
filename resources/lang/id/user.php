@@ -2,12 +2,12 @@
 
 return [
     // Labels
-    'uset'           => 'User',
-    'list'           => 'Daftar User',
-    'search'         => 'Cari User',
-    'not_found'      => 'User tidak ditemukan',
-    'empty'          => 'Belum ada User',
-    'back_to_index'  => 'Kembali ke daftar User',
+    'uset'          => 'User',
+    'list'          => 'Daftar User',
+    'search'        => 'Cari User',
+    'not_found'     => 'User tidak ditemukan',
+    'empty'         => 'Belum ada User',
+    'back_to_index' => 'Kembali ke daftar User',
 
     // Actions
     'create'         => 'Input User Baru',
@@ -23,6 +23,6 @@ return [
     'undeleteable'   => 'Data User tidak dapat dihapus.',
 
     // Attributes
-    'name'           => 'Nama User',
-    'username'       => 'Username',
+    'name'     => 'Nama User',
+    'username' => 'Username',
 ];
