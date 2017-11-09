@@ -22,5 +22,5 @@ return [
     'undeleteable'   => 'Data Satuan tidak dapat dihapus.',
 
     // Attributes
-    'name'           => 'Nama Satuan',
+    'name' => 'Nama Satuan',
 ];

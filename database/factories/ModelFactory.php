@@ -13,8 +13,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
-        'name'         => $faker->name,
-        'unit_id'      => function () {
+        'name'    => $faker->name,
+        'unit_id' => function () {
             return factory(App\Unit::class)->create()->id;
         },
         'cash_price'   => 2000,

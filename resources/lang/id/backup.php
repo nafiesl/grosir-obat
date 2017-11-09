@@ -2,8 +2,8 @@
 
 return [
     // Labels
-    'index_title'         => 'Database Backup Manager',
-    'list'                => 'Backup File List',
+    'index_title' => 'Database Backup Manager',
+    'list'        => 'Backup File List',
 
     // Actions
     'create'              => 'Create Backup File',
