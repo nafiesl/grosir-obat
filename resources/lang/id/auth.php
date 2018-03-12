@@ -25,4 +25,6 @@ return [
     'old_password_success'      => 'Password berhasil diubah!',
     'welcome_please_login'      => 'Selamat datang, silakan login',
     'welcome'                   => 'Selamat datang kembali :name.',
+    'login_welcome'             => 'Selamat datang di aplikasi <br><strong>:app_name</strong>',
+    'login_notes'               => 'Silakan login untuk melanjutkan aktifitas Anda.',
 ];
