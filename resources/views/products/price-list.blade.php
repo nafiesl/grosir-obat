@@ -1,6 +1,6 @@
 @extends('layouts.pdf')
 
-@section('title', trans('product.price_list') . ' (per ' . date('Y-m-d H:i') . ')')
+@section('title', __('product.price_list') . ' (per ' . date('Y-m-d H:i') . ')')
 
 @section('content')
 
@@ -8,7 +8,7 @@
     <tbody>
         <tr>
             <td colspan="4">
-                <h2 class="text-center">{{ trans('product.price_list') }} - {{ config('store.name') }}</h2>
+                <h2 class="text-center">{{ __('product.price_list') }} - {{ config('store.name') }}</h2>
                 <p class="text-center strong">Per: {{ date('Y-m-d H:i') }}</p>
                 <br>
             </td>
