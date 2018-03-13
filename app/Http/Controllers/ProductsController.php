@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use PDF;
 
 class ProductsController extends Controller
 {
@@ -17,9 +16,9 @@ class ProductsController extends Controller
                 $query->where('name', 'like', '%'.$q.'%');
             }
         })
-        ->orderBy('name')
-        ->with('unit')
-        ->paginate(25);
+            ->orderBy('name')
+            ->with('unit')
+            ->paginate(25);
 
         if (in_array($request->get('action'), ['edit', 'delete']) && $request->has('id')) {
             $editableProduct = Product::find($request->get('id'));
@@ -30,46 +29,47 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $newProduct = $request->validate([
             'name'         => 'required|max:20',
             'cash_price'   => 'required|numeric',
             'credit_price' => 'nullable|numeric',
-            'unit_id'      => 'required|numeric',
+            'unit_id'      => 'required|numeric|exists:product_units,id',
         ]);
 
-        Product::create($request->only('name', 'cash_price', 'credit_price', 'unit_id'));
+        Product::create($newProduct);
 
         flash(trans('product.created'), 'success');
 
         return redirect()->route('products.index');
     }
 
-    public function update(Request $request, $productId)
+    public function update(Request $request, Product $product)
     {
-        $this->validate($request, [
+        $productData = $request->validate([
             'name'         => 'required|max:20',
             'cash_price'   => 'required|numeric',
             'credit_price' => 'nullable|numeric',
+            'unit_id'      => 'required|numeric|exists:product_units,id',
         ]);
 
         $routeParam = $request->only('page', 'q');
 
-        $product = Product::findOrFail($productId)->update($request->only('name', 'cash_price', 'credit_price', 'unit_id'));
+        $product->update($productData);
 
         flash(trans('product.updated'), 'success');
 
         return redirect()->route('products.index', $routeParam);
     }
 
-    public function destroy(Request $request, $productId)
+    public function destroy(Request $request, Product $product)
     {
-        $this->validate($request, [
+        $requestData = $request->validate([
             'product_id' => 'required|exists:products,id',
         ]);
 
         $routeParam = $request->only('page', 'q');
 
-        if ($request->get('product_id') == $productId && Product::findOrFail($productId)->delete()) {
+        if ($requestData['product_id'] == $product->id && $product->delete()) {
             flash(trans('product.deleted'), 'success');
 
             return redirect()->route('products.index', $routeParam);
@@ -86,7 +86,7 @@ class ProductsController extends Controller
 
         return view('products.price-list', compact('products'));
 
-        // $pdf = PDF::loadView('products.price-list', compact('products'));
+        // $pdf = \PDF::loadView('products.price-list', compact('products'));
         // return $pdf->stream('price-list.pdf');
     }
 }

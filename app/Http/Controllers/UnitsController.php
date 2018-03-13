@@ -21,24 +21,24 @@ class UnitsController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $newUnit = $request->validate([
             'name' => 'required|max:20',
         ]);
 
-        Unit::create($request->only('name'));
+        Unit::create($newUnit);
 
         flash(trans('unit.created'), 'success');
 
         return redirect()->route('units.index');
     }
 
-    public function update(Request $request, $unitId)
+    public function update(Request $request, Unit $unit)
     {
-        $this->validate($request, [
+        $unitData = $request->validate([
             'name' => 'required|max:20',
         ]);
 
-        $unit = Unit::findOrFail($unitId)->update($request->only('name'));
+        $unit->update($unitData);
 
         flash(trans('unit.updated'), 'success');
 
@@ -50,7 +50,7 @@ class UnitsController extends Controller
         $this->validate($request, [
             'unit_id' => 'required|exists:product_units,id|not_exists:products,unit_id',
         ], [
-            'unit_id.not_exists' => trans('unit.undeleted'),
+            'unit_id.not_exists' => trans('unit.undeleteable'),
         ]);
 
         if ($request->get('unit_id') == $unit->id && $unit->delete()) {

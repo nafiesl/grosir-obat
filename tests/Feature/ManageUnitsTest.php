@@ -98,7 +98,7 @@ class ManageUnitsTest extends BrowserKitTestCase
 
         $this->press(trans('app.delete_confirm_button'));
 
-        $this->see(trans('unit.undeleted'));
+        $this->see(trans('unit.undeleteable'));
         $this->seePageIs(route('units.index', ['action' => 'delete', 'id' => $unitId]));
 
         $this->seeInDatabase('product_units', [
