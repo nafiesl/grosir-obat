@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
-
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -28,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Pages Routes
      */
-    Route::get('/home', 'CartController@index')->name('home');
+    Route::get('/', 'CartController@index')->name('home');
 
     /*
      * Cart / Trasanction Draft Routes
