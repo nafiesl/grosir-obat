@@ -66,6 +66,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('transactions/{transaction}/receipt', ['as' => 'transactions.receipt', 'uses' => 'TransactionsController@receipt']);
 
     /*
+     * Reports Routes
+     */
+    Route::group(['prefix' => 'reports'], function () {
+
+        /*
+         * Sales Routes
+         */
+        Route::get('sales', ['as' => 'reports.sales.index', 'uses' => 'Reports\SalesController@monthly']);
+        Route::get('sales/daily', ['as' => 'reports.sales.daily', 'uses' => 'Reports\SalesController@daily']);
+        Route::get('sales/monthly', ['as' => 'reports.sales.monthly', 'uses' => 'Reports\SalesController@monthly']);
+        Route::get('sales/yearly', ['as' => 'reports.sales.yearly', 'uses' => 'Reports\SalesController@yearly']);
+    });
+
+    /*
      * Backup Restore Database Routes
      */
     Route::post('backups/upload', ['as' => 'backups.upload', 'uses' => 'BackupsController@upload']);

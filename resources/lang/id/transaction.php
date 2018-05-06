@@ -23,6 +23,7 @@ return [
     'items_count'     => 'Jumlah Item',
     'cashier'         => 'Kasir',
     'search'          => 'Cari Invoice',
+    'not_found'       => 'Transaksi tidak ditemukan.',
 
     // Actions
     'proccess'            => 'Proses Transaksi',

@@ -14,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         require_once app_path().'/Helpers/helpers.php';
+        require_once app_path().'/Helpers/date_time.php';
+
         \Validator::extend('not_exists', function ($attribute, $value, $parameters) {
             return \DB::table($parameters[0])
                 ->where($parameters[1], $value)

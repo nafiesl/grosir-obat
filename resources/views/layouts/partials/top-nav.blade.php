@@ -25,6 +25,9 @@
                 <li {{ (Request::segment(1) == 'transactions') ? 'class=active' : '' }}>
                     {{ link_to_route('transactions.index', trans('transaction.list')) }}
                 </li>
+                <li {{ (Request::segment(1) == 'reports') ? 'class=active' : '' }}>
+                    {{ link_to_route('reports.sales.index', trans('report.sales')) }}
+                </li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
