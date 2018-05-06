@@ -171,10 +171,14 @@ Proses Entry transaksi baru:
 #### Daftar Produk
 ![Daftar Produk](public/imgs/04-daftar-produk.jpg "Daftar Produk")
 
+#### Laporan Penjualan Pertahun
+![Laporan Tahunan](public/imgs/06-yearly-sales.jpg "Laporan Tahunan")
+
+#### Laporan Penjualan Perbulan
+![Laporan Bulanan](public/imgs/07-monthly-sales.jpg "Laporan Bulanan")
+
 #### Testing
 ![Testing](public/imgs/05-testing.jpg "Testing")
-
-
 
 ## License
 
