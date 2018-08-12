@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Integration;
 
+use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 class TransactionTest extends TestCase
 {

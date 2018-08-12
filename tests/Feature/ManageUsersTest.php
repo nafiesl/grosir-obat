@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Transaction;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Transaction;
 use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ManageUsersTest extends BrowserKitTestCase
 {

@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Transaction;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ManageTransactionsTest extends BrowserKitTestCase
 {

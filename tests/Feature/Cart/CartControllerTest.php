@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Cart;
 
-use App\Cart\CartCollection;
+use App\Product;
+use App\Cart\Item;
+use Tests\TestCase;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
-use App\Cart\Item;
-use App\Product;
+use App\Cart\CartCollection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 class CartControllerTest extends TestCase
 {

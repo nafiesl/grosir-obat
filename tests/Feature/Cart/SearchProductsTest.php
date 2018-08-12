@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Cart;
 
-use App\Cart\CartCollection;
-use App\Cart\CreditDraft;
 use App\Product;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use App\Cart\CreditDraft;
+use App\Cart\CartCollection;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class SearchProductsTest extends TestCase
 {
