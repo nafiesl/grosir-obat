@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Cart\CartCollection;
+use App\Product;
+use App\Cart\Item;
+use Tests\TestCase;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
-use App\Cart\Item;
-use App\Product;
-use Tests\TestCase;
+use App\Cart\CartCollection;
 
 class CartCollectionTest extends TestCase
 {

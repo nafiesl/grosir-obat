@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Transaction;
 use Illuminate\Http\Request;
-use PDF;
 
 class TransactionsController extends Controller
 {

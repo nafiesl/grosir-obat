@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart\CartCollection;
+use App\Product;
+use App\Cart\Item;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
-use App\Cart\Item;
-use App\Product;
+use App\Cart\CartCollection;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
