@@ -2,6 +2,8 @@
 
 <h1 align="center">Aplikasi Grosir Obat</h1>
 
+<h1 align="center"><img src="Logotype primary.png" width="70%" height="70%" />
+
 [![Build Status](https://travis-ci.org/nafiesl/grosir-obat.svg?branch=master)](https://travis-ci.org/nafiesl/grosir-obat)
 [![StyleCI](https://styleci.io/repos/87638082/shield?branch=master)](https://styleci.io/repos/87638082)
 
