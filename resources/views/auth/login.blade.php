@@ -6,6 +6,9 @@
 <div class="login-page">
     <div class="row">
         <div class="login-form">
+            <div class="text-center lead">
+                {{ Html::image('imgs/logo.png', env('STORE_NAME'), ['style' => 'width:100px']) }}
+            </div>
             <p class="text-center lead">
                 {!! __('auth.login_welcome', ['app_name' => env('STORE_NAME')]) !!}
             </p>
