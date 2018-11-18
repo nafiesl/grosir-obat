@@ -2,11 +2,15 @@
 
 namespace Tests\Unit\Integration;
 
+use App\Unit;
 use App\Product;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function it_has_get_price_method()
     {
@@ -40,5 +44,14 @@ class ProductTest extends TestCase
 
         $product = new Product(['cash_price' => 2000, 'credit_price' => null]);
         $this->assertEquals(2000, $product->getPrice('credit'));
+    }
+
+    /** @test */
+    public function a_product_has_belongs_to_unit_relation()
+    {
+        $product = factory(Product::class)->make();
+
+        $this->assertInstanceOf(Unit::class, $product->unit);
+        $this->assertEquals($product->unit_id, $product->unit->id);
     }
 }
