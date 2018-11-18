@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "572bf1147121b96ff25f10e6d5e7c1d6",
+    "content-hash": "a6ddfd7b42179b0f93201845c059a17f",
     "packages": [
         {
             "name": "backup-manager/backup-manager",
@@ -76,7 +76,7 @@
         },
         {
             "name": "backup-manager/laravel",
-            "version": "dev-master",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/backup-manager/laravel.git",
@@ -4299,9 +4299,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "backup-manager/laravel": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
