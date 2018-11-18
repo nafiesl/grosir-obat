@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Integration;
+namespace Tests\Unit\Models;
 
 use Tests\TestCase;
 use App\Transaction;

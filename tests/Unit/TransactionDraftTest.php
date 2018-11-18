@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Integration;
+namespace Tests\Unit;
 
 use App\Product;
 use App\Cart\Item;
@@ -171,8 +171,8 @@ class TransactionDraftTest extends TestCase
                 'name'  => 'Nafies',
                 'phone' => '081234567890',
             ],
-            'payment' => 10000,
-            'notes'   => 'Catatan',
+            'payment'  => 10000,
+            'notes'    => 'Catatan',
         ];
         $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
 
@@ -206,8 +206,8 @@ class TransactionDraftTest extends TestCase
                 'name'  => 'Nafies',
                 'phone' => '081234567890',
             ],
-            'payment' => 10000,
-            'notes'   => 'Catatan',
+            'payment'  => 10000,
+            'notes'    => 'Catatan',
         ];
         $cart->updateDraftAttributes($draft->draftKey, $draftAttributes);
 
