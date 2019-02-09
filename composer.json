@@ -10,9 +10,9 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "laracasts/flash": "~2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "league/flysystem": "^1.0",
-        "luthfi/formfield": "^0.2"
+        "luthfi/formfield": "^1.0"
     },
     "require-dev": {
         "laravel/browser-kit-testing": "^4.0",
