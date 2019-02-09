@@ -79,9 +79,9 @@ Catatan:
 
 ## Instalasi
 ### Spesifikasi
-- PHP 7.0
-- Laravel 5.4
-- MySQL
+- PHP ^7.1.3
+- Laravel 5.7
+- Database MySQL atau MariaDB
 - SQlite (untuk `automated testing`)
 
 ### Cara Install
