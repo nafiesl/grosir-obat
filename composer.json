@@ -10,17 +10,17 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "laracasts/flash": "~2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.8.*",
         "league/flysystem": "^1.0",
         "luthfi/formfield": "^1.0"
     },
     "require-dev": {
-        "laravel/browser-kit-testing": "^4.0",
+        "laravel/browser-kit-testing": "^5.0",
         "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.5"
     },
     "autoload": {
         "classmap": [
