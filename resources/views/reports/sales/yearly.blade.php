@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 @php $chartData = []; @endphp
-                @foreach(getMonths() as $monthNumber => $monthName)
+                @foreach(get_months() as $monthNumber => $monthName)
                 @php
                     $any = isset($reports[$monthNumber]);
                     $omzet = $any ? $reports[$monthNumber]->omzet : 0

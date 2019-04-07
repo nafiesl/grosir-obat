@@ -28,7 +28,7 @@ class SalesController extends Controller
     public function monthly(Request $request)
     {
         $years = getYears();
-        $months = getMonths();
+        $months = get_months();
         $year = $request->get('year', date('Y'));
         $month = $request->get('month', date('m'));
         $reports = $this->getMonthlyReports($year, $month);
