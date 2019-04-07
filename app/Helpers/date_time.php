@@ -1,22 +1,5 @@
 <?php
 
-function formatDate($date)
-{
-    if (!$date || $date == '0000-00-00') {
-        return;
-    }
-
-    $explodedDate = explode('-', $date);
-
-    if (count($explodedDate) == 3 && checkdate($explodedDate[1], $explodedDate[0], $explodedDate[2])) {
-        return $explodedDate[2].'-'.$explodedDate[1].'-'.$explodedDate[0];
-    } elseif (count($explodedDate) == 3 && checkdate($explodedDate[1], $explodedDate[2], $explodedDate[0])) {
-        return $explodedDate[2].'-'.$explodedDate[1].'-'.$explodedDate[0];
-    }
-
-    throw new App\Exceptions\InvalidDateException('Invalid date format.');
-}
-
 function date_id($date)
 {
     if (is_null($date) || $date == '0000-00-00') {
