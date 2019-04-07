@@ -1,23 +1,6 @@
 <?php
 
-function formatDate($date)
-{
-    if (!$date || $date == '0000-00-00') {
-        return;
-    }
-
-    $explodedDate = explode('-', $date);
-
-    if (count($explodedDate) == 3 && checkdate($explodedDate[1], $explodedDate[0], $explodedDate[2])) {
-        return $explodedDate[2].'-'.$explodedDate[1].'-'.$explodedDate[0];
-    } elseif (count($explodedDate) == 3 && checkdate($explodedDate[1], $explodedDate[2], $explodedDate[0])) {
-        return $explodedDate[2].'-'.$explodedDate[1].'-'.$explodedDate[0];
-    }
-
-    throw new App\Exceptions\InvalidDateException('Invalid date format.');
-}
-
-function dateId($date)
+function date_id($date)
 {
     if (is_null($date) || $date == '0000-00-00') {
         return '-';
@@ -26,7 +9,7 @@ function dateId($date)
     $explodedDate = explode('-', $date);
 
     if (count($explodedDate) == 3 && checkdate($explodedDate[1], $explodedDate[2], $explodedDate[0])) {
-        $months = getMonths();
+        $months = get_months();
 
         return $explodedDate[2].' '.$months[$explodedDate[1]].' '.$explodedDate[0];
     }
@@ -34,24 +17,24 @@ function dateId($date)
     throw new App\Exceptions\InvalidDateException('Invalid date format.');
 }
 
-function monthNumber($number)
+function month_number($number)
 {
     return str_pad($number, 2, '0', STR_PAD_LEFT);
 }
 
-function monthId($monthNumber)
+function month_id($monthNumber)
 {
     if (is_null($monthNumber)) {
         return $monthNumber;
     }
 
-    $months = getMonths();
-    $monthNumber = monthNumber($monthNumber);
+    $months = get_months();
+    $monthNumber = month_number($monthNumber);
 
     return $months[$monthNumber];
 }
 
-function getMonths()
+function get_months()
 {
     return [
         '01' => __('time.months.01'),
@@ -69,7 +52,7 @@ function getMonths()
     ];
 }
 
-function getYears()
+function get_years()
 {
     $yearRange = range(2017, date('Y'));
     foreach ($yearRange as $year) {
@@ -79,7 +62,7 @@ function getYears()
     return $years;
 }
 
-function monthDateArray($year, $month)
+function month_date_array($year, $month)
 {
     $dateCount = Carbon\Carbon::parse($year.'-'.$month)->format('t');
     $dates = [];

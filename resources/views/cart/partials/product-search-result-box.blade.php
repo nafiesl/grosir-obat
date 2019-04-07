@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->unit->name }}</td>
-                <td>{{ formatRp($product->getPrice($draftType)) }}</td>
+                <td>{{ format_rp($product->getPrice($draftType)) }}</td>
                 <td>
                     <form action="{{ route('cart.add-draft-item', [$draftKey, $product->id]) }}" method="post" style="display:inline">
                         <input type="hidden" name="query" value="{{ isset($query) ? $query : request('query') }}">

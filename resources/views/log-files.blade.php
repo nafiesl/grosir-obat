@@ -20,7 +20,7 @@
                     <tr>
                         <td>0</td>
                         <td>error_log</td>
-                        <td>{{ formatSizeUnits(File::size('error_log')) }}</td>
+                        <td>{{ format_size_units(File::size('error_log')) }}</td>
                         <td>{{ date('Y-m-d H:i:s', File::lastModified('error_log')) }}</td>
                         <td>
                             {!! html_link_to_route('log-files.server-error-log','',[],[
@@ -37,7 +37,7 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $logFile->getFilename() }}</td>
-                        <td>{{ formatSizeUnits($logFile->getSize()) }}</td>
+                        <td>{{ format_size_units($logFile->getSize()) }}</td>
                         <td>{{ date('Y-m-d H:i:s', $logFile->getMTime()) }}</td>
                         <td>
                             {{ link_to_route('log-files.show', 'Lihat', [$logFile->getFilename()],[

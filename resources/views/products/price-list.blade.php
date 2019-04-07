@@ -22,8 +22,8 @@
                         @foreach($chunckedProducts as $key => $product)
                         <tr>
                             <td>{{ $key + 1 }})&nbsp;{{ $product->name }} ({{ $product->unit->name }})</td>
-                            <td class="text-right" style="width:20%">{{ formatRp($product->cash_price) }}</td>
-                            <td class="text-right" style="width:20%">{{ formatRp($product->credit_price) }}</td>
+                            <td class="text-right" style="width:20%">{{ format_rp($product->cash_price) }}</td>
+                            <td class="text-right" style="width:20%">{{ format_rp($product->credit_price) }}</td>
                         </tr>
                         @endforeach
                     </tbody>

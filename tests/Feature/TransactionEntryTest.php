@@ -67,7 +67,7 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->seePageIs(route('cart.show', [$draft->draftKey, 'query' => 'testing']));
         // See product list appears
         $this->see($product->name);
-        $this->see(formatRp($product->credit_price));
+        $this->see(format_rp($product->credit_price));
         $this->seeElement('form', ['action' => route('cart.add-draft-item', [$draft->draftKey, $product->id])]);
         $this->seeElement('input', ['id' => 'qty-'.$product->id, 'name' => 'qty']);
         $this->seeElement('input', ['id' => 'add-product-'.$product->id]);
@@ -110,7 +110,7 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->seeElement('input', ['id' => 'qty-'. 0]);
         $this->seeElement('input', ['id' => 'item_discount-'. 0]);
         $this->seeElement('button', ['id' => 'remove-item-'. 0]);
-        $this->see(formatRp(3800));
+        $this->see(format_rp(3800));
     }
 
     /** @test */
@@ -173,8 +173,8 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->assertEquals(6000, $draft->getSubtotal());
         $this->assertEquals(5600, $draft->getTotal());
 
-        $this->see(formatRp($draft->getSubtotal()));
-        $this->see(formatRp($draft->getTotal()));
+        $this->see(format_rp($draft->getSubtotal()));
+        $this->see(format_rp($draft->getTotal()));
     }
 
     /** @test */
@@ -208,8 +208,8 @@ class TransactionEntryTest extends BrowserKitTestCase
         $this->see($draft->customer['name']);
         $this->see($draft->customer['phone']);
         $this->see($draft->notes);
-        $this->see(formatRp(10000));
-        $this->see(formatRp(3000));
+        $this->see(format_rp(10000));
+        $this->see(format_rp(3000));
         $this->seeElement('input', ['id' => 'save-transaction-draft']);
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('report.daily', ['date' => dateId($date)]))
+@section('title', __('report.daily', ['date' => date_id($date)]))
 
 @section('content')
 
@@ -14,7 +14,7 @@
 {{ link_to_route(
     'reports.sales.monthly',
     __('report.view_monthly'),
-    ['month' => monthNumber($dt->month), 'year' => $dt->year],
+    ['month' => month_number($dt->month), 'year' => $dt->year],
     ['class' => 'btn btn-default btn-sm']
 ) }}
 {{ Form::close() }}
@@ -31,8 +31,8 @@
             @forelse($transactions as $key => $transaction)
             <tr>
                 <td class="text-center">{{ 1 + $key }}</td>
-                <td class="text-center">{{ dateId($transaction->created_at->format('Y-m-d')) }}</td>
-                <td class="text-right">{{ formatRp($transaction->total) }}</td>
+                <td class="text-center">{{ date_id($transaction->created_at->format('Y-m-d')) }}</td>
+                <td class="text-right">{{ format_rp($transaction->total) }}</td>
                 <td class="text-center">
                     {{ link_to_route(
                         'transactions.show',
@@ -53,7 +53,7 @@
         <tfoot>
             <tr>
                 <th class="text-right" colspan="2">{{ __('app.total') }}</th>
-                <th class="text-right">{{ formatRp($transactions->sum('total')) }}</th>
+                <th class="text-right">{{ format_rp($transactions->sum('total')) }}</th>
                 <th>&nbsp;</th>
             </tr>
         </tfoot>

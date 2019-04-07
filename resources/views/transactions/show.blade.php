@@ -20,9 +20,9 @@
                         <tr><td>{{ trans('transaction.customer_name') }}</td><td>{{ $transaction->customer['name'] }}</td></tr>
                         <tr><td>{{ trans('transaction.customer_phone') }}</td><td>{{ $transaction->customer['phone'] }}</td></tr>
                         <tr><td>{{ trans('transaction.items_count') }}</td><td>{{ $transaction->items_count }}</td></tr>
-                        <tr><td>{{ trans('transaction.total') }}</td><td class="text-right strong">{{ formatRp($transaction->total) }}</td></tr>
-                        <tr><td>{{ trans('transaction.payment') }}</td><td class="text-right">{{ formatRp($transaction->payment) }}</td></tr>
-                        <tr><td>{{ trans('transaction.exchange') }}</td><td class="text-right">{{ formatRp($transaction->getExchange()) }}</td></tr>
+                        <tr><td>{{ trans('transaction.total') }}</td><td class="text-right strong">{{ format_rp($transaction->total) }}</td></tr>
+                        <tr><td>{{ trans('transaction.payment') }}</td><td class="text-right">{{ format_rp($transaction->payment) }}</td></tr>
+                        <tr><td>{{ trans('transaction.exchange') }}</td><td class="text-right">{{ format_rp($transaction->getExchange()) }}</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -52,10 +52,10 @@
                         {{ $item['name'] }} <br>
                         <small class="text-primary">({{ $item['unit'] }})</small>
                     </td>
-                    <td class="text-right">{{ formatRp($item['price']) }}</td>
-                    <td class="text-right">{{ formatRp($item['item_discount']) }}</td>
+                    <td class="text-right">{{ format_rp($item['price']) }}</td>
+                    <td class="text-right">{{ format_rp($item['item_discount']) }}</td>
                     <td class="text-center">{{ $item['qty'] }}</td>
-                    <td class="text-right">{{ formatRp($item['subtotal']) }}</td>
+                    <td class="text-right">{{ format_rp($item['subtotal']) }}</td>
                 </tr>
                 <?php $discountTotal += $item['item_discount_subtotal'] ?>
             @endforeach
@@ -63,15 +63,15 @@
             <tfoot>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.subtotal') }} :</th>
-                    <th class="text-right">{{ formatRp($transaction['total'] + $discountTotal) }}</th>
+                    <th class="text-right">{{ format_rp($transaction['total'] + $discountTotal) }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.discount_total') }} :</th>
-                    <th class="text-right">{{ formatRp($discountTotal) }}</th>
+                    <th class="text-right">{{ format_rp($discountTotal) }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.total') }} :</th>
-                    <th class="text-right">{{ formatRp($transaction['total']) }}</th>
+                    <th class="text-right">{{ format_rp($transaction['total']) }}</th>
                 </tr>
             </tfoot>
         </table>

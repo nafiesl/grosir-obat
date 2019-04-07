@@ -32,30 +32,30 @@
             </thead>
             <tbody>
                 @php $chartData = []; @endphp
-                @foreach(getMonths() as $monthNumber => $monthName)
+                @foreach(get_months() as $month_number => $monthName)
                 @php
-                    $any = isset($reports[$monthNumber]);
-                    $omzet = $any ? $reports[$monthNumber]->omzet : 0
+                    $any = isset($reports[$month_number]);
+                    $omzet = $any ? $reports[$month_number]->omzet : 0
                 @endphp
                 <tr>
-                    <td class="text-center">{{ monthId($monthNumber) }}</td>
-                    <td class="text-center">{{ $any ? $reports[$monthNumber]->count : 0 }}</td>
-                    <td class="text-right">{{ formatRp($omzet) }}</td>
+                    <td class="text-center">{{ month_id($month_number) }}</td>
+                    <td class="text-center">{{ $any ? $reports[$month_number]->count : 0 }}</td>
+                    <td class="text-right">{{ format_rp($omzet) }}</td>
                     <td class="text-center">
                         {{ link_to_route(
                             'reports.sales.monthly',
                             __('report.view_monthly'),
-                            ['month' => $monthNumber, 'year' => $year],
+                            ['month' => $month_number, 'year' => $year],
                             [
                                 'class' => 'btn btn-info btn-xs',
-                                'title' => __('report.monthly', ['year_month' => monthId($monthNumber)]),
-                                'title' => __('report.monthly', ['year_month' => monthId($monthNumber).' '.$year]),
+                                'title' => __('report.monthly', ['year_month' => month_id($month_number)]),
+                                'title' => __('report.monthly', ['year_month' => month_id($month_number).' '.$year]),
                             ]
                         ) }}
                     </td>
                 </tr>
                 @php
-                    $chartData[] = ['month' => monthId($monthNumber), 'value' => $omzet];
+                    $chartData[] = ['month' => month_id($month_number), 'value' => $omzet];
                 @endphp
                 @endforeach
             </tbody>
@@ -63,7 +63,7 @@
                 <tr>
                     <th class="text-center">{{ trans('app.total') }}</th>
                     <th class="text-center">{{ $reports->sum('count') }}</th>
-                    <th class="text-right">{{ formatRp($reports->sum('omzet')) }}</th>
+                    <th class="text-right">{{ format_rp($reports->sum('omzet')) }}</th>
                     <td>&nbsp;</td>
                 </tr>
             </tfoot>

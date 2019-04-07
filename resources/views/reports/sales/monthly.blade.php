@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 @php $chartData = []; @endphp
-                @foreach(monthDateArray($year, $month) as $dateNumber)
+                @foreach(month_date_array($year, $month) as $dateNumber)
                 @php
                     $any = isset($reports[$dateNumber]);
                     $count = $any ? $reports[$dateNumber]->count : 0;
@@ -42,9 +42,9 @@
                 @endphp
                 @if ($any)
                     <tr>
-                        <td class="text-center">{{ dateId($date = $year.'-'.$month.'-'.$dateNumber) }}</td>
+                        <td class="text-center">{{ date_id($date = $year.'-'.$month.'-'.$dateNumber) }}</td>
                         <td class="text-center">{{ $count }}</td>
-                        <td class="text-right">{{ formatRp($subtotal) }}</td>
+                        <td class="text-right">{{ format_rp($subtotal) }}</td>
                         <td class="text-center">
                             {{ link_to_route(
                                 'reports.sales.daily',
@@ -52,7 +52,7 @@
                                 ['date' => $date],
                                 [
                                     'class' => 'btn btn-info btn-xs',
-                                    'title' => __('report.daily', ['date' => dateId($date)]),
+                                    'title' => __('report.daily', ['date' => date_id($date)]),
                                 ]
                             ) }}
                         </td>
@@ -67,7 +67,7 @@
                 <tr>
                     <th class="text-right">{{ __('app.total') }}</th>
                     <th class="text-center">{{ $reports->sum('count') }}</th>
-                    <th class="text-right">{{ formatRp($reports->sum('amount')) }}</th>
+                    <th class="text-right">{{ format_rp($reports->sum('amount')) }}</th>
                     <td>&nbsp;</td>
                 </tr>
             </tfoot>
