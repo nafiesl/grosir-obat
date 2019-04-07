@@ -62,7 +62,7 @@ function get_years()
     return $years;
 }
 
-function monthDateArray($year, $month)
+function month_date_array($year, $month)
 {
     $dateCount = Carbon\Carbon::parse($year.'-'.$month)->format('t');
     $dates = [];
