@@ -52,7 +52,7 @@ function get_months()
     ];
 }
 
-function getYears()
+function get_years()
 {
     $yearRange = range(2017, date('Y'));
     foreach ($yearRange as $year) {
