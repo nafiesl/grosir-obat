@@ -22,16 +22,16 @@ function month_number($number)
     return str_pad($number, 2, '0', STR_PAD_LEFT);
 }
 
-function month_id($month_number)
+function month_id($monthNumber)
 {
-    if (is_null($month_number)) {
-        return $month_number;
+    if (is_null($monthNumber)) {
+        return $monthNumber;
     }
 
     $months = get_months();
-    $month_number = month_number($month_number);
+    $monthNumber = month_number($monthNumber);
 
-    return $months[$month_number];
+    return $months[$monthNumber];
 }
 
 function get_months()
