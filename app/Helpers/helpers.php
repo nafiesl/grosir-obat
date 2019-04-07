@@ -31,7 +31,7 @@ function html_link_to_route($name, $title = null, $parameters = [], $attributes 
     return app('html')->decode(link_to_route($name, $title, $parameters, $attributes));
 }
 
-function formatSizeUnits($bytes)
+function format_size_units($bytes)
 {
     if ($bytes >= 1073741824) {
         $bytes = number_format($bytes / 1073741824, 2).' GB';
