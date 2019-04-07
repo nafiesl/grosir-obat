@@ -14,7 +14,7 @@
 {{ link_to_route(
     'reports.sales.monthly',
     __('report.view_monthly'),
-    ['month' => monthNumber($dt->month), 'year' => $dt->year],
+    ['month' => month_number($dt->month), 'year' => $dt->year],
     ['class' => 'btn btn-default btn-sm']
 ) }}
 {{ Form::close() }}

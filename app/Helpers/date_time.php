@@ -34,21 +34,21 @@ function date_id($date)
     throw new App\Exceptions\InvalidDateException('Invalid date format.');
 }
 
-function monthNumber($number)
+function month_number($number)
 {
     return str_pad($number, 2, '0', STR_PAD_LEFT);
 }
 
-function monthId($monthNumber)
+function monthId($month_number)
 {
-    if (is_null($monthNumber)) {
-        return $monthNumber;
+    if (is_null($month_number)) {
+        return $month_number;
     }
 
     $months = get_months();
-    $monthNumber = monthNumber($monthNumber);
+    $month_number = month_number($month_number);
 
-    return $months[$monthNumber];
+    return $months[$month_number];
 }
 
 function get_months()
