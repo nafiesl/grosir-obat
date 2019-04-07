@@ -40,7 +40,7 @@
                 <tr>
                     <td class="text-center">{{ monthId($monthNumber) }}</td>
                     <td class="text-center">{{ $any ? $reports[$monthNumber]->count : 0 }}</td>
-                    <td class="text-right">{{ formatRp($omzet) }}</td>
+                    <td class="text-right">{{ format_rp($omzet) }}</td>
                     <td class="text-center">
                         {{ link_to_route(
                             'reports.sales.monthly',
@@ -63,7 +63,7 @@
                 <tr>
                     <th class="text-center">{{ trans('app.total') }}</th>
                     <th class="text-center">{{ $reports->sum('count') }}</th>
-                    <th class="text-right">{{ formatRp($reports->sum('omzet')) }}</th>
+                    <th class="text-right">{{ format_rp($reports->sum('omzet')) }}</th>
                     <td>&nbsp;</td>
                 </tr>
             </tfoot>

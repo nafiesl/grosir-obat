@@ -44,7 +44,7 @@
                     <tr>
                         <td class="text-center">{{ dateId($date = $year.'-'.$month.'-'.$dateNumber) }}</td>
                         <td class="text-center">{{ $count }}</td>
-                        <td class="text-right">{{ formatRp($subtotal) }}</td>
+                        <td class="text-right">{{ format_rp($subtotal) }}</td>
                         <td class="text-center">
                             {{ link_to_route(
                                 'reports.sales.daily',
@@ -67,7 +67,7 @@
                 <tr>
                     <th class="text-right">{{ __('app.total') }}</th>
                     <th class="text-center">{{ $reports->sum('count') }}</th>
-                    <th class="text-right">{{ formatRp($reports->sum('amount')) }}</th>
+                    <th class="text-right">{{ format_rp($reports->sum('amount')) }}</th>
                     <td>&nbsp;</td>
                 </tr>
             </tfoot>

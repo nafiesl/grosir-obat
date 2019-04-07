@@ -37,8 +37,8 @@
                 <tbody>
                     <tr><th>{{ __('product.name') }}</th><td>{{ $editableProduct->name }}</td></tr>
                     <tr><th>{{ __('product.unit') }}</th><td>{{ $editableProduct->unit->name }}</td></tr>
-                    <tr><th>{{ __('product.cash_price') }}</th><td>{{ formatRp($editableProduct->cash_price) }}</td></tr>
-                    <tr><th>{{ __('product.credit_price') }}</th><td>{{ formatRp($editableProduct->credit_price) }}</td></tr>
+                    <tr><th>{{ __('product.cash_price') }}</th><td>{{ format_rp($editableProduct->cash_price) }}</td></tr>
+                    <tr><th>{{ __('product.credit_price') }}</th><td>{{ format_rp($editableProduct->credit_price) }}</td></tr>
                 </tbody>
             </table>
             <hr>

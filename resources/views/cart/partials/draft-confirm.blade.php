@@ -19,10 +19,10 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->name }}</td>
-                            <td class="text-right">{{ formatRp($item->price) }}</td>
-                            <td class="text-right">{{ formatRp($item->item_discount) }}</td>
+                            <td class="text-right">{{ format_rp($item->price) }}</td>
+                            <td class="text-right">{{ format_rp($item->item_discount) }}</td>
                             <td class="text-center">{{ $item->qty }}</td>
-                            <td class="text-right">{{ formatRp($item->subtotal) }}</td>
+                            <td class="text-right">{{ format_rp($item->subtotal) }}</td>
                         </tr>
                         @empty
                         @endforelse
@@ -32,15 +32,15 @@
 
 
                             <th colspan="5" class="text-right">{{ trans('transaction.subtotal') }} :</th>
-                            <th class="text-right">{{ formatRp($draft->getSubtotal()) }}</th>
+                            <th class="text-right">{{ format_rp($draft->getSubtotal()) }}</th>
                         </tr>
                         <tr>
                             <th colspan="5" class="text-right">{{ trans('transaction.discount_total') }} :</th>
-                            <th class="text-right">{{ formatRp($draft->getDiscountTotal()) }}</th>
+                            <th class="text-right">{{ format_rp($draft->getDiscountTotal()) }}</th>
                         </tr>
                         <tr>
                             <th colspan="5" class="text-right">{{ trans('transaction.total') }} :</th>
-                            <th class="text-right">{{ formatRp($draft->getTotal()) }}</th>
+                            <th class="text-right">{{ format_rp($draft->getTotal()) }}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -55,9 +55,9 @@
                     <tbody>
                         <tr><td>{{ trans('transaction.customer_name') }}</td><td>{{ $draft->customer['name'] }}</td></tr>
                         <tr><td>{{ trans('transaction.customer_phone') }}</td><td>{{ $draft->customer['phone'] }}</td></tr>
-                        <tr><td>{{ trans('transaction.payment') }}</td><th class="text-right">{{ formatRp($draft->payment) }}</th></tr>
-                        <tr><td>{{ trans('transaction.total') }}</td><th class="text-right">{{ formatRp($draft->getTotal()) }}</th></tr>
-                        <tr><td>{{ trans('transaction.exchange') }}</td><th class="text-right">{{ formatRp($draft->getExchange()) }}</th></tr>
+                        <tr><td>{{ trans('transaction.payment') }}</td><th class="text-right">{{ format_rp($draft->payment) }}</th></tr>
+                        <tr><td>{{ trans('transaction.total') }}</td><th class="text-right">{{ format_rp($draft->getTotal()) }}</th></tr>
+                        <tr><td>{{ trans('transaction.exchange') }}</td><th class="text-right">{{ format_rp($draft->getExchange()) }}</th></tr>
                         <tr><td>{{ trans('transaction.notes') }}</td><td>{{ $draft->notes }}</td></tr>
                     </tbody>
                 </table>

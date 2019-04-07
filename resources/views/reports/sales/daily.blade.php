@@ -32,7 +32,7 @@
             <tr>
                 <td class="text-center">{{ 1 + $key }}</td>
                 <td class="text-center">{{ dateId($transaction->created_at->format('Y-m-d')) }}</td>
-                <td class="text-right">{{ formatRp($transaction->total) }}</td>
+                <td class="text-right">{{ format_rp($transaction->total) }}</td>
                 <td class="text-center">
                     {{ link_to_route(
                         'transactions.show',
@@ -53,7 +53,7 @@
         <tfoot>
             <tr>
                 <th class="text-right" colspan="2">{{ __('app.total') }}</th>
-                <th class="text-right">{{ formatRp($transactions->sum('total')) }}</th>
+                <th class="text-right">{{ format_rp($transactions->sum('total')) }}</th>
                 <th>&nbsp;</th>
             </tr>
         </tfoot>

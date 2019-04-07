@@ -40,8 +40,8 @@
                         <td class="text-center">{{ $products->firstItem() + $key }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->unit->name }}</td>
-                        <td class="text-right">{{ formatRp($product->cash_price) }}</td>
-                        <td class="text-right">{{ formatRp($product->credit_price) }}</td>
+                        <td class="text-right">{{ format_rp($product->cash_price) }}</td>
+                        <td class="text-right">{{ format_rp($product->credit_price) }}</td>
                         <td class="text-center">
                             {!! link_to_route('products.index', __('app.edit'), ['action' => 'edit', 'id' => $product->id] + request(['page','q']), ['id' => 'edit-product-' . $product->id]) !!} |
                             {!! link_to_route('products.index', __('app.delete'), ['action' => 'delete', 'id' => $product->id] + request(['page','q']), ['id' => 'del-product-' . $product->id]) !!}

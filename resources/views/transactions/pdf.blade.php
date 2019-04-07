@@ -47,32 +47,32 @@
                         <tr>
                             <td class="text-center border-bottom">{{ $item['qty'] }}</td>
                             <td class="text-right border-bottom">
-                                {{ formatRp($item['price']) }}<br>({{ formatRp($item['item_discount']) }})
+                                {{ format_rp($item['price']) }}<br>({{ format_rp($item['item_discount']) }})
                             </td>
-                            <td class="text-right border-bottom">{{ formatRp($item['subtotal']) }}</td>
+                            <td class="text-right border-bottom">{{ format_rp($item['subtotal']) }}</td>
                         </tr>
                         <?php $discountTotal += $item['item_discount_subtotal'] ?>
                         @endforeach
                         @if ($loop->last && $loop->parent->last)
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.subtotal') }} :</th>
-                            <th class="text-right">{{ formatRp($transaction['total'] + $discountTotal) }}</th>
+                            <th class="text-right">{{ format_rp($transaction['total'] + $discountTotal) }}</th>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.discount_total') }} :</th>
-                            <th class="text-right">{{ formatRp($discountTotal) }}</th>
+                            <th class="text-right">{{ format_rp($discountTotal) }}</th>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.total') }} :</th>
-                            <th class="text-right">{{ formatRp($transaction['total']) }}</th>
+                            <th class="text-right">{{ format_rp($transaction['total']) }}</th>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.payment') }} :</th>
-                            <th class="text-right">{{ formatRp($transaction->payment) }}</th>
+                            <th class="text-right">{{ format_rp($transaction->payment) }}</th>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-right">{{ trans('transaction.exchange') }} :</th>
-                            <th class="text-right">{{ formatRp($transaction->getExchange()) }}</th>
+                            <th class="text-right">{{ format_rp($transaction->getExchange()) }}</th>
                         </tr>
                         @endif
                     </tbody>

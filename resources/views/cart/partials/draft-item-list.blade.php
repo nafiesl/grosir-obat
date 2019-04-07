@@ -27,7 +27,7 @@
                         {{ $item->name }} <br>
                         <small class="text-primary">({{ $item->unit }})</small>
                     </td>
-                    <td>{{ formatRp($item->price) }}</td>
+                    <td>{{ format_rp($item->price) }}</td>
                         {{ Form::open(['route' => ['cart.update-draft-item', $draft->draftKey], 'method' => 'patch']) }}
                         {{ Form::hidden('item_key', $key) }}
                     <td class="text-right">
@@ -43,7 +43,7 @@
                             'min' => 1
                         ]) }}
                     </td>
-                    <td class="text-right">{{ formatRp($item->subtotal) }}</td>
+                    <td class="text-right">{{ format_rp($item->subtotal) }}</td>
                         {{ Form::submit('update-item-' . $key, ['style'=>'display:none']) }}
                         {{ Form::close() }}
                     <td class="text-center show-on-hover-parent">
@@ -60,17 +60,17 @@
             <tfoot>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.subtotal') }} :</th>
-                    <th class="text-right">{{ formatRp($draft->getSubtotal()) }}</th>
+                    <th class="text-right">{{ format_rp($draft->getSubtotal()) }}</th>
                     <th></th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.discount_total') }} :</th>
-                    <th class="text-right">{{ formatRp($draft->getDiscountTotal()) }}</th>
+                    <th class="text-right">{{ format_rp($draft->getDiscountTotal()) }}</th>
                     <th></th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-right">{{ trans('transaction.total') }} :</th>
-                    <th class="text-right">{{ formatRp($draft->getTotal()) }}</th>
+                    <th class="text-right">{{ format_rp($draft->getTotal()) }}</th>
                     <th></th>
                 </tr>
             </tfoot>
