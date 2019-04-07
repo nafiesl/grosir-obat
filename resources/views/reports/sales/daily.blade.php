@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('report.daily', ['date' => dateId($date)]))
+@section('title', __('report.daily', ['date' => date_id($date)]))
 
 @section('content')
 
@@ -31,7 +31,7 @@
             @forelse($transactions as $key => $transaction)
             <tr>
                 <td class="text-center">{{ 1 + $key }}</td>
-                <td class="text-center">{{ dateId($transaction->created_at->format('Y-m-d')) }}</td>
+                <td class="text-center">{{ date_id($transaction->created_at->format('Y-m-d')) }}</td>
                 <td class="text-right">{{ format_rp($transaction->total) }}</td>
                 <td class="text-center">
                     {{ link_to_route(

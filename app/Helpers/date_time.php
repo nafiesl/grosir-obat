@@ -17,7 +17,7 @@ function formatDate($date)
     throw new App\Exceptions\InvalidDateException('Invalid date format.');
 }
 
-function dateId($date)
+function date_id($date)
 {
     if (is_null($date) || $date == '0000-00-00') {
         return '-';

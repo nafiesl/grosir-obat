@@ -42,7 +42,7 @@
                 @endphp
                 @if ($any)
                     <tr>
-                        <td class="text-center">{{ dateId($date = $year.'-'.$month.'-'.$dateNumber) }}</td>
+                        <td class="text-center">{{ date_id($date = $year.'-'.$month.'-'.$dateNumber) }}</td>
                         <td class="text-center">{{ $count }}</td>
                         <td class="text-right">{{ format_rp($subtotal) }}</td>
                         <td class="text-center">
@@ -52,7 +52,7 @@
                                 ['date' => $date],
                                 [
                                     'class' => 'btn btn-info btn-xs',
-                                    'title' => __('report.daily', ['date' => dateId($date)]),
+                                    'title' => __('report.daily', ['date' => date_id($date)]),
                                 ]
                             ) }}
                         </td>
