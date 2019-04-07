@@ -38,7 +38,7 @@
                     $omzet = $any ? $reports[$month_number]->omzet : 0
                 @endphp
                 <tr>
-                    <td class="text-center">{{ monthId($month_number) }}</td>
+                    <td class="text-center">{{ month_id($month_number) }}</td>
                     <td class="text-center">{{ $any ? $reports[$month_number]->count : 0 }}</td>
                     <td class="text-right">{{ format_rp($omzet) }}</td>
                     <td class="text-center">
@@ -48,14 +48,14 @@
                             ['month' => $month_number, 'year' => $year],
                             [
                                 'class' => 'btn btn-info btn-xs',
-                                'title' => __('report.monthly', ['year_month' => monthId($month_number)]),
-                                'title' => __('report.monthly', ['year_month' => monthId($month_number).' '.$year]),
+                                'title' => __('report.monthly', ['year_month' => month_id($month_number)]),
+                                'title' => __('report.monthly', ['year_month' => month_id($month_number).' '.$year]),
                             ]
                         ) }}
                     </td>
                 </tr>
                 @php
-                    $chartData[] = ['month' => monthId($month_number), 'value' => $omzet];
+                    $chartData[] = ['month' => month_id($month_number), 'value' => $omzet];
                 @endphp
                 @endforeach
             </tbody>

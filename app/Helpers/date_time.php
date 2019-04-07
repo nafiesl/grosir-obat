@@ -22,7 +22,7 @@ function month_number($number)
     return str_pad($number, 2, '0', STR_PAD_LEFT);
 }
 
-function monthId($month_number)
+function month_id($month_number)
 {
     if (is_null($month_number)) {
         return $month_number;
