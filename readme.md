@@ -78,9 +78,10 @@ Catatan:
 <hr>
 
 ## Instalasi
+
 ### Spesifikasi
 - PHP ^7.1.3
-- Laravel 5.7
+- Laravel 5.8
 - Database MySQL atau MariaDB
 - SQlite (untuk `automated testing`)
 
