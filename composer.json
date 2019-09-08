@@ -8,9 +8,10 @@
         "php": "^7.2",
         "backup-manager/laravel": "dev-master",
         "barryvdh/laravel-dompdf": "^0.8.0",
-        "laracasts/flash": "^3.0",
         "fideloper/proxy": "^4.0",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "^6.0",
+        "laravel/helpers": "^1.1",
         "league/flysystem": "^1.0",
         "luthfi/formfield": "^1.0"
     },
