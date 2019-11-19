@@ -7,7 +7,9 @@
 
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
-    {{ Html::style(url('css/pdf.css')) }}
+    {{-- {{ Html::style(url('css/pdf.css')) }} --}}
+    <link rel="stylesheet" href="{{ elixir('css/pdf.css') }}">
+    
     @yield('style')
 </head>
 <body>
