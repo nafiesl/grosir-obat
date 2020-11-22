@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Models;
 
-use App\Unit;
 use App\Product;
-use Tests\TestCase;
+use App\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {

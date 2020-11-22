@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\Cart\Item;
+use App\Cart\CartCollection;
 use App\Cart\CashDraft;
 use App\Cart\CreditDraft;
-use App\Cart\CartCollection;
-use Tests\BrowserKitTestCase;
+use App\Cart\Item;
+use App\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\BrowserKitTestCase;
 
 class TransactionEntryTest extends BrowserKitTestCase
 {

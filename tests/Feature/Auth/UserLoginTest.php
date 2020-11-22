@@ -3,8 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use App\User;
-use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\BrowserKitTestCase;
 
 class UserLoginTest extends BrowserKitTestCase
 {
