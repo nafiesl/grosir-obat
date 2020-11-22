@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Product;
-use App\Cart\Item;
-use Tests\TestCase;
-use App\Cart\CashDraft;
 use App\Cart\CartCollection;
+use App\Cart\CashDraft;
+use App\Cart\Item;
+use App\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class TransactionDraftTest extends TestCase
 {

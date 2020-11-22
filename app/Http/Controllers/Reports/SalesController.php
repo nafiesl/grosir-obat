@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Reports;
 
-use DB;
-use App\Transaction;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transaction;
+use DB;
+use Illuminate\Http\Request;
 
 /**
  * Reports Controller.

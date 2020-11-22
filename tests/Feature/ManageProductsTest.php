@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Unit;
 use App\Product;
-use Tests\BrowserKitTestCase;
+use App\Unit;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\BrowserKitTestCase;
 
 class ManageProductsTest extends BrowserKitTestCase
 {
